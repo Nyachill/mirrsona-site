@@ -1,0 +1,2023 @@
+{
+  "version": "0.1.0-6951c6",
+  "generatedAt": "2026-10-09T00:15:56.845Z",
+  "files": [
+    {
+      "path": "config/game.json",
+      "size": 35698,
+      "sha256": "4ca297a8d16ce2fd6bfbe79f551ddf1db851d42c796eeddad758bb147913fda7"
+    },
+    {
+      "path": "hd/models/apc.glb",
+      "size": 7907228,
+      "sha256": "889fdbeae2cead62ac3c16f56de27d0fb376966a8214a7b2d337768d0ea82d71",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/fa18.glb",
+      "size": 8850568,
+      "sha256": "f41b8e21e865d11c13f05c66a44dca2dc1d26d7caf08bfc764f0324333462874",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/helicopter.glb",
+      "size": 5852768,
+      "sha256": "9399adcad4f9e49e1bdbf072a3458da601cd4f10528fb17602fcd43bb3eac8a6",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/jeep.glb",
+      "size": 8532384,
+      "sha256": "3c6806829882ea509e7a3881d51603871af95b63653e7a6746759e0d1502dfd1",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/landmarks.glb",
+      "size": 16855672,
+      "sha256": "51f74fde65b7b4372c268a77708c73dd672d276540ab040783cb9081d93c0ad1",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/landmarks2.glb",
+      "size": 14301692,
+      "sha256": "c9e7c28d4e2151c2cd7e687fee61bc7aed9aab7fe2cfaed5cb8d5b343ad8ab4d",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/lmg.glb",
+      "size": 5571012,
+      "sha256": "2859914f5b390053774233bc4982ffa7de5bb454d660d1af91b3b7a47acd451d",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/p90.glb",
+      "size": 10993692,
+      "sha256": "8c304b8fb144d502c5a58b77ae3d60436ed685ff2a2880d633d91e3c898dcfaf",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/pickup.glb",
+      "size": 9900484,
+      "sha256": "b51571aae0d037b3d2cfd9687908cee996cef289270f71779ccc5f053fa5478c",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/pistol.glb",
+      "size": 4624924,
+      "sha256": "16d175bce6905b5ee83b844e92b41a3df2e8ed737cdd2d24231c43542e5d9695",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/rifle.glb",
+      "size": 5564872,
+      "sha256": "63250cf4a88f5a18a5842aade1866243bffeccc7bccedd8ef927f7afbd949b38",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/shotgun.glb",
+      "size": 4438652,
+      "sha256": "12b28ef640b66a3ce116f1a7207b4e3cc283a8dad3ef157af84675172e1fd1fc",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/sniper.glb",
+      "size": 5920640,
+      "sha256": "ac49c72ea16184942ed7411ce41f66d25419051da0ee44d3b6c14840548d4138",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/models/soldier.glb",
+      "size": 27217504,
+      "sha256": "d46360c7765ed2eee6331fea2768a852957c1899f898edce844fc9792c79add1",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/sky/dusk_bg.jpg",
+      "size": 295173,
+      "sha256": "642868eb2b6cf4fa6c65f0144c2750df65dc9672a0cc141b9d564c61599bc265",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt/albedo.jpg",
+      "size": 1418779,
+      "sha256": "3f86fe6c1c4fbb9633fe74669d13fc0be55c237e1b59dabda7cef17dc4bf3d1f",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt/normal.png",
+      "size": 8755401,
+      "sha256": "800cb93a97b4fcc71bf13c86966b57f0947b5bf07350a3f6bc1f88687a48d981",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt/orm.jpg",
+      "size": 2891451,
+      "sha256": "434d13dd1e45fea7acab10da04054768e97d79061df5080bea6b061323d11eb9",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt_city/albedo.jpg",
+      "size": 1334217,
+      "sha256": "a9bfe72aea1895a5e2364ae436cec5fa66e5cdbc8bedf0d20edb714c28f263d2",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt_city/normal.png",
+      "size": 9316244,
+      "sha256": "08f52878171c8781d78b97c58f88874c5f452f419787f596f3c505186aa9b061",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt_city/orm.jpg",
+      "size": 2180150,
+      "sha256": "4ffefd2c276d024065d3adfdedf49f6d978adc2e2f2b1b465975dcf55aacf182",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt_patch/albedo.jpg",
+      "size": 234763,
+      "sha256": "34adc8facdfee5b6876321a2b41470738416fe640938f6e3e18fe669bec0e0d4",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt_patch/normal.png",
+      "size": 2224300,
+      "sha256": "d300bba1dd03e6fc1b40cb2f32e176665bb7cbaaa7f884dc756527b842c920a6",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/asphalt_patch/orm.jpg",
+      "size": 419153,
+      "sha256": "ed60cba50656065c7f7ec843b6711c1e7a223147df450a3c4c773d19795a6871",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/billboards/albedo.jpg",
+      "size": 385810,
+      "sha256": "00fcf0dcd9213a6c3df546ac493e79643b9dc1e3a0548a1e029420ea9c029adc",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/billboards/emissive.jpg",
+      "size": 694855,
+      "sha256": "a492938386d2323b611d29fb379952b9cd615f44dd2a792ed706c0ae1e5e6bf7",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_brown/albedo.jpg",
+      "size": 1195534,
+      "sha256": "660f22dbb59f3f474f1f1cf2c0024eef5eb20f169c936ef3e7600d55b780a4e4",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_brown/emissive.jpg",
+      "size": 60850,
+      "sha256": "1b826b4b5089a85247792fa5e0a256bc73c80e58536a3cb9c3d0cf4e8e0b1175",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_brown/normal.png",
+      "size": 4384077,
+      "sha256": "bead5bcd65398ce2cdabe6220463e06536ab63c18c48c70cc8da314748ec13ed",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_brown/orm.jpg",
+      "size": 1609712,
+      "sha256": "4a02bb482846cf35b2d3bd3e4c76ddaaf4cabb442ff48b078f4c72764c4f1264",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_red/albedo.jpg",
+      "size": 1433149,
+      "sha256": "9527abab4174861990037df63c981a65fb9a7852183749c875d95a25281fc468",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_red/emissive.jpg",
+      "size": 60058,
+      "sha256": "fe2dcb64f6b20bd3ce7de12eec26bfbde5d970eb6b60941f9e981345a908843e",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_red/normal.png",
+      "size": 4404756,
+      "sha256": "792e94d4b113c563bda23d9ac8a06376ad901754635bb9a30d0d917158bad589",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/brick_red/orm.jpg",
+      "size": 1652490,
+      "sha256": "8cb60c06e26be50cf36c4ca0cff65fc46322e13bdc5c516c1b69a9434bcc96aa",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/carpet_office/albedo.jpg",
+      "size": 1393887,
+      "sha256": "7328db19f164ad7c9a90fbe1aa3defe26e475a39273df9572162083ad6e5bcd8",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/carpet_office/normal.png",
+      "size": 6525923,
+      "sha256": "feb446c745e4dda906920d3ad0631959713f7b66be01ca94ba9a65505a1e4282",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/carpet_office/orm.jpg",
+      "size": 819880,
+      "sha256": "957eaeb6963c79944dcdeed8d7e38ee0b08555633f6e3b94f6f48b253d9d01c9",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/concourse_ceiling/albedo.jpg",
+      "size": 521122,
+      "sha256": "46554239078ef7067e3d866a27c9e72402f7a0f7e71c338446cd3b40a93b2976",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/concourse_ceiling/emissive.jpg",
+      "size": 94125,
+      "sha256": "ea97a1c808c7f49f8442d90caed567d878a93c453b2ed7633bd4886fc5f3786a",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/concourse_ceiling/normal.png",
+      "size": 962536,
+      "sha256": "7dfdd7e30d7aed48f369007b0eccaddac709eaaae42bcf27d7477ad64b401d0c",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/concourse_ceiling/orm.jpg",
+      "size": 828778,
+      "sha256": "5b386993626ad2f551e2158022dac57da77eaa64e575967125c950588b63c3f3",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/concrete/albedo.jpg",
+      "size": 513259,
+      "sha256": "8e28e1bfcec0c7308fc52ed6e1784c2bd9301f38c674130354c4695e8411d8f7",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/concrete/normal.png",
+      "size": 4472525,
+      "sha256": "716918a45f78afb32b57262954235a4a6d5fa868213c7731b4068c9b87b29312",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/concrete/orm.jpg",
+      "size": 1310576,
+      "sha256": "b54c210eb86c9a1db287099063e230164fef93c986234c18cd5b3065e55cef08",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/container/albedo.jpg",
+      "size": 739063,
+      "sha256": "2528e042f6f33c7cc5451b83eeafb14dffcc5e1c08a39385614462cc8e232495",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/container/normal.png",
+      "size": 4803975,
+      "sha256": "554352c517cc00ecf7a4607f78d560881ec6d27915acd7e5fd98c6783a36317f",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/container/orm.jpg",
+      "size": 1178347,
+      "sha256": "7531ed9dfde56b7d00d9de851547d899cabceffbc7e9b644b6e7ee3f3021e783",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/curb/albedo.jpg",
+      "size": 2119223,
+      "sha256": "307464b2f9078a209fe4cc49cdad55468cebd5dd5d777c081c91af5761dba966",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/curb/normal.png",
+      "size": 7075807,
+      "sha256": "876a7f42529d4ae0db42b1d474e0a895100b70c1d85c62b213e87775c8c71ca8",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/curb/orm.jpg",
+      "size": 1336580,
+      "sha256": "64a574792a05dcca888e7fb03b9151a606255b3b13cdd12d731aaabed9021117",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/facade/albedo.jpg",
+      "size": 963328,
+      "sha256": "c9bc4d19456a10786278aa34b625cbe6017c28e382ecaf095b7b2f0b88a0fe40",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/facade/emissive.jpg",
+      "size": 84734,
+      "sha256": "54b0bdfbdb50a631382d4ab02dff7b6636b33f1ac6c6ce7203e4f884b81d07d2",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/facade/normal.png",
+      "size": 3135263,
+      "sha256": "b5c3241b14d5e37e0e301f3b48edcb5a783d261a2293f1b553717c40027f29da",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/facade/orm.jpg",
+      "size": 1488251,
+      "sha256": "8868a3f00fd1ccd4d0e8e8764d89a33ef2e0216e0354277d7c85c408bbc5def5",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/glass_tower/albedo.jpg",
+      "size": 164368,
+      "sha256": "51ca4c6adc9f6f4f07ac7cbeaf70b0244ba73b623443175a06bd670c6c0a5fa5",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/glass_tower/emissive.jpg",
+      "size": 90868,
+      "sha256": "6bc1b82a56a114ad0868bfec00e2819da5b12ed7532ed08bb22dd14236760c98",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/glass_tower/normal.png",
+      "size": 70880,
+      "sha256": "a2051f86951cae76a153ccffde9d525fd3c46bfe85d45918d9055e3e92fb61a4",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/glass_tower/orm.jpg",
+      "size": 249021,
+      "sha256": "4ae58163a5d92be8647b55b2a1bb6ada9c141e4f6a2f5da8f2242fd92226cd0a",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/grass/albedo.jpg",
+      "size": 1707086,
+      "sha256": "1e6dea4a9a118b6cf3e8ec7c7c574e47414cdf860b176e393b0e79c6dc78a955",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/grass/normal.png",
+      "size": 8854610,
+      "sha256": "dc957e89ce720c93caf02192aea0f52dcb7ee41ba37d8ccaf055c3b9988724d3",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/grass/orm.jpg",
+      "size": 3679880,
+      "sha256": "1335ab2f311aac4435ae915f6e6f72d43a0b6624090c63a570df96f6799e8a45",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/gravel_roof/albedo.jpg",
+      "size": 1938797,
+      "sha256": "a5c2d8efa5ebc58614a1bddddc8c730911ed517766c0064807e23a1182553059",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/gravel_roof/normal.png",
+      "size": 8905595,
+      "sha256": "e72d58f99d6cf53b7d0c2aa300732ed21289f0a836ece50a604f8d3ee74a0ac9",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/gravel_roof/orm.jpg",
+      "size": 4767855,
+      "sha256": "05e8b3facebcdd744d196549b41ee1af963a981cb7527db50937195a40aa0091",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/ground/albedo.jpg",
+      "size": 1470044,
+      "sha256": "59f5ea66c72010e9e88497e8f56249b0559bc13565e0f217297884016d1d5c8d",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/ground/normal.png",
+      "size": 8252066,
+      "sha256": "786b8e6a3de4b953a536336735ef0a555d13744117089a5a2cd1b34a8c15773a",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/ground/orm.jpg",
+      "size": 3315745,
+      "sha256": "24e3dcb96f5639edfc90d3df0224d935e9fb01cd65ce3afbf506bc13dd42400f",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/hazard/albedo.jpg",
+      "size": 593999,
+      "sha256": "1b232e609f802c6e9bead0c50f44d4031377cd51e6338f9cc1ae4ec48ebe1fcc",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/hazard/normal.png",
+      "size": 7996500,
+      "sha256": "d141a153c219bfc83a321d02fa2e7260857e91b427ffafe6e3351c43ac69a68c",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/hazard/orm.jpg",
+      "size": 844034,
+      "sha256": "a9ee8745dc9b77725a3c83cbe18639b690896387312ca7db910406b3ce73998f",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/limestone/albedo.jpg",
+      "size": 646810,
+      "sha256": "dc47475970b50ee58827742dc90fd226fe5c36b2fa6f70da4cc949952dace113",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/limestone/normal.png",
+      "size": 4909690,
+      "sha256": "83cfedc5262f01919991ed79f379eeca7d6f63c4a5dced3ccf43606a2e7e8fae",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/limestone/orm.jpg",
+      "size": 1449384,
+      "sha256": "a503484a2dcfcdf908c6ba3b01a9b3c2664691aa2a5b801daa919b406d138659",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/manhole/albedo.jpg",
+      "size": 47997,
+      "sha256": "4ebdc1ec42ebe213ea8d5d44bbfb0be258932a2ef70f0846fcfbc26d38782602",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/manhole/normal.png",
+      "size": 188808,
+      "sha256": "5c25997d271d1d4d4f0d58541b4269be5a79b60613fcc107c398088c78e7dbfa",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/manhole/orm.jpg",
+      "size": 113714,
+      "sha256": "6d410fcd2e82e2a4f091aa7ed67c7cf374aa057dcaafaebf6a61d853b9a7eb40",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/marble_floor/albedo.jpg",
+      "size": 692549,
+      "sha256": "7d04f9c05e6f8912dce9a227899d44e4883373b790303d0309d771da4d73e1d1",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/marble_floor/normal.png",
+      "size": 1533077,
+      "sha256": "9507addd2cb73d202d6923bb3c72cc76a07055cf0535bfd05851ecbee587cb1b",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/marble_floor/orm.jpg",
+      "size": 587938,
+      "sha256": "760b4329b2a7efbd8d9705db5b466f5c9516e4a759d1cc31f3ec6733202b224d",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/metal/albedo.jpg",
+      "size": 369489,
+      "sha256": "fb208cc7b6799bb895143ab4e9ea8ab3fdbc820023ff63bbc0402515d92180c1",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/metal/normal.png",
+      "size": 7411603,
+      "sha256": "26c73f8171b8627b76580de4d3199d618c3669fa3a5284fa90c543a6a72844b6",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/metal/orm.jpg",
+      "size": 812025,
+      "sha256": "3ef23556e2ea2544ac50eada6ed33218b68df15575ffa998bead3b4344ceb991",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/office_stone/albedo.jpg",
+      "size": 737467,
+      "sha256": "58c93645171f67b2de61c21f88ac06b2c38556067f37cc527ab5e10dd471d328",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/office_stone/emissive.jpg",
+      "size": 71961,
+      "sha256": "8563e30ef22e5c71db99c9cf673eae649c5d576a242f24ff39baaf82504f4bbf",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/office_stone/normal.png",
+      "size": 2431460,
+      "sha256": "6f4b8f178d0fd94e9f840183724bafa930d8f8a91e74b33dc61911dfa6a8f60b",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/office_stone/orm.jpg",
+      "size": 960074,
+      "sha256": "5768fb985345b06f005ed4e6e00c34a36929c0bd597600aa7ab78bf4ec1eecbb",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/plaster/albedo.jpg",
+      "size": 624816,
+      "sha256": "2d1ec7f3264f3b86f6a4ced4c6dbdefc1f471ef7b2062985e78249b8d4e1043c",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/plaster/normal.png",
+      "size": 6866251,
+      "sha256": "5718e10dbb8ae112e0ac710bbf00a31e8d314dec8a2e0482af6e1199314be7ac",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/plaster/orm.jpg",
+      "size": 2227941,
+      "sha256": "39a64e92f5e0cfee0370e4a8c3da103c92ad86ab66930f8a8d54d2a0a8cb0ad3",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/plaster_interior/albedo.jpg",
+      "size": 278025,
+      "sha256": "c8ae894cf23a764cd5cd00a42585acb1f38af9341514d8afa621faf739422647",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/plaster_interior/normal.png",
+      "size": 3600975,
+      "sha256": "9992a4484d0a5d1d1460453a8987230f8a6dac5ff40c820bfa7010c3bebd9f7a",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/plaster_interior/orm.jpg",
+      "size": 469712,
+      "sha256": "b83dd5ec2ee3deb7a40de43a9745ff86d3d79b174bd660813992eed445724acc",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/roof/albedo.jpg",
+      "size": 2018662,
+      "sha256": "69bf117aeb8057c8013602d6f6c7326f710117bea788b88df0d6c93f815e89b3",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/roof/normal.png",
+      "size": 8990436,
+      "sha256": "e637f39c99eb469fe1e8ce606f3a7d3f17f5f7b42f4d70315126c34e0f92acf9",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/roof/orm.jpg",
+      "size": 4925132,
+      "sha256": "53da488de1536c516d09c46171e8e19b6388cf5615475f9c977aa7248e32d38b",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/rust/albedo.jpg",
+      "size": 375241,
+      "sha256": "95a66428fcf625f743ebf4895e1a65a649d6c87c7f79dc46f166869a6baf4050",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/rust/normal.png",
+      "size": 7292507,
+      "sha256": "d3df8543f0c8c934aeb5855e11728c22df3325985b34472a97a3899ced9eb134",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/rust/orm.jpg",
+      "size": 890537,
+      "sha256": "61111e3ed4ea8430d7aaafe498f66db61273a3ab6760cf8057cc0a92bf7079e5",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/sandbag/albedo.jpg",
+      "size": 1627188,
+      "sha256": "0d09dbe177d174b366ace745af06dcca98eeb49e5da666463f375e6575ffcd84",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/sandbag/normal.png",
+      "size": 9398590,
+      "sha256": "304b76ae665baec4fda43452f0d3e0d9547fa417afc18f44c739f6dddaf0ae99",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/sandbag/orm.jpg",
+      "size": 2117523,
+      "sha256": "873bd89089b7c498c158fa492ce00fe9e12b61c847effa69fe442362b0ee3b09",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/sidewalk/albedo.jpg",
+      "size": 473796,
+      "sha256": "8b5a29644d3d0b01791c588a0c241215e95d82b5d219c03ed1f59ae1d55a9874",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/sidewalk/normal.png",
+      "size": 3368060,
+      "sha256": "98ffd2dce916081eb4b31fb060076a2f46e41b603e5611395d3346cf115c1a60",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/sidewalk/orm.jpg",
+      "size": 981357,
+      "sha256": "33a1a4846f723d6c6dd1489c85eec9442618987df85d32b385ab2fa74ddf4a89",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/stair_stone/albedo.jpg",
+      "size": 708021,
+      "sha256": "73d5b2199f79332a7dccd7e32655a988b0032b42efe0a52e5e37ec9fd73ce1ab",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/stair_stone/normal.png",
+      "size": 5176762,
+      "sha256": "7bca0579a0ba4c559725827e38a7aeadd856c4892daeeabbe7367f6a9fe9507e",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/stair_stone/orm.jpg",
+      "size": 689292,
+      "sha256": "5fa91e5bece8f31d7cfc2a57d5de8ee51fe33243a44c17236cf6b12422a902cc",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/terrazzo/albedo.jpg",
+      "size": 3360439,
+      "sha256": "3a5d8937aaf4aec660f4e3b3f455b33ea328ea3e4887437b6972b664ee7270ba",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/terrazzo/normal.png",
+      "size": 6339118,
+      "sha256": "d1b1470dead4a0f7b1aa4bcc5dee54ee5995068c4b216713c01dfebdd34e94d4",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/terrazzo/orm.jpg",
+      "size": 491032,
+      "sha256": "04fa88275c476b8ffe0c5f15b2df76d34ae8215396b49bf3c51d92cfaa0ae5bd",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/wood/albedo.jpg",
+      "size": 634009,
+      "sha256": "32613871fa1a705d837771400ecc1b5b13afd039aed268c37dcda853492ed6af",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/wood/normal.png",
+      "size": 4346321,
+      "sha256": "6668a6c066c3e71c0e3e92918c04152d74df1b3a46aadf199442e185803d9256",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/wood/orm.jpg",
+      "size": 1063858,
+      "sha256": "0c3dba21cb441add1790c547fea94e05a2c3ec9f8c5d364f8ff1aaf751216aed",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/wood_floor/albedo.jpg",
+      "size": 647464,
+      "sha256": "7fb0f9831c4501daea1b1de0bb82fa995846b9dcc84eac6c07b466d4082a327b",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/wood_floor/normal.png",
+      "size": 951029,
+      "sha256": "b586f0f5e0d1417b49430889a9c982ed548beea2e38142e089ee8427e48ac0d5",
+      "tier": "hd"
+    },
+    {
+      "path": "hd/textures/wood_floor/orm.jpg",
+      "size": 554224,
+      "sha256": "2a689e9c6f3d44f21782ebbfa887c607cb24e7e6af15d6d128a2406f3b9b259a",
+      "tier": "hd"
+    },
+    {
+      "path": "levels/arena01.json",
+      "size": 1161,
+      "sha256": "951de6a232547e108dfdbaa873e63008c151e67a882c1c8cd590ce784ac86791"
+    },
+    {
+      "path": "levels/midtown.json",
+      "size": 23585,
+      "sha256": "150048545d041b3dc90078eb1b4015ac8f09d1734840f30935c6a607adc859a9"
+    },
+    {
+      "path": "models/city_props.glb",
+      "size": 9670864,
+      "sha256": "787ce08f095065185a33433ea17ca32eab79e8eb08649d68c5b60d74e39ed03e"
+    },
+    {
+      "path": "models/loot.glb",
+      "size": 2042960,
+      "sha256": "cb272edb3c1e64feeb38182e6c0ba7b81f41adf0b0534dab56cac8a51347cdd5"
+    },
+    {
+      "path": "models/props.glb",
+      "size": 10720620,
+      "sha256": "a01f0a961d0ccb82fcf1b81a68acfd72e9d5b53d520aa31c36523e9106d179fe"
+    },
+    {
+      "path": "sd/models/apc.glb",
+      "size": 2527000,
+      "sha256": "f3a2693d8cfae427f433e5dba34130f841094908bfa18259f049d6452ee8547f",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/fa18.glb",
+      "size": 3381696,
+      "sha256": "4c195e6e6757701fdb536fd60d1a7c14be5de8b9867fedefc1ebc60727b132ed",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/helicopter.glb",
+      "size": 1820208,
+      "sha256": "59a8fe146c897d5118ee3066336c6ca57af84583d23df36e87e52576386de175",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/jeep.glb",
+      "size": 2613004,
+      "sha256": "0cd9294116d9a7f2b1c081b6d50cd88a79aa0bc4241a1e8e65bab77ea599ca25",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/landmarks.glb",
+      "size": 5157420,
+      "sha256": "398ad39975abc5c8372e323ebdbdd18f277b51e6b3109535ae0a488e59f5c3d4",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/landmarks2.glb",
+      "size": 5574920,
+      "sha256": "b72709f4133dfac9ff39aed824e79410d79b6f9422f18feb4aa69c3a1b14cb15",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/lmg.glb",
+      "size": 2137960,
+      "sha256": "2abcd03bcf7f08243b94b0ee7aca516acd64ac8da71e199f64c1d9b945b871ce",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/p90.glb",
+      "size": 3140708,
+      "sha256": "1c1322f68bff0004ff4ad6c1ef98627da5e6839f5fd50635f2c475321334e221",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/pickup.glb",
+      "size": 2959276,
+      "sha256": "b9f6c67965aad9924b120ec93e957441903775440438d6df32deca5c6804fa3b",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/pistol.glb",
+      "size": 1557984,
+      "sha256": "53555ee441b96bcd9ffa252ea72e10d47ef3b0de489b12b4d005670f7a825bfc",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/rifle.glb",
+      "size": 2082096,
+      "sha256": "3b42774288afeb6947498a9fc887750d5a9e1f91e16cc2507f84912de273c191",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/shotgun.glb",
+      "size": 1587796,
+      "sha256": "796d88a0a789f96725dcc47349c9692889441f7f59dc88ada06cea9830cd7cff",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/sniper.glb",
+      "size": 2092440,
+      "sha256": "277514f037ffb693b123dd77b6119712e342bdd210d99e91d9e26902f674adf4",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/models/soldier.glb",
+      "size": 8629428,
+      "sha256": "3ccf9c00586dfceda4e65121af9916118768e6b08d84a4dd56fa06da0df43ae1",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/sky/dusk_bg.jpg",
+      "size": 98681,
+      "sha256": "500756aa83d63a288db6df150a1c989b49e8c80a2e11c7ae7c737bc6586a5fac",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt/albedo.jpg",
+      "size": 397021,
+      "sha256": "c744e1904f3e45a10dd85ef505ca340b42a358a01abe1db567fca55802dfc190",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt/normal.png",
+      "size": 2462610,
+      "sha256": "bff04b285e307180b6fdf1a7071021406322ff59971c61a2566971faa1674915",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt/orm.jpg",
+      "size": 630176,
+      "sha256": "05e13e8e6bab88e2f18aa9ebc611f12049fdfff317e365c45aa96ae124e672d5",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt_city/albedo.jpg",
+      "size": 330799,
+      "sha256": "b48107a06622269a0ebe20c4e8f4b0050d8e8e50d9785b43296acf735532039f",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt_city/normal.png",
+      "size": 2365249,
+      "sha256": "20ffe1ebf73442504335d496b60f632aee78d196ad453e5d9b17a9a0497f0377",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt_city/orm.jpg",
+      "size": 402085,
+      "sha256": "45cf178eeab46b9354122ddfce85b89a23ba00848511c36aab7b858995352160",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt_patch/albedo.jpg",
+      "size": 57690,
+      "sha256": "c9a324ed617724798253e9830c668b98c1f056b77d348223688843173e06e207",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt_patch/normal.png",
+      "size": 581416,
+      "sha256": "7fe22f9584e6495818c80c7b9b14b5b7bff7b014feb5955ebc3caa3e9c62abc6",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/asphalt_patch/orm.jpg",
+      "size": 68601,
+      "sha256": "f37c8bd975073c066afc9903f7f8a733c94a2f135f20b18aceca37211c07eee6",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/billboards/albedo.jpg",
+      "size": 154455,
+      "sha256": "d51185a637c70413bb08b20c2d4281fe3a2c925283695017ee254649942f37ba",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/billboards/emissive.jpg",
+      "size": 279372,
+      "sha256": "ef34be88b8f833c85440bbbfbb949d39a2ca4a21e4b885c9119cdf60de642ccb",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_brown/albedo.jpg",
+      "size": 392256,
+      "sha256": "b90fd2fc49c3f9b1a0529ebcade786a18e2a783e8fe37650c3f26bb361a48608",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_brown/emissive.jpg",
+      "size": 18359,
+      "sha256": "1bcbc5ca77454acddde24afa1182c20659e776ba7bf01d7b81987575537ea22a",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_brown/normal.png",
+      "size": 1167665,
+      "sha256": "06e741cbcbb0f2e578a0d41704fabd33bcea22067708e1ff6b8f92bd37eb9d30",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_brown/orm.jpg",
+      "size": 595062,
+      "sha256": "e7b1ef5d1c573616304c583c8a3b5ec4c37caa7532e3607e111878649314a9d3",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_red/albedo.jpg",
+      "size": 479121,
+      "sha256": "762b3d1907740bc98ca91598b05e2b6de19a29cf3ff6d6121e352401fb8407d2",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_red/emissive.jpg",
+      "size": 18133,
+      "sha256": "c7379753d42ca47d3d7ce7e55353250ce264aae6c37635cbe193edaee7750fbd",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_red/normal.png",
+      "size": 1174561,
+      "sha256": "7e26e59b7fe9dcb8cdf5728e1fa93b1381872ef9f310bfa93948523a1333ab47",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/brick_red/orm.jpg",
+      "size": 608058,
+      "sha256": "4c060fc8d0f7837d3ae7d804d32b06134b2b169b99b7ced996c4314ef41bcd71",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/carpet_office/albedo.jpg",
+      "size": 221605,
+      "sha256": "1d937c700225cf0931beaeba38b7a703ea2add6a9b998659309289b9700c3d79",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/carpet_office/normal.png",
+      "size": 1852350,
+      "sha256": "50f7e9bee03d939f1d6b5a4d6d788166cdd00163c8c44b2b542e779de1dd77fc",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/carpet_office/orm.jpg",
+      "size": 177322,
+      "sha256": "302068f6c630a715b0afa965966482b7a5e6f1a33f5a82c96bc58f067c864594",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/concourse_ceiling/albedo.jpg",
+      "size": 182987,
+      "sha256": "96ff9caefff927c31d2524fe344533b5a90d7e1133c8ea031283bb5cd6985fe1",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/concourse_ceiling/emissive.jpg",
+      "size": 35298,
+      "sha256": "e1c652c3a88855aef1904c11ffbc2b1c55ab3edf6e414f15e82c5825c5d65c0f",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/concourse_ceiling/normal.png",
+      "size": 445930,
+      "sha256": "2332b0eafb1073bd8e86460c882638b7d8ff9c1e4dcce407ec3983c9f9a62096",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/concourse_ceiling/orm.jpg",
+      "size": 262060,
+      "sha256": "8309d6b50a3752b63677c53ad81f428d31c37f70fdb44ba9aa430b11e08afd59",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/concrete/albedo.jpg",
+      "size": 162546,
+      "sha256": "a55006fc286e81a5d6142649294d9de71e13b89dc346b8ec1c81c868081ac442",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/concrete/normal.png",
+      "size": 1494254,
+      "sha256": "7f505f0b9bb08dd4ee99d9a882fe65eb9d0d1d2d0af379b2acdf8a43325f0167",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/concrete/orm.jpg",
+      "size": 418981,
+      "sha256": "cb14b1fc2fbbf6f462a0796abea7836429394c77c78046aade2a30a7a9dbde8b",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/container/albedo.jpg",
+      "size": 224102,
+      "sha256": "ba43a598573a7ee45931ff44d76354e7590cefd2cefeb8534022421ebe7fbcfb",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/container/normal.png",
+      "size": 1409710,
+      "sha256": "c189d5e05f9e513dd1ed80fd263de4e8d3fb7820d33c97e47e5f1b0b25f808e8",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/container/orm.jpg",
+      "size": 328212,
+      "sha256": "696863c71bd90d7778b8d75e8fa8fb50b37daf1a81a6fc9cb4098465f75b6800",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/curb/albedo.jpg",
+      "size": 502077,
+      "sha256": "fcc1cd38798efe57b0f6c6468c6a223d0d04a3cdff1502528589b56e650930dc",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/curb/normal.png",
+      "size": 2031395,
+      "sha256": "2559a490e734d64105822a76f3bc3c66af788cb402fcb7b2ccd984a9ca9036f3",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/curb/orm.jpg",
+      "size": 334230,
+      "sha256": "e5dd75af1e53356b722573b49e3fde8c6c009f75e84eb3d1edc3ee4ed08129a3",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/facade/albedo.jpg",
+      "size": 367430,
+      "sha256": "e8dbd1dfe0b5df788e305a13c11b302d9f5835e040b3f337a6ba01f4e92fe529",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/facade/emissive.jpg",
+      "size": 31057,
+      "sha256": "b52891fdd4b2693cf722d9a53d8fe6c3977570d8c770fca808668579e4a58e98",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/facade/normal.png",
+      "size": 891346,
+      "sha256": "9a01e1a839a24326582786f6d12bbd9f95714ebcf61cde3d3a0a5297ba658a51",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/facade/orm.jpg",
+      "size": 539209,
+      "sha256": "f897b0680591fac16923aba725a99f3c7ea02676f1ccb6acad603f761824fdc1",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/glass_tower/albedo.jpg",
+      "size": 72206,
+      "sha256": "8b11d00b2925666da5b323cc4381bee67d87bc32a8631997feea18a2d60397ed",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/glass_tower/emissive.jpg",
+      "size": 33548,
+      "sha256": "531ba53019cc8755384de50048e7c3a6e5dc10f265a1b8414ec76f5c7ca529d7",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/glass_tower/normal.png",
+      "size": 31488,
+      "sha256": "763ebd4ac62a608d56d8ca88201c4178ee7ebab1335b2d714fe8e58eb93de340",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/glass_tower/orm.jpg",
+      "size": 100725,
+      "sha256": "364b8c730542444370ae0476ef8943465ac13f7872b0d49fa73db070adb69195",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/grass/albedo.jpg",
+      "size": 479722,
+      "sha256": "5bf24a2de49ba8c481d47f4e4981f8768669e330d82eb3a88b12f10c1412738e",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/grass/normal.png",
+      "size": 2314060,
+      "sha256": "4d51552fc78f014190982241734d6d41773fb3099d288f6d40dc3b8dd64d67b4",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/grass/orm.jpg",
+      "size": 904100,
+      "sha256": "45ad31d9f7bffe659435f5347189c25f2f10be9293f3660beec972692ce9e2d8",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/gravel_roof/albedo.jpg",
+      "size": 580286,
+      "sha256": "cbf46d8ba2a6c8b98db7c5920cedecbfa0a789602ff1e1b341db5c2bfa104336",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/gravel_roof/normal.png",
+      "size": 2623454,
+      "sha256": "ee9f22ede0d09775d30f96cc6b0c0e29ec813ae735d8859d4bac1e2628029f43",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/gravel_roof/orm.jpg",
+      "size": 1322031,
+      "sha256": "ea2a1a65d99c55b0008b8c1e438cdbc73d791f3fad7e11045129caa6c296d83e",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/ground/albedo.jpg",
+      "size": 425093,
+      "sha256": "353a6c1e2367526c689b7125e5bf8388e6f9a660921123cff675b8226b802fbc",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/ground/normal.png",
+      "size": 2448766,
+      "sha256": "ce00b948fefd1e0bb7e740fb7ec4b4b62ced6c79621fb4065923f0f51bf0e6e2",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/ground/orm.jpg",
+      "size": 910335,
+      "sha256": "d8a3af6a974791c387d4630e59ada87529d95fd1682839446e14b5d0f4747336",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/hazard/albedo.jpg",
+      "size": 207045,
+      "sha256": "ded25d0193a55b614f0d8e4e26589f77a79a231f32d33acd4e6cbad1c0398c06",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/hazard/normal.png",
+      "size": 2225837,
+      "sha256": "d0e8d731eb48fb6b20f41dc9a8f0ccfaa012acc8044adeafe53c8a805aad98c3",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/hazard/orm.jpg",
+      "size": 238474,
+      "sha256": "b1d18712ee8621c93ec178a90cc219a3dfa1cd36f6f63ca8ad9bc98bc0206089",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/limestone/albedo.jpg",
+      "size": 155518,
+      "sha256": "55953c6df0894f7840b0781a39c9f1f17afcab2609b75a1fe2663cd642a9cf24",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/limestone/normal.png",
+      "size": 1534598,
+      "sha256": "9c05d0d8aad433fa3e468ca518b036e785b94329538b5ad744fcdbc7fecf1adf",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/limestone/orm.jpg",
+      "size": 340517,
+      "sha256": "e6cab88d9405db0701ee3b2159b3d2fdedcfcadd2edd1ecddd252e16737fe87d",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/manhole/albedo.jpg",
+      "size": 16453,
+      "sha256": "687529fe20a9073e5e9ba6c48e74a708187a94353512ff94ee9d87bbf915ea49",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/manhole/normal.png",
+      "size": 65972,
+      "sha256": "b6a0412af6fbbc220b0586bd9403ebada781ebb443dc7ab7869628e1713d9428",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/manhole/orm.jpg",
+      "size": 36607,
+      "sha256": "3f330f3d8ab66f8783cc0b110c9d2b0628e34439d5ccb1e6651019c06512f2ca",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/marble_floor/albedo.jpg",
+      "size": 182039,
+      "sha256": "5a30278140e52471bc69ff9c42a00e88a2177f4a911f979e312dcc0ba3824324",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/marble_floor/normal.png",
+      "size": 495947,
+      "sha256": "33ad2deb4f18a77fe37f221ed8e443f1bbc0a819436ba61e3d86d7a8715f4470",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/marble_floor/orm.jpg",
+      "size": 130740,
+      "sha256": "96635de08e2101f29b036c587ad7bc0b68cb42a69216d2db86cc31c50c3aed85",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/metal/albedo.jpg",
+      "size": 102288,
+      "sha256": "80dc0cb76bde8377cd6db97fab696aad848dd6a61239624f8dc0bda7ab5e50c1",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/metal/normal.png",
+      "size": 2054198,
+      "sha256": "6db3aef9a19b8f5717f7a244a501215df2bcf7a7061c7240b7efe03163cad488",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/metal/orm.jpg",
+      "size": 215187,
+      "sha256": "719462b9a817e1505a086b7a8516c4db044693c5e927a561b45aead879943d93",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/office_stone/albedo.jpg",
+      "size": 169913,
+      "sha256": "08fee88a7b57ddfcbf54acdada026fbf1133de8697887c60d0bdc1181a5c039a",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/office_stone/emissive.jpg",
+      "size": 25188,
+      "sha256": "601772ff3956de8872622b82a7a6cd9a91020341dfb0d585f295db7d124e450a",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/office_stone/normal.png",
+      "size": 686069,
+      "sha256": "b0e9c8cf722c68c25937ae29d0f6756f7a6e63f8de044afe9cb1ae007f3789b8",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/office_stone/orm.jpg",
+      "size": 248416,
+      "sha256": "afca658c0365ce9c0c36b16d7a4fc3f98e1b3f8d63faeaff4a6ab55a518d3e28",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/plaster/albedo.jpg",
+      "size": 193341,
+      "sha256": "228e02ea0a4d6ecd13fd902e9f07cba0eae467a0be91d054a9c8a8dec3a760e6",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/plaster/normal.png",
+      "size": 2074620,
+      "sha256": "d99a5c2fa7ae55403b9a8a0471a3266549ecd206230df532424f3408fa59b547",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/plaster/orm.jpg",
+      "size": 709151,
+      "sha256": "01a69b6dcad543bb04dd7068d25da7610d00d9811f41cf872eae69c7c536e861",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/plaster_interior/albedo.jpg",
+      "size": 63141,
+      "sha256": "ea1dff7bc14cbabb308e124d0c6754927175bb939e28f4d8a2629f6f84b048d0",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/plaster_interior/normal.png",
+      "size": 996885,
+      "sha256": "885afb691775fcd0d5b805bf117374fa157b9407e984cd75b866c12c0f083733",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/plaster_interior/orm.jpg",
+      "size": 90378,
+      "sha256": "a410877e0f7baa74c4d5530ccca896080a25dbdb32ab7b3307cbad059ede09c2",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/roof/albedo.jpg",
+      "size": 535951,
+      "sha256": "c666046f060238d5ae6b413c30f7cdf524ba4ead9211f2834bcaf1ded7fa75d0",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/roof/normal.png",
+      "size": 2703137,
+      "sha256": "b3bd8fb098b96b7ce5927c4df892be42e2abd05d99b69f6eda400e7d51bf14c6",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/roof/orm.jpg",
+      "size": 1250316,
+      "sha256": "3ab6f4f3e9ea2d6aa5f5c860b68223228a4cff1087fbf581adf2c5cc66d97090",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/rust/albedo.jpg",
+      "size": 127604,
+      "sha256": "83328c9f12a469a9b92637d2ddb71a8b78512bc558a647ef957f3f5f37a06ada",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/rust/normal.png",
+      "size": 2190193,
+      "sha256": "078b36ae9f841cad572e77bc227f66bf4017b1c67ae38df35021dadd6f94d3bd",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/rust/orm.jpg",
+      "size": 228016,
+      "sha256": "a33e01e5c55c5b9b306072e86befdf30dff773e3db3c4e88035a757e0ead4de5",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/sandbag/albedo.jpg",
+      "size": 352708,
+      "sha256": "6e77e7aacbdbb297291cf1828f8752676f6c263758efa580e27dac5a060ad66d",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/sandbag/normal.png",
+      "size": 2613412,
+      "sha256": "3d18c3681a1671f9a8c15dc68ea9ae73af924a884085a446690b51ae6b983283",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/sandbag/orm.jpg",
+      "size": 379975,
+      "sha256": "451d2d089b88f26977f6145787cb5b955e7877d979cd4ceffedc3640d90bf185",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/sidewalk/albedo.jpg",
+      "size": 123492,
+      "sha256": "ee083668ae5c001b299e5d13ec45a1de74e70164d29981a63ab2874bd13dd097",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/sidewalk/normal.png",
+      "size": 1055570,
+      "sha256": "6615c2e3acdb8df379a486121f31fc2d68d5f19245288ca0032e17dbba63a578",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/sidewalk/orm.jpg",
+      "size": 206042,
+      "sha256": "6d1092a2242d9d96650fab0e3e1b81f9f954ead12eeaec46afc574b4076a6ff8",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/stair_stone/albedo.jpg",
+      "size": 152688,
+      "sha256": "1245e4c9a64d7598a1bce5b6870393d94f861e140e6894b57776c1257c794341",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/stair_stone/normal.png",
+      "size": 1419770,
+      "sha256": "5c7db283d635ad25d4035bade0e0a15e15288b168ea34b892ddc91911e13b013",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/stair_stone/orm.jpg",
+      "size": 137917,
+      "sha256": "09af179881111c0fb8d8ec7013a49e1209e2c546a1c1715a38f9773358d57904",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/terrazzo/albedo.jpg",
+      "size": 760430,
+      "sha256": "1ceb17309f5f28c74a8ee3b9d9c87dd4d06a2be9480f3b580f9cba4373359bed",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/terrazzo/normal.png",
+      "size": 1586892,
+      "sha256": "8b2fb5011b7601c7b1bb132527fa4eb9cd70c9a5a7acb18787dae0bd0dbdbe57",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/terrazzo/orm.jpg",
+      "size": 116874,
+      "sha256": "24e6c737ede2485df329a04b78380b594f424290e3adda005e42b5999ecf488a",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/wood/albedo.jpg",
+      "size": 215134,
+      "sha256": "4bbe0d7bd73e5f21aa30d5daa3ff052a0ae01c1a690e29c65d714b7799c14f06",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/wood/normal.png",
+      "size": 1342327,
+      "sha256": "ed8d57fb25a243fe10e9c712af2bfef493fb0ba93a8c812adb0390ce56b5555c",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/wood/orm.jpg",
+      "size": 313445,
+      "sha256": "040898b8c2496a00b23144ad8b14547b01b92680935b5a5be2a3995627dc3369",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/wood_floor/albedo.jpg",
+      "size": 206977,
+      "sha256": "e728474785d883f1fcf1db5ff8ab2b101e9b2469c7c8c78fab1a98c7d4e44a5d",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/wood_floor/normal.png",
+      "size": 343467,
+      "sha256": "63a7bef1e3e452522b30fbc705a2ea25fcdc116c08f7d63c6d3a3e43908419ad",
+      "tier": "sd"
+    },
+    {
+      "path": "sd/textures/wood_floor/orm.jpg",
+      "size": 151949,
+      "sha256": "b248e413216a180b259e31f8bc68d42a08c69b572f0d6a57cb400eb217c1d533",
+      "tier": "sd"
+    },
+    {
+      "path": "sky/dusk_env.jpg",
+      "size": 29877,
+      "sha256": "c9a797c6e81c6c4e20013e9c209c8a20b17273cb05fb39cdd7ff09d2f40d53ad"
+    },
+    {
+      "path": "sounds/ads_in.mp3",
+      "size": 5792,
+      "sha256": "e6406c1f6440e511127633712cf2f4708501c7b2fe5a920c4aabc774b07d2e91"
+    },
+    {
+      "path": "sounds/ads_out.mp3",
+      "size": 5792,
+      "sha256": "fe72b8ec6ac7ed5ca0d7c1dc5d0742c492e48e0dae085f1ccc7237890599e7cb"
+    },
+    {
+      "path": "sounds/ambience_city.mp3",
+      "size": 1201155,
+      "sha256": "484381b25af6be8ab6359a61eb77ad96a8666c0a95b45aa90346e7024d6b03c6"
+    },
+    {
+      "path": "sounds/ambience_dusk.mp3",
+      "size": 1201155,
+      "sha256": "5630038c094514a6ad6801e3c81d16b1990c51e01c50aacd3559596a38161b5c"
+    },
+    {
+      "path": "sounds/arrest_catch.mp3",
+      "size": 49155,
+      "sha256": "ce6ac510b4ab1e8bd6c79758bea2aa37a2c8e4ffa7ef58e919579a465fc6d4f2"
+    },
+    {
+      "path": "sounds/bolt_cycle.mp3",
+      "size": 15196,
+      "sha256": "fd457451d4c810a185c90e33bd7ef2f6597f15f4b52fe0d7ef70a783af5dc098"
+    },
+    {
+      "path": "sounds/cannon_m61.mp3",
+      "size": 15718,
+      "sha256": "818887daa12557dbff9feab87e71542af869001b633657099ca065ab6666d0a1"
+    },
+    {
+      "path": "sounds/cannon_tail.mp3",
+      "size": 33481,
+      "sha256": "58ff104ab7def81dc1168d36e98e32a033d87c065cee82ae2b873604974bfc5f"
+    },
+    {
+      "path": "sounds/canopy_motor.mp3",
+      "size": 49155,
+      "sha256": "e321ad941a1195784ce08e92c30b3b9653082d36a9b3e48da75563b510354de0"
+    },
+    {
+      "path": "sounds/casing_1.mp3",
+      "size": 7881,
+      "sha256": "c7a3706fd68815cc133f2b5c8a122236eb4dcb83dbf2127d79924a5cc18b5a01"
+    },
+    {
+      "path": "sounds/casing_2.mp3",
+      "size": 7881,
+      "sha256": "3456855161ed664624a94d3f02f1399c61e52c1e98cb532b16963d5bfe9abe86"
+    },
+    {
+      "path": "sounds/catapult_launch.mp3",
+      "size": 69530,
+      "sha256": "a71ab0bc55e7cd452971669165010ea657efd7215bc65a82a9c84a4cfe355f07"
+    },
+    {
+      "path": "sounds/death.mp3",
+      "size": 69530,
+      "sha256": "9ff87d5de8b93b1c481b4b9b27148b8c2589c86802ec54f2054423a0f9e3f8bc"
+    },
+    {
+      "path": "sounds/empty.mp3",
+      "size": 4224,
+      "sha256": "8af6fd0a521e0bd5c1c87d3b50a4e5dbb4f139642ed7099f4648d05253263368"
+    },
+    {
+      "path": "sounds/enemy_fire.mp3",
+      "size": 10494,
+      "sha256": "9d01db145819b17d305898d09203e7f0304aa6483616738d3e15efb12fa31034"
+    },
+    {
+      "path": "sounds/engine_idle.mp3",
+      "size": 41318,
+      "sha256": "d779184d7202ae3b72dd4f6e4f240674ffd286bde0e08846e552e298523cf621"
+    },
+    {
+      "path": "sounds/engine_loop.mp3",
+      "size": 41318,
+      "sha256": "10e5ac8e83457d03d10fa62ee40371874d8b0a5324dcb790d281cec60a1c777a"
+    },
+    {
+      "path": "sounds/engine_start.mp3",
+      "size": 25122,
+      "sha256": "fc63d81e1af757d3980e221a29dd098b3ae14dbfa0ffb10cc593b59d5308ee44"
+    },
+    {
+      "path": "sounds/explosion_far.mp3",
+      "size": 91473,
+      "sha256": "b2cdfa15c794b90dd74889e94ec6e5adff51ceba91d1a3c2cfdab1288862ee63"
+    },
+    {
+      "path": "sounds/explosion_large.mp3",
+      "size": 97220,
+      "sha256": "80f5924720b5520b458686f8005f97b04cb9b5a9a2ca126c57e321a789d56b3a"
+    },
+    {
+      "path": "sounds/fall_land_hard.mp3",
+      "size": 19375,
+      "sha256": "d6e3b42e8615733d5ce12c324ef445857d1c4f741af6f60b083097acdb976d12"
+    },
+    {
+      "path": "sounds/flare_pop_1.mp3",
+      "size": 17285,
+      "sha256": "4d9eb94353fa554d5e16dd595651f24ec0532cd5d33a9b9793098b189ca632c6"
+    },
+    {
+      "path": "sounds/flare_pop_2.mp3",
+      "size": 17285,
+      "sha256": "97440acf73cc58e193e1be2dbf5855d9e56ae968c5327732c687b2bf0ab1830d"
+    },
+    {
+      "path": "sounds/flare_pop_3.mp3",
+      "size": 17285,
+      "sha256": "abe3463348c97f29bd17cc31ba227a73ff30977508aa62d6ea8863c2091bb811"
+    },
+    {
+      "path": "sounds/footstep_concrete_1.mp3",
+      "size": 6836,
+      "sha256": "8ec69272e1124945b57a763fb41da4077abd2b9031dcffa7bf81e21845927266"
+    },
+    {
+      "path": "sounds/footstep_concrete_2.mp3",
+      "size": 6836,
+      "sha256": "eacf111331a895df9f9541ab0a398999bbcb3dbe3637b76c1db3967239910e1b"
+    },
+    {
+      "path": "sounds/footstep_concrete_3.mp3",
+      "size": 6836,
+      "sha256": "922a1d0cbc7b7959ca9727ec8c4ac722bec8ce470ad2595cd97f14e6ca45e573"
+    },
+    {
+      "path": "sounds/footstep_concrete_4.mp3",
+      "size": 6836,
+      "sha256": "ac40c5994c843840ac53c8305d191635f1f20eee52e8e9aeb5086b33aa5c131f"
+    },
+    {
+      "path": "sounds/footstep_dirt_1.mp3",
+      "size": 6836,
+      "sha256": "37710ca21515b86cdfca1cfc4b83cd589f73083f7dd17b117663c2f2d288bfda"
+    },
+    {
+      "path": "sounds/footstep_dirt_2.mp3",
+      "size": 6836,
+      "sha256": "8e052ad46cc4ed490a4d4a55d0f034c79a987e0d630e9e42646f94575dc3d5da"
+    },
+    {
+      "path": "sounds/footstep_dirt_3.mp3",
+      "size": 6836,
+      "sha256": "0dc972636cb5104ab3f3ebe1460a02e4fc043bc7776577798e208a44fef6943b"
+    },
+    {
+      "path": "sounds/footstep_dirt_4.mp3",
+      "size": 6836,
+      "sha256": "2e7bc7114f3fa32d805ee9d3eab24a832095c2844f079577cf43641e23ea1784"
+    },
+    {
+      "path": "sounds/footstep_metal_1.mp3",
+      "size": 7359,
+      "sha256": "9d649d1d19e5672f43666fd3d2c8d4109d8712dedf270f64d62b51654de2d42a"
+    },
+    {
+      "path": "sounds/footstep_metal_2.mp3",
+      "size": 7359,
+      "sha256": "53fcf7acdf9a4cec323f1537cf391c74a619414615bd03d273717fac16d6f3a2"
+    },
+    {
+      "path": "sounds/footstep_metal_3.mp3",
+      "size": 7359,
+      "sha256": "f96512d0c1356bc77dcbb156a9de06178039882c93da5fa7befc8beb93c4c89b"
+    },
+    {
+      "path": "sounds/footstep_metal_4.mp3",
+      "size": 7359,
+      "sha256": "e86ea72870f76a69661f2a37cdfa10d4a6641e2b27f63fb1a060dc340dd20bb3"
+    },
+    {
+      "path": "sounds/footstep_wood_1.mp3",
+      "size": 7359,
+      "sha256": "4dcab62e410916b5c4cf77de9ec194e4b8ac7c9cff68908d28f33fd127d40e12"
+    },
+    {
+      "path": "sounds/footstep_wood_2.mp3",
+      "size": 7359,
+      "sha256": "e5484f87ed9ef291cccfa04cbd096b8bed798bb78707a393bc3f621c57a9eabb"
+    },
+    {
+      "path": "sounds/footstep_wood_3.mp3",
+      "size": 7359,
+      "sha256": "4a66630b62dd26e680910adfd7a9773d26a7ee838ef8e2dce639a7b3a9beb23c"
+    },
+    {
+      "path": "sounds/footstep_wood_4.mp3",
+      "size": 7359,
+      "sha256": "5d941b5424b38936676fbb4ddc921c14782b7f9a2a83a368831905f718552476"
+    },
+    {
+      "path": "sounds/gear_motor.mp3",
+      "size": 33481,
+      "sha256": "93bcac8e064a21770867723fae3d3160bd3672a951da0a4743331d4e02ffa08f"
+    },
+    {
+      "path": "sounds/heal.mp3",
+      "size": 61171,
+      "sha256": "c0b3bca7f8ff01cb910a57147e9673f6757e78b13e72e73fb8f461daf39e2622"
+    },
+    {
+      "path": "sounds/heli_rotor.mp3",
+      "size": 41318,
+      "sha256": "e5d747feabf08363794b1e91c65b80456af59b4062aa0d49402c2df0bec753e1"
+    },
+    {
+      "path": "sounds/heli_start.mp3",
+      "size": 81547,
+      "sha256": "f2a3b497f739d37c19f1dd9e1e43facd970114f4f6594d355b06a333a682fedc"
+    },
+    {
+      "path": "sounds/heli_wind.mp3",
+      "size": 81547,
+      "sha256": "b8c3a4df033303927422e4e5db962ef3d7691617206806cc5cfe777b8c4f180b"
+    },
+    {
+      "path": "sounds/hitmarker.mp3",
+      "size": 2657,
+      "sha256": "83a2fd898e0ec0351d2536aa41333e78a511c792a9e3886481ba64e85f6ebad2"
+    },
+    {
+      "path": "sounds/horn.mp3",
+      "size": 17285,
+      "sha256": "f84704e70852955c40689601ed4f4079a70921d3364a9ba88f9e9e7c40e39855"
+    },
+    {
+      "path": "sounds/hurt_1.mp3",
+      "size": 10494,
+      "sha256": "9e1e0c68214a814d23dd49483a165262149fec06a273c439da9e6d6725857ad1"
+    },
+    {
+      "path": "sounds/hurt_2.mp3",
+      "size": 10494,
+      "sha256": "5666accf8f623fdd2af3f9334f7f296accc89222242c6a622ebd2a9bd473c2ee"
+    },
+    {
+      "path": "sounds/impact_concrete_1.mp3",
+      "size": 7881,
+      "sha256": "cbfa55f48a5b1165c94d5a273904ab8216ded82e0d83243e9407586944ca9c36"
+    },
+    {
+      "path": "sounds/impact_concrete_2.mp3",
+      "size": 7881,
+      "sha256": "f15cf39692eed00c94607c0713dae78046c23ee35d94d9bfa17aa704f9677a81"
+    },
+    {
+      "path": "sounds/impact_concrete_3.mp3",
+      "size": 7881,
+      "sha256": "2e79142b7482bf056fa86e4d2872ca4bb486b2fb5d5da0067ec8b154ead2ea98"
+    },
+    {
+      "path": "sounds/impact_flesh_1.mp3",
+      "size": 6314,
+      "sha256": "efc8de5b4cfebb34ecda94c95d78965660f6a28c9f9f7457b98c4e0f1e8c5688"
+    },
+    {
+      "path": "sounds/impact_flesh_2.mp3",
+      "size": 6314,
+      "sha256": "3d4f2e696265af60a304a5420d52edfc0e249803219af16ffb3e3f549c7b2477"
+    },
+    {
+      "path": "sounds/impact_metal_1.mp3",
+      "size": 11538,
+      "sha256": "94ecdc4da09edca14d27e0a2fdf44e2b8f40b8ce17b84d4ed5fbbdcfaa1e6826"
+    },
+    {
+      "path": "sounds/impact_metal_2.mp3",
+      "size": 11538,
+      "sha256": "c35cf956c2e757735bcd877699cf5419bf241eb23184154c35978f6d7b2d9fa8"
+    },
+    {
+      "path": "sounds/impact_metal_3.mp3",
+      "size": 11538,
+      "sha256": "d4830efe8139365682ebdbe7af916290da03f4ff9d42e00ba84f99fbcc24cb83"
+    },
+    {
+      "path": "sounds/jet_afterburner.mp3",
+      "size": 81547,
+      "sha256": "78b97002960db70756033b4d4c492271ab6c5b20ec16ed9814ed48aca7291ba3"
+    },
+    {
+      "path": "sounds/jet_engine.mp3",
+      "size": 41318,
+      "sha256": "0a5fad71aa82644e55972fc8472d22a90a4def63ddd24bb4c85638c9915c77f3"
+    },
+    {
+      "path": "sounds/jet_flyby.mp3",
+      "size": 73187,
+      "sha256": "f39f65c4edaae953bd39795656b998e09944b274625140a08958016d7f287280"
+    },
+    {
+      "path": "sounds/jump.mp3",
+      "size": 7881,
+      "sha256": "d4184e2334da92e19a13d8d13d5858fa5c9a260c43c0fbe1e0441eb0b95173cd"
+    },
+    {
+      "path": "sounds/kill.mp3",
+      "size": 16241,
+      "sha256": "0c030fd901f64d5ca7d42734d266af42f99283169eb68cf6a275f6b52326c142"
+    },
+    {
+      "path": "sounds/ladder_step_1.mp3",
+      "size": 8404,
+      "sha256": "a5160ea3618540c89e3332c931b23fb88dae17bdba937bc523089bf975a0d241"
+    },
+    {
+      "path": "sounds/ladder_step_2.mp3",
+      "size": 8404,
+      "sha256": "b50000f176c36e30effe7618e834886349f55feb91bf804598c23d3812a97e72"
+    },
+    {
+      "path": "sounds/ladder_step_3.mp3",
+      "size": 8404,
+      "sha256": "ebf09feca8e6ada5ddfd906b99b772f13f5970cf41d8518c4a01f4dc5f586217"
+    },
+    {
+      "path": "sounds/land.mp3",
+      "size": 9449,
+      "sha256": "d78de135a9fcbaf11b8b5603f0f65a32113bc29c6d88375eb2532ae2df0d9d37"
+    },
+    {
+      "path": "sounds/lmg_fire.mp3",
+      "size": 8404,
+      "sha256": "a2c1159e31dd251faa5526372d06c0de2b52f33e134cad411db95cf36f451e7c"
+    },
+    {
+      "path": "sounds/lock_solid.mp3",
+      "size": 21465,
+      "sha256": "f57ce0d9d0227e8531abd96918a261b324fb537e92aec6ed3161d529c2b09195"
+    },
+    {
+      "path": "sounds/lock_tone.mp3",
+      "size": 21465,
+      "sha256": "f41ae42789a6c96bc8c71d698183b3732173497ab166d0989b80b60ce86beed4"
+    },
+    {
+      "path": "sounds/missile_explode.mp3",
+      "size": 65351,
+      "sha256": "314e7637890799eef66af7d6b947d441fb8c26d83adb33ba4a6795de35d0bd60"
+    },
+    {
+      "path": "sounds/missile_launch.mp3",
+      "size": 45498,
+      "sha256": "fe3c1cc0123264475d497d2827be2aa16cfa006f905c5a5bf8555672499e9457"
+    },
+    {
+      "path": "sounds/missile_loop.mp3",
+      "size": 41318,
+      "sha256": "846689c3d505c56f6c96f945b75be903b61a4ec870556cdea9648c668f6ffcc8"
+    },
+    {
+      "path": "sounds/music_city.mp3",
+      "size": 1801449,
+      "sha256": "e4052fb0b1c6ca4302f033e3ffab3b9a0ec26b0b0bd9145d308d6384ba178996"
+    },
+    {
+      "path": "sounds/music_combat.mp3",
+      "size": 1921089,
+      "sha256": "c97af73c9d0cbb35e7d3d82f712c95ffa36805e9df0bad2d64b3db02b080a345"
+    },
+    {
+      "path": "sounds/p90_fire.mp3",
+      "size": 8404,
+      "sha256": "38345808e1edaf8a6f51fef6d4f22b510181f30f6fedd3f01e01a995a88bae74"
+    },
+    {
+      "path": "sounds/p90_tail.mp3",
+      "size": 17285,
+      "sha256": "8a04ec6af074108afc4ae371f4d9c31529b55e5fcf407d9119dec04aff675571"
+    },
+    {
+      "path": "sounds/parachute_open.mp3",
+      "size": 41318,
+      "sha256": "6e818e4e3dcb372881abb02c4c7fcd6a4d06c8a8d128ce955463b0b1edecd351"
+    },
+    {
+      "path": "sounds/pickup_ammo.mp3",
+      "size": 9449,
+      "sha256": "292a02373e57bd1617963748a4467df8fc82405450d905799e21e0e8ddb7161c"
+    },
+    {
+      "path": "sounds/pickup_med.mp3",
+      "size": 10494,
+      "sha256": "9b82713eb8c00b791d9a07b6f10d6296708a5eb561e8db68c7b6664034caa0ec"
+    },
+    {
+      "path": "sounds/pickup_weapon.mp3",
+      "size": 13106,
+      "sha256": "d02fe3545f6243e38395686dee8679db3fb7487f0c375076b0c416cb00741335"
+    },
+    {
+      "path": "sounds/pistol_fire.mp3",
+      "size": 7359,
+      "sha256": "129c2f1770c2419cb17cde7a640d11190e4ae17a63cfb2a2295943ac4e8deedf"
+    },
+    {
+      "path": "sounds/reload_lmg.mp3",
+      "size": 101400,
+      "sha256": "da316c39fd49a6cf402a154ee76589e43087e7642be4cac0c0ffd9e02c88ff12"
+    },
+    {
+      "path": "sounds/reload_p90.mp3",
+      "size": 33481,
+      "sha256": "3325a5974f66fdba2fd38f0422c830fd11d13864c81a297c7d8d6e444a7e4a2f"
+    },
+    {
+      "path": "sounds/reload_pistol.mp3",
+      "size": 31392,
+      "sha256": "b3af9e83be2189ff0bc6cf5f17533823239bfb91a6d4633441e68ad53def88af"
+    },
+    {
+      "path": "sounds/reload_rifle.mp3",
+      "size": 47587,
+      "sha256": "4ed98ad1b1ec9945646c1363361ec5090e3052c610b1e3ea42f2cb69f1b2afc9"
+    },
+    {
+      "path": "sounds/reload_shotgun.mp3",
+      "size": 45498,
+      "sha256": "add81ac23d68c8413381de367cc869cbf8453910dae51fc23eb6c67dfa222378"
+    },
+    {
+      "path": "sounds/reload_sniper.mp3",
+      "size": 65351,
+      "sha256": "b35b23834db2f5861b92c3ac347b369e553599583478f7f4e5b75955129dfb86"
+    },
+    {
+      "path": "sounds/rifle_fire.mp3",
+      "size": 9449,
+      "sha256": "1ea66f19e672d8a12220dbb4c7408995ad93294084a3783c9ca6cbb2a616a242"
+    },
+    {
+      "path": "sounds/rifle_tail.mp3",
+      "size": 17285,
+      "sha256": "73952fef08e8cf1cf1bb60efab70b3a6513240149a374e8c2887aab5338f2a4c"
+    },
+    {
+      "path": "sounds/rwr_warning.mp3",
+      "size": 21465,
+      "sha256": "a23666dd6e450f50229eeca118d3ee19d0aa074f00f833353864a3ca5ad44a94"
+    },
+    {
+      "path": "sounds/shotgun_fire.mp3",
+      "size": 13106,
+      "sha256": "0fc2b579d3162ae62e53f1957e62113349140005f6a7e283b1793286e355361a"
+    },
+    {
+      "path": "sounds/sniper_fire.mp3",
+      "size": 19375,
+      "sha256": "2b68e945bddd357bde4de2d5d5cc28a15d4791cdcc0ddd72e1dfd5eeaf67cf8a"
+    },
+    {
+      "path": "sounds/sniper_tail.mp3",
+      "size": 29302,
+      "sha256": "5e59f5c7d887cbe33f35634f6156ca0b00166fa1f087c0dd785c55d9294d3654"
+    },
+    {
+      "path": "sounds/sonic_boom.mp3",
+      "size": 53334,
+      "sha256": "d4ffca60bb1043c9b0756e2ed5e1ae29366be7636a5ab0978692b125e04df8d4"
+    },
+    {
+      "path": "sounds/splash.mp3",
+      "size": 41318,
+      "sha256": "1578daae21b90f5986ac73cc395c4eaa95ac79b248ab9874228a608e6b157aa0"
+    },
+    {
+      "path": "sounds/swim_stroke_1.mp3",
+      "size": 21465,
+      "sha256": "51f4a2f3ecfe7aed72c3a96a804843a908229af913df4716deea44659e763999"
+    },
+    {
+      "path": "sounds/swim_stroke_2.mp3",
+      "size": 19898,
+      "sha256": "98b12c1ff2af18cf50d4ecf57426c0509d878b41dcccab955b5f93c0010a42b2"
+    },
+    {
+      "path": "sounds/swim_stroke_3.mp3",
+      "size": 23032,
+      "sha256": "9c3f976af6e02dc02feab95b52fd49e4e807c358d4362dbf0faf58794586da94"
+    },
+    {
+      "path": "sounds/tire_skid.mp3",
+      "size": 31392,
+      "sha256": "7b5f296a411f76a2e78e4b25e6e025188d5170746f9b1ba46397d27f33c551a0"
+    },
+    {
+      "path": "sounds/vehicle_door.mp3",
+      "size": 11538,
+      "sha256": "fb70d7327e80afea603c0614c347901f7233a458d93a2c3423d963b523a496f3"
+    },
+    {
+      "path": "sounds/vehicle_explode.mp3",
+      "size": 51245,
+      "sha256": "3c53d852aa24ce9dd4679bb05b884a19b7fe1ae4a24ee52909c6fe2bbf2329b9"
+    },
+    {
+      "path": "sounds/vehicle_impact_1.mp3",
+      "size": 13106,
+      "sha256": "ae5de7546632229cc35b59cedb30600361b4dcbb72ae2411df883e2178992a7c"
+    },
+    {
+      "path": "sounds/vehicle_impact_2.mp3",
+      "size": 13106,
+      "sha256": "c20e57b879a04d303561557058f18bbedc580a925524b9df87360924969a79e4"
+    },
+    {
+      "path": "sounds/water_lap.mp3",
+      "size": 321351,
+      "sha256": "ae452c5a9aeca50ec97b274963b55574eb22468d1899be11eb0ffcb9a5b91916"
+    },
+    {
+      "path": "sounds/weapon_swap.mp3",
+      "size": 10494,
+      "sha256": "4aa3a011db407ec9d98d5dd3f1ac26f018d61b3eb1911c90628d22ad055c41d0"
+    },
+    {
+      "path": "sounds/whizz_1.mp3",
+      "size": 7881,
+      "sha256": "05fa93c2aa1ca992d910c6b6d55087e431ae8c0ce85100b94bfaf0010ad36090"
+    },
+    {
+      "path": "sounds/whizz_2.mp3",
+      "size": 7881,
+      "sha256": "6b8badf148b4716e4fd66b8e26947da70fd52e7c266d92cde93ee721c59875b1"
+    },
+    {
+      "path": "sounds/whizz_3.mp3",
+      "size": 7881,
+      "sha256": "b8facb4175f3f549b6a48facdcca977058568192552d0cf5de96fb71f5ba680e"
+    },
+    {
+      "path": "sounds/wind_high.mp3",
+      "size": 321351,
+      "sha256": "350e210cb877b2db1dd5e442ef60e028d0ed42910fe1db2560f1d13e41a10f9b"
+    },
+    {
+      "path": "textures/fx/debris_atlas.png",
+      "size": 214548,
+      "sha256": "13ac967633e478ed63f005942aaffef945f578bdc9b0f7ff4bd37bfbdedfbf37"
+    },
+    {
+      "path": "textures/fx/ember.png",
+      "size": 2555,
+      "sha256": "f442c9be0ec0cab453a848cbf55ae7c84f09e32cdba1931883f8ce822431e73c"
+    },
+    {
+      "path": "textures/fx/explosion_flipbook.png",
+      "size": 759077,
+      "sha256": "c4d8ddd98183a19c3c6373b98154dabbea65e0e8b63032d07eca0b96ea784960"
+    },
+    {
+      "path": "textures/fx/fire_flipbook.png",
+      "size": 1101658,
+      "sha256": "32e01e7550eca06e98d103a129096c8b674fcf10e2578e565de98daa05d2fc51"
+    },
+    {
+      "path": "textures/fx/scorch.png",
+      "size": 191591,
+      "sha256": "ae6f3ebafed35aa571b1a773287015fefefc8727b2f92ac8bc6db765059fc329"
+    },
+    {
+      "path": "textures/fx/smoke_flipbook.png",
+      "size": 605223,
+      "sha256": "e784c451ec3c56629cf4d9c2a00f2a9a25fe59e3b9b12ba1a5d7b989ce728abb"
+    },
+    {
+      "path": "textures/water/foam.png",
+      "size": 535277,
+      "sha256": "13c4fe37a5d76baa61f9989241713b2fce311a2678e79f85ee59d0499de0a4e1"
+    },
+    {
+      "path": "textures/water/normal_large.png",
+      "size": 525224,
+      "sha256": "54f0672cf74b794114a033213962ab661b50841b1dcef396c5fb84bc33db420e"
+    },
+    {
+      "path": "textures/water/normal_small.png",
+      "size": 885594,
+      "sha256": "e58d2ceba88aac5d0813e832cca5657250a4122b456077732c8bfee60a6cb47b"
+    }
+  ]
+}

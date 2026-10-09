@@ -1,0 +1,91 @@
+{
+  "id": "arena01",
+  "name": "Dusk Outpost",
+  "size": 100,
+  "seed": 12345,
+  "clearRadius": 8,
+  "roadWidth": 7,
+  "wallHeight": 4,
+  "props": {
+    "buildings": 7,
+    "containers": 10,
+    "barriers": 16,
+    "sandbags": 8,
+    "crates": 14,
+    "barrels": 10
+  },
+  "sky": {
+    "zenith": "#1d3358",
+    "horizon": "#e9985a",
+    "ground": "#3a2e2a",
+    "sunColor": "#ffd9a8",
+    "sunDir": [
+      -0.55,
+      0.3,
+      -0.45
+    ],
+    "sunIntensity": 2.2,
+    "background": "sky/dusk_bg.jpg",
+    "env": "sky/dusk_env.jpg"
+  },
+  "playerStart": [
+    0,
+    0,
+    180
+  ],
+  "spawnPoints": [
+    [
+      36,
+      36
+    ],
+    [
+      -36,
+      36
+    ],
+    [
+      36,
+      -36
+    ],
+    [
+      -36,
+      -36
+    ],
+    [
+      0,
+      43
+    ],
+    [
+      43,
+      0
+    ],
+    [
+      0,
+      -43
+    ],
+    [
+      -43,
+      0
+    ]
+  ],
+  "vehicles": [
+    {
+      "type": "jeep",
+      "x": 1.6,
+      "z": 13.0,
+      "yaw": 180
+    },
+    {
+      "type": "pickup",
+      "x": -18.0,
+      "z": 1.6,
+      "yaw": 90
+    },
+    {
+      "type": "apc",
+      "x": 1.4,
+      "z": -27.0,
+      "yaw": 0
+    }
+  ],
+  "boxes": null
+}

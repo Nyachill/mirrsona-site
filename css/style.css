@@ -1,0 +1,1267 @@
+:root {
+  --bg: #0b1118;
+  --ink: #e8eef4;
+  --ink-dim: rgba(232, 238, 244, 0.55);
+  --accent: #6fd8ea;
+  --danger: #ff5466;
+  --hp: #6fe3a1;
+  --glass: rgba(10, 16, 24, 0.42);
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --font: "Avenir Next", "Hiragino Sans", "Hiragino Kaku Gothic ProN", -apple-system, "Segoe UI", "Noto Sans JP", sans-serif;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+.hidden { display: none !important; }
+
+#game {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* ===== HUD ===== */
+#hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  touch-action: none;
+}
+#hud > * { pointer-events: auto; }
+
+#stick-zone {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 42%;
+  touch-action: none;
+}
+#look-pad {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 58%;
+  touch-action: none;
+}
+
+#stick {
+  position: absolute;
+  left: calc(var(--sal) + 22px);
+  bottom: calc(var(--sab) + 22px);
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 2px solid rgba(232, 238, 244, 0.35);
+  background: rgba(232, 238, 244, 0.06);
+  pointer-events: none;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+}
+#stick.active { opacity: 0.9; bottom: auto; }
+#stick-knob {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(232, 238, 244, 0.85);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* 照準 */
+#crosshair {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 24px; height: 24px;
+  margin: -12px 0 0 -12px;
+  pointer-events: none;
+}
+#crosshair i {
+  position: absolute;
+  background: rgba(232, 238, 244, 0.9);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+}
+#crosshair i:nth-child(1) { left: 11px; top: 0; width: 2px; height: 7px; }
+#crosshair i:nth-child(2) { left: 11px; bottom: 0; width: 2px; height: 7px; }
+#crosshair i:nth-child(3) { top: 11px; left: 0; width: 7px; height: 2px; }
+#crosshair i:nth-child(4) { top: 11px; right: 0; width: 7px; height: 2px; }
+/* 照準（ADS）中はクロスヘアを消す（銃のサイトで狙う） */
+#crosshair { transition: opacity 0.12s, transform 0.12s; }
+#crosshair.ads { opacity: 0; transform: scale(0.6); }
+
+/* スナイパーのスコープ */
+#scope {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.scope-mask {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30vmin, rgba(0, 0, 0, 0.55) 31vmin, rgba(0, 0, 0, 0.97) 33vmin, #000 36vmin);
+}
+#scope i {
+  position: absolute;
+  left: 50%; top: 50%;
+  background: rgba(10, 10, 12, 0.92);
+}
+#scope .scope-h { width: 56vmin; height: 2px; margin: -1px 0 0 -28vmin; }
+#scope .scope-v { width: 2px; height: 56vmin; margin: -28vmin 0 0 -1px; }
+#scope .scope-dot {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 6px; height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: rgba(255, 80, 80, 0.95);
+  box-shadow: 0 0 4px rgba(255, 80, 80, 0.8);
+}
+
+#hit-marker {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 28px; height: 28px;
+  margin: -14px 0 0 -14px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.6);
+}
+#hit-marker i {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 28px; height: 3px;
+  margin: -1.5px 0 0 -14px;
+  background: var(--ink);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+#hit-marker i:nth-child(1) { transform: rotate(45deg); }
+#hit-marker i:nth-child(2) { transform: rotate(-45deg); }
+#hit-marker.show { opacity: 1; transform: scale(1); transition: opacity 0.05s, transform 0.08s; }
+#hit-marker.kill i { background: var(--danger); }
+
+#damage-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 60, 80, 0) 45%, rgba(255, 60, 80, 0.55) 100%);
+}
+#damage-vignette.show { opacity: 1; transition: opacity 0.05s; }
+#damage-vignette:not(.show) { transition: opacity 0.35s; }
+
+/* HP */
+#hp-wrap {
+  position: absolute;
+  left: calc(var(--sal) + 18px);
+  top: calc(var(--sat) + 14px);
+  width: 180px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--glass);
+  overflow: hidden;
+  pointer-events: none;
+}
+#hp-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--hp);
+  border-radius: 5px;
+  transition: width 0.12s;
+}
+#hp-wrap.low #hp-bar { background: var(--danger); animation: hp-pulse 0.7s infinite; }
+@keyframes hp-pulse { 50% { opacity: 0.45; } }
+
+/* 撃破数 */
+#kills-wrap {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--sat) + 10px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 14px;
+  background: var(--glass);
+  pointer-events: none;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+#kills { font-size: 20px; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* 弾数 */
+#ammo {
+  position: absolute;
+  right: calc(var(--sar) + 18px);
+  top: calc(var(--sat) + 8px);
+  font-size: 34px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  line-height: 1;
+}
+#ammo-sep { margin: 0 6px; color: var(--ink-dim); font-weight: 300; }
+#ammo-reserve { font-size: 20px; color: var(--ink-dim); }
+#ammo-mag.empty { color: var(--danger); }
+#weapon-name {
+  position: absolute;
+  right: calc(var(--sar) + 18px);
+  top: calc(var(--sat) + 46px);
+  font-size: 12px;
+  color: var(--ink-dim);
+  pointer-events: none;
+}
+/* 武器一覧（PC は数字キー、スマホは切替ボタンで順送り） */
+#weapon-list {
+  position: absolute;
+  right: calc(var(--sar) + 18px);
+  top: calc(var(--sat) + 66px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  pointer-events: none;
+}
+.weapon-item {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  color: rgba(232, 238, 244, 0.45);
+  background: rgba(10, 16, 24, 0.3);
+}
+.weapon-item.active {
+  color: var(--ink);
+  background: rgba(111, 216, 234, 0.25);
+  border: 1px solid rgba(111, 216, 234, 0.6);
+  padding: 1px 6px;
+}
+
+#message {
+  position: absolute;
+  left: 50%; top: 36%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: var(--ink);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+#message.show { opacity: 1; }
+
+#debug {
+  position: absolute;
+  left: calc(var(--sal) + 18px);
+  top: calc(var(--sat) + 32px);
+  font-size: 11px;
+  color: var(--accent);
+  pointer-events: none;
+  font-family: ui-monospace, Menlo, monospace;
+}
+
+/* ボタン */
+.btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(232, 238, 244, 0.1);
+  border: 2px solid rgba(232, 238, 244, 0.4);
+  color: var(--ink);
+  font-size: 12px;
+  touch-action: none;
+  transition: transform 0.06s, background 0.06s;
+}
+.btn.pressed { transform: scale(0.92); background: rgba(232, 238, 244, 0.28); }
+.btn-fire {
+  right: calc(var(--sar) + 22px);
+  bottom: calc(var(--sab) + 66px);
+  width: 96px; height: 96px;
+  font-size: 16px;
+  border-color: rgba(255, 84, 102, 0.75);
+  background: rgba(255, 84, 102, 0.18);
+}
+.btn-fire.pressed { background: rgba(255, 84, 102, 0.45); }
+/* 左の撃つボタン（右手で視点を動かしながら左手で撃つ）。config.controls.leftFireButton: false で隠す */
+.btn-fire.btn-fire-left {
+  right: auto;
+  left: calc(var(--sal) + 30px);
+  bottom: calc(var(--sab) + 190px);
+  width: 72px; height: 72px;
+  font-size: 13px;
+}
+#hud.no-left-fire #btn-fire-left { display: none; }
+.btn-small { width: 60px; height: 60px; }
+#btn-jump { right: calc(var(--sar) + 134px); bottom: calc(var(--sab) + 40px); }
+#btn-reload { right: calc(var(--sar) + 134px); bottom: calc(var(--sab) + 116px); }
+#btn-swap { right: calc(var(--sar) + 40px); bottom: calc(var(--sab) + 176px); }
+/* 照準（ADS）: ジャンプの左隣、トグル式なので押下状態をアクセント色で示す */
+#btn-ads { right: calc(var(--sar) + 208px); bottom: calc(var(--sab) + 40px); }
+#btn-ads.pressed {
+  transform: none;
+  background: rgba(111, 216, 234, 0.3);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* 乗り物: 乗り降りボタン（照準の上）と、画面下中央の速度・耐久 */
+#btn-vehicle { right: calc(var(--sar) + 208px); bottom: calc(var(--sab) + 116px); border-color: rgba(111, 216, 234, 0.7); background: rgba(111, 216, 234, 0.16); }
+#vehicle-hud {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--sab) + 16px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 14px;
+  background: var(--glass);
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+#vehicle-name { font-size: 12px; color: var(--ink-dim); margin-right: 6px; }
+#vehicle-speed { font-size: 26px; font-weight: 600; line-height: 1; }
+.vehicle-unit { font-size: 11px; color: var(--ink-dim); }
+#vehicle-hp-wrap { width: 90px; height: 6px; margin-left: 10px; border-radius: 3px; background: rgba(232, 238, 244, 0.15); overflow: hidden; align-self: center; }
+#vehicle-hp { height: 100%; width: 100%; background: var(--accent); transition: width 0.15s; }
+#vehicle-hud.low #vehicle-hp { background: var(--danger); animation: hp-pulse 0.7s infinite; }
+#hud.driving #btn-jump span { font-size: 0; }
+#hud.driving #btn-jump span::after { content: '警笛'; font-size: 12px; }
+#vehicle-hud .vehicle-label { display: none; font-size: 11px; color: var(--ink-dim); }
+#vehicle-hud.is-heli .vehicle-label { display: inline; }
+
+/* ヘリ: 高度（速度・耐久の上）・始動の回転数の輪（照準の下）・上昇 / 下降 / 視点 / 席のボタン。
+   操縦席（#hud.piloting）は撃てないので撃つ・照準・装填・切替を隠し、右に上昇（ジャンプ）と下降を縦に並べる */
+#heli-info {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--sab) + 60px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: var(--glass);
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.heli-label { font-size: 11px; color: var(--ink-dim); }
+#heli-alt { font-size: 22px; font-weight: 600; line-height: 1; }
+.heli-unit { font-size: 11px; color: var(--ink-dim); }
+.heli-sub { font-size: 11px; color: var(--ink-dim); margin-left: 8px; }
+#heli-rpm {
+  position: absolute;
+  left: 50%; top: 58%;
+  transform: translateX(-50%);
+  width: 76px; height: 76px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  pointer-events: none;
+  --rpm: 0%;
+}
+#heli-rpm .rpm-ring {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) var(--rpm), rgba(232, 238, 244, 0.15) 0);
+}
+#heli-rpm .rpm-ring::after { content: ''; position: absolute; inset: 6px; border-radius: 50%; background: rgba(10, 16, 24, 0.72); }
+#heli-rpm .rpm-label, #heli-rpm #heli-rpm-text { position: relative; font-size: 11px; line-height: 1.3; }
+#heli-rpm #heli-rpm-text { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#btn-descend, #btn-camera { display: none; }
+#hud.heli #btn-camera { display: flex; right: calc(var(--sar) + 128px); bottom: calc(var(--sab) + 176px); }
+#hud.heli:not(.piloting) #btn-jump { display: none; }
+#hud.piloting #btn-fire, #hud.piloting #btn-fire-left, #hud.piloting #btn-ads, #hud.piloting #btn-reload, #hud.piloting #btn-swap,
+#hud.chase #btn-fire, #hud.chase #btn-fire-left, #hud.chase #btn-ads, #hud.chase #btn-reload { display: none; }
+#hud.piloting #crosshair, #hud.chase #crosshair { opacity: 0.3; }
+#hud.piloting #ammo, #hud.piloting #weapon-name, #hud.piloting #weapon-list, #hud.chase #weapon-list { display: none; }
+#hud.piloting #btn-jump { right: calc(var(--sar) + 30px); bottom: calc(var(--sab) + 150px); width: 80px; height: 80px; }
+#hud.piloting #btn-descend { display: flex; right: calc(var(--sar) + 30px); bottom: calc(var(--sab) + 50px); width: 80px; height: 80px; }
+#hud.heli.piloting #btn-jump span::after { content: '上昇'; font-size: 13px; }
+#hud.piloting #btn-descend span { font-size: 13px; }
+#hud.piloting #btn-vehicle { right: calc(var(--sar) + 128px); bottom: calc(var(--sab) + 60px); }
+#btn-seat { right: calc(var(--sar) + 208px); bottom: calc(var(--sab) + 192px); }
+
+/* ===== オンライン ===== */
+/* 撃破数をタップでスコアボード */
+#hud.online #kills-wrap { pointer-events: auto; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+#hud.online #kills-wrap::after { content: '\25BE'; font-size: 11px; color: var(--ink-dim); margin-left: -2px; }
+/* 接続表示（HP の下）: ping とプレイヤー数 */
+#net-info {
+  position: absolute;
+  left: calc(var(--sal) + 18px);
+  top: calc(var(--sat) + 30px);
+  font-size: 11px;
+  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+#net-info::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--hp); vertical-align: 1px; }
+#net-info.bad::before { background: var(--danger); }
+/* キルフィード（左上） */
+#killfeed {
+  position: absolute;
+  left: calc(var(--sal) + 18px);
+  top: calc(var(--sat) + 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  pointer-events: none;
+}
+.kf-line {
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: var(--glass);
+  font-size: 12px;
+  color: var(--ink);
+  white-space: nowrap;
+  animation: kf-in 0.18s ease-out;
+}
+.kf-line.self { color: var(--accent); }
+.kf-line.victim { color: #ffb3bb; }
+/* 背の低い画面（スマホの横向き）: 3 行まで・少し小さく（左の撃つボタンに重ならないように） */
+@media (max-height: 500px) {
+  #killfeed { gap: 3px; }
+  .kf-line { padding: 2px 8px; font-size: 11px; }
+  .kf-line:nth-last-child(n+4) { display: none; }
+}
+@keyframes kf-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+/* 再接続中などの帯（上中央） */
+#net-banner {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--sat) + 48px);
+  transform: translateX(-50%);
+  max-width: 80vw;
+  padding: 6px 16px;
+  border-radius: 12px;
+  background: rgba(120, 20, 32, 0.75);
+  font-size: 13px;
+  color: #ffe2e6;
+  text-align: center;
+  pointer-events: none;
+  z-index: 3;
+}
+/* スコアボード */
+#scoreboard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: min(420px, 86vw);
+  max-height: 80vh;
+  overflow: auto;
+  padding: 14px 18px 10px;
+  border-radius: 16px;
+  background: rgba(8, 13, 20, 0.86);
+  pointer-events: auto;
+  z-index: 4;
+}
+#scoreboard table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+#scoreboard th { font-size: 11px; font-weight: 500; color: var(--ink-dim); text-align: right; padding: 0 8px 6px; }
+#scoreboard td { text-align: right; padding: 5px 8px; border-top: 1px solid rgba(232, 238, 244, 0.08); }
+#scoreboard .name { text-align: left; }
+#scoreboard .rank { text-align: left; width: 1.5em; color: var(--ink-dim); }
+#scoreboard .ping { color: var(--ink-dim); }
+#scoreboard tr.self td { color: var(--accent); }
+#scoreboard tr.dead td.name { opacity: 0.55; }
+.sb-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+.sb-hint { font-size: 10px; color: var(--ink-dim); }
+/* オンラインから抜ける（スコアボードの中・接続の帯） */
+#btn-leave, .nb-leave {
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink);
+  background: rgba(232, 238, 244, 0.1);
+  border: 1px solid rgba(232, 238, 244, 0.25);
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+#btn-leave:active, .nb-leave:active { background: rgba(232, 238, 244, 0.2); }
+.nb-leave { margin-left: 10px; padding: 3px 12px; vertical-align: middle; }
+#net-banner.with-action { pointer-events: auto; }
+
+/* 死亡 */
+#death-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(40, 6, 12, 0.55);
+  pointer-events: none;
+}
+.death-title { font-size: 40px; font-weight: 600; letter-spacing: 0.1em; color: #ffd6da; }
+.death-sub { margin-top: 10px; font-size: 14px; color: var(--ink-dim); }
+/* オンライン: 誰に・何でやられたか（名前と武器名が長いので見出しとは別の小さい行。狭い画面でも 1 行に収める） */
+.death-by {
+  max-width: calc(100vw - var(--sal) - var(--sar) - 32px);
+  margin-top: 8px;
+  font-size: clamp(14px, 4.2vw, 20px);
+  font-weight: 500;
+  color: #ffe2e6;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== ロード画面 ===== */
+#loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sat) var(--sar) var(--sab) var(--sal);
+  background: radial-gradient(ellipse at 50% 30%, #16222f 0%, var(--bg) 70%);
+  z-index: 10;
+}
+.title-wrap { position: relative; line-height: 1; }
+.title {
+  font-size: clamp(40px, 9vw, 72px);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  margin-left: 0.22em;
+  color: var(--ink);
+}
+.title.mirror {
+  position: absolute;
+  left: 0; top: 100%;
+  transform: scaleY(-1) translateY(-6px);
+  color: var(--accent);
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  pointer-events: none;
+}
+.subtitle { margin-top: clamp(40px, 9vw, 72px); font-size: 14px; color: var(--ink-dim); letter-spacing: 0.3em; }
+#progress {
+  width: min(360px, 70vw);
+  height: 3px;
+  margin-top: 36px;
+  background: rgba(232, 238, 244, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+#progress-bar { height: 100%; width: 2%; background: var(--accent); transition: width 0.2s; }
+#status { margin-top: 12px; font-size: 13px; color: var(--ink-dim); min-height: 1.4em; }
+#btn-start {
+  margin-top: 26px;
+  padding: 14px 40px;
+  font: inherit;
+  font-size: 17px;
+  color: var(--bg);
+  background: var(--ink);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+#btn-start:active { transform: scale(0.97); }
+#mode-buttons { display: flex; gap: 14px; margin-top: 26px; }
+#mode-buttons #btn-start { margin-top: 0; }
+#btn-online {
+  padding: 14px 32px;
+  font: inherit;
+  font-size: 17px;
+  color: var(--ink);
+  background: rgba(111, 216, 234, 0.14);
+  border: 1px solid rgba(111, 216, 234, 0.6);
+  border-radius: 999px;
+  cursor: pointer;
+}
+#btn-online:active { transform: scale(0.97); }
+#btn-online:disabled { opacity: 0.45; cursor: default; font-size: 13px; }
+/* オンラインの設定（コールサイン・ルーム・接続） */
+#online-panel {
+  width: min(380px, 86vw);
+  margin-top: 22px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(10, 16, 24, 0.6);
+  border: 1px solid rgba(232, 238, 244, 0.1);
+}
+.op-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+.op-label { width: 6.5em; font-size: 12px; color: var(--ink-dim); flex: none; }
+#callsign { flex: 1; font-size: 17px; font-weight: 600; letter-spacing: 0.04em; }
+#room-code {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 16px; /* 16px 未満だと iOS がズームする */
+  color: var(--ink);
+  background: rgba(232, 238, 244, 0.08);
+  border: 1px solid rgba(232, 238, 244, 0.18);
+  border-radius: 8px;
+  outline: none;
+}
+#room-code:focus { border-color: var(--accent); }
+.op-small {
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: rgba(232, 238, 244, 0.1);
+  border: 1px solid rgba(232, 238, 244, 0.2);
+  border-radius: 999px;
+  cursor: pointer;
+}
+#online-status { min-height: 1.4em; margin: 8px 0 4px; font-size: 12px; color: var(--ink-dim); }
+#online-status.error { color: #ffb3bb; }
+.op-actions { justify-content: flex-end; margin-top: 8px; }
+#btn-connect {
+  padding: 9px 28px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--bg);
+  background: var(--accent);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+#btn-connect:disabled { opacity: 0.5; cursor: default; }
+#version { margin-top: 24px; font-size: 11px; color: rgba(232, 238, 244, 0.35); font-variant-numeric: tabular-nums; }
+#crumb { margin-top: 6px; max-width: 90vw; font-size: 11px; color: rgba(255, 214, 160, 0.6); font-variant-numeric: tabular-nums; user-select: text; -webkit-user-select: text; }
+#resume-card { margin-top: 14px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+#btn-resume { padding: 12px 26px; font-size: 17px; font-weight: 700; color: #1b1206; background: #ffcf7a; border: none; border-radius: 10px; letter-spacing: 0.04em; cursor: pointer; }
+#btn-resume:active { transform: scale(0.97); }
+#btn-resume:disabled { opacity: 0.6; }
+#resume-sub { max-width: 90vw; font-size: 12px; color: rgba(255, 214, 160, 0.8); text-align: center; }
+#resume-sub:empty { display: none; }
+#btn-saver-off { margin-top: 6px; padding: 4px 10px; font-size: 11px; color: rgba(255, 214, 160, 0.8); background: transparent; border: 1px solid rgba(255, 214, 160, 0.35); border-radius: 6px; cursor: pointer; }
+#loading.online-open #resume-card, #loading.solo-open #resume-card { display: none; }
+/* 「続きから」・「前回: …」・省メモリの解除を出した開始画面: 縦に長くなるので、真ん中寄せで上（ロゴ）が切れないよう
+   上下の伸びる空き（::before / ::after）で寄せ（はみ出したらスクロール）、背の低い画面（スマホの横）では鏡のロゴ・操作の説明を消して詰める */
+#loading.resume-open { justify-content: flex-start; }
+#loading.resume-open::before, #loading.resume-open::after { content: ''; flex: 1 0 0; }
+@media (max-height: 500px) {
+  #loading.resume-open .title.mirror, #loading.resume-open .howto, #loading.resume-open #progress { display: none; }
+  #loading.resume-open .title { font-size: 34px; }
+  #loading.resume-open .subtitle { margin-top: 6px; }
+  #loading.resume-open #status { margin-top: 6px; }
+  #loading.resume-open #mode-buttons { margin-top: 12px; }
+  #loading.resume-open #version { margin-top: 10px; }
+}
+.howto { margin-top: 6px; font-size: 11px; color: rgba(232, 238, 244, 0.35); }
+
+/* 縦向き警告（Web 版用。アプリは横固定なので出ない） */
+#rotate-hint {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  font-size: 18px;
+  color: var(--ink);
+}
+@media (orientation: portrait) and (max-width: 700px) {
+  #rotate-hint { display: flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hp-wrap.low #hp-bar { animation: none; }
+}
+/* オンラインの設定を開いている間はロード画面を詰める（横向きの iPhone でも収まるように） */
+#loading { overflow-y: auto; }
+#loading.online-open .subtitle,
+#loading.online-open .howto,
+#loading.online-open .title.mirror,
+#loading.online-open #progress,
+#loading.online-open #mode-buttons { display: none; }
+#loading.online-open #status { margin-top: 18px; }
+
+/* ===== 街（フェーズ C3）: ミニマップ（右上）・方位（上中央）・防具（HP の下）・武器の枠（下中央）・回復（枠の左）・拾う（照準の右上）・
+   バトルロイヤル（ミニマップの下）・降下・全体の地図・結果。iPhone の横向き（高さ 375〜430）で重ならない位置 ===== */
+#hud.city #ammo, #hud.city #weapon-name, #hud.city #weapon-list { display: none; }
+#hud:not(.city) #minimap, #hud:not(.city) #compass, #hud:not(.city) #slots, #hud:not(.city) #btn-heal, #hud:not(.city) #armor { display: none !important; }
+/* スティックの待ち位置を回復ボタンより上に */
+#hud.city #stick { bottom: calc(var(--sab) + 48px); }
+
+#minimap {
+  position: absolute;
+  right: calc(var(--sar) + 12px);
+  top: calc(var(--sat) + 10px);
+  width: 112px; height: 112px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #16344a;
+  border: 1.5px solid rgba(232, 238, 244, 0.38);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+#minimap canvas { display: block; width: 100%; height: 100%; }
+#minimap .mm-n { display: none; }
+
+#compass {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--sat) + 42px);
+  width: 210px; height: 34px;
+  margin-left: -105px;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 22%, #000 78%, transparent 100%);
+}
+#compass::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 22px; background: rgba(10, 16, 24, 0.38); }
+#compass .cmp-strip { position: absolute; left: 50%; top: 0; margin-left: -720px; width: 2160px; height: 22px; }
+#compass .cmp-strip canvas { display: block; }
+#compass .cmp-mark { position: absolute; left: 50%; top: 18px; margin-left: -4px; width: 0; height: 0; border: 4px solid transparent; border-bottom-color: rgba(255, 255, 255, 0.9); }
+#compass .cmp-wp { position: absolute; top: 3px; width: 9px; height: 9px; margin-left: -4.5px; background: #ffd23f; transform: rotate(45deg); box-shadow: 0 0 3px rgba(0, 0, 0, 0.8); }
+#compass .cmp-wp.edge { opacity: 0.75; }
+#compass .cmp-dist { position: absolute; left: 0; right: 0; top: 23px; text-align: center; font-size: 10px; color: #ffe08a; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); font-variant-numeric: tabular-nums; }
+
+#armor { position: absolute; left: calc(var(--sal) + 18px); top: calc(var(--sat) + 29px); display: flex; gap: 10px; pointer-events: none; }
+.ar-row { display: flex; align-items: center; gap: 4px; }
+.ar-icon { width: 11px; height: 11px; background: #9cc9ff; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+.ar-icon.ar-vest { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M4 3L8 1H16L20 3V21H4ZM9 1L12 5L15 1Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M4 3L8 1H16L20 3V21H4ZM9 1L12 5L15 1Z'/%3E%3C/svg%3E"); }
+.ar-icon.ar-helmet { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M2 17C2 8 7 3 12 3S22 8 22 17H17V14H7V17Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M2 17C2 8 7 3 12 3S22 8 22 17H17V14H7V17Z'/%3E%3C/svg%3E"); }
+.ar-bar { width: 70px; height: 5px; border-radius: 3px; background: var(--glass); overflow: hidden; }
+.ar-bar i { display: block; height: 100%; width: 100%; background: #8fc4ff; transition: width 0.15s; }
+#hud.city #killfeed { top: calc(var(--sat) + 46px); }
+
+#slots {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--sab) + 4px);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  pointer-events: none;
+}
+.slot {
+  position: relative;
+  width: 88px; height: 34px;
+  border-radius: 8px;
+  background: rgba(10, 16, 24, 0.52);
+  border: 1px solid rgba(232, 238, 244, 0.2);
+  pointer-events: auto;
+  font-variant-numeric: tabular-nums;
+  touch-action: none;
+}
+.slot.active { border-color: var(--accent); background: rgba(111, 216, 234, 0.2); box-shadow: 0 0 8px rgba(111, 216, 234, 0.25); }
+.slot.empty { opacity: 0.45; }
+.slot-key { position: absolute; left: 4px; top: 2px; font-size: 8px; color: var(--ink-dim); }
+.slot-icon { position: absolute; left: 9px; top: 4px; width: 40px; height: 15px; background: rgba(232, 238, 244, 0.9); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: left center; mask-position: left center; }
+.slot.active .slot-icon { background: #ffffff; }
+.slot.empty .slot-icon { display: none; }
+.slot-name { position: absolute; left: 9px; bottom: 2px; font-size: 9px; color: var(--ink-dim); white-space: nowrap; }
+.slot.empty .slot-name { top: 50%; bottom: auto; transform: translateY(-50%); font-size: 11px; }
+.slot-ammo { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); text-align: right; line-height: 1; }
+.slot-mag { display: block; font-size: 15px; font-weight: 600; color: var(--ink); }
+.slot-res { display: block; font-size: 9px; font-style: normal; color: var(--ink-dim); margin-top: 1px; }
+.slot.dry .slot-mag { color: var(--danger); }
+.slot[data-w="rifle"] .slot-icon { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M2 9L14 8V7H40V6H46V8H62V10H46V11H38L36 16H32L33 11H24L22 19H17L19 11L14 12L2 14Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M2 9L14 8V7H40V6H46V8H62V10H46V11H38L36 16H32L33 11H24L22 19H17L19 11L14 12L2 14Z'/%3E%3C/svg%3E"); }
+.slot[data-w="p90"] .slot-icon { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M14 5L44 4V6L50 8L58 9V11H50L48 15H40L36 18H30L32 15L20 16H10L6 13V8L14 7Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M14 5L44 4V6L50 8L58 9V11H50L48 15H40L36 18H30L32 15L20 16H10L6 13V8L14 7Z'/%3E%3C/svg%3E"); }
+.slot[data-w="shotgun"] .slot-icon { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M2 10L14 9L16 8H60V10H44V12H32V10H22L20 15H16L17 11L2 14Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M2 10L14 9L16 8H60V10H44V12H32V10H22L20 15H16L17 11L2 14Z'/%3E%3C/svg%3E"); }
+.slot[data-w="lmg"] .slot-icon { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M2 9L12 8V6H44L46 8H62V10H46L44 12H30V19H22V12H18L16 17H12L13 12L2 14ZM48 10L52 18H54L50 10Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M2 9L12 8V6H44L46 8H62V10H46L44 12H30V19H22V12H18L16 17H12L13 12L2 14ZM48 10L52 18H54L50 10Z'/%3E%3C/svg%3E"); }
+.slot[data-w="sniper"] .slot-icon { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M20 3H38V6H20ZM2 10L16 8V7H42V8H63V9.5H42L40 11H30L29 14H26V11H22L20 16H16L17 11L2 13Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M20 3H38V6H20ZM2 10L16 8V7H42V8H63V9.5H42L40 11H30L29 14H26V11H22L20 16H16L17 11L2 13Z'/%3E%3C/svg%3E"); }
+.slot[data-w="pistol"] .slot-icon { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M18 7H46V10H31L29 18H22L24 10H18Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cpath fill='white' d='M18 7H46V10H31L29 18H22L24 10H18Z'/%3E%3C/svg%3E"); }
+/* 乗り物の中: 今の武器の枠だけ（速度の表示の上）。操縦席では出さない */
+#hud.city.driving #slots .slot:not(.active) { display: none; }
+#hud.city.driving #slots { bottom: calc(var(--sab) + 62px); }
+#hud.city.heli #slots { bottom: calc(var(--sab) + 100px); }
+#hud.city.piloting #slots, #hud.city.driving #btn-heal { display: none; }
+
+#btn-heal {
+  left: calc(50% - 141px - 84px);
+  bottom: calc(var(--sab) + 4px);
+  width: 80px; height: 34px;
+  border-radius: 8px;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 0 7px;
+  background: rgba(10, 16, 24, 0.52);
+  border: 1px solid rgba(94, 224, 138, 0.6);
+}
+#btn-heal.none { opacity: 0.4; }
+#btn-heal.pressed-on { background: rgba(94, 224, 138, 0.25); border-color: #5ee08a; }
+.heal-icon { width: 16px; height: 16px; flex: none; background: #5ee08a; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 3H15V9H21V15H15V21H9V15H3V9H9Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 3H15V9H21V15H15V21H9V15H3V9H9Z'/%3E%3C/svg%3E"); -webkit-mask-size: contain; mask-size: contain; }
+.heal-counts { display: flex; flex-direction: column; line-height: 1.15; }
+.heal-row { font-size: 9px; color: var(--ink-dim); white-space: nowrap; }
+.heal-row b { font-size: 11px; color: var(--ink); font-weight: 600; }
+#heal-ring {
+  position: absolute;
+  left: 50%; top: 60%;
+  transform: translateX(-50%);
+  width: 72px; height: 72px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  pointer-events: none;
+  --p: 0%;
+}
+#heal-ring .hr-ring { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(#5ee08a var(--p), rgba(232, 238, 244, 0.15) 0); }
+#heal-ring .hr-ring::after { content: ''; position: absolute; inset: 6px; border-radius: 50%; background: rgba(10, 16, 24, 0.72); }
+#heal-ring .hr-text, #heal-ring .hr-sec { position: relative; font-size: 10px; line-height: 1.3; }
+#heal-ring .hr-sec { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+#btn-pickup {
+  left: calc(50% + 34px);
+  top: calc(50% - 68px);
+  height: 42px;
+  min-width: 120px; max-width: 230px;
+  padding: 0 16px;
+  border-radius: 21px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1px;
+  background: rgba(255, 207, 74, 0.2);
+  border-color: rgba(255, 207, 74, 0.85);
+  font-size: 13px;
+  white-space: nowrap;
+}
+#btn-pickup .pk-main { font-weight: 600; }
+#btn-pickup .pk-sub { font-size: 10px; color: var(--ink-dim); }
+
+#royale-info {
+  position: absolute;
+  right: calc(var(--sar) + 132px);
+  top: calc(var(--sat) + 10px);
+  min-width: 92px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: var(--glass);
+  text-align: right;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.ry-row { display: flex; align-items: baseline; justify-content: flex-end; gap: 6px; }
+.ry-label { font-size: 10px; color: var(--ink-dim); }
+.ry-alive { font-size: 20px; font-weight: 600; line-height: 1.1; }
+.ry-zone { font-size: 11px; color: #bcd8ff; }
+.ry-dist { font-size: 10px; color: #8fc4ff; }
+#royale-info.warn { background: rgba(30, 60, 140, 0.55); }
+#zone-tint {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(70, 130, 255, 0) 38%, rgba(60, 120, 255, 0.72) 100%);
+  transition: opacity 0.25s;
+}
+
+#btn-drop {
+  right: calc(var(--sar) + 34px);
+  bottom: calc(var(--sab) + 110px);
+  width: 100px; height: 100px;
+  font-size: 19px; font-weight: 600;
+  border-color: rgba(255, 207, 74, 0.95);
+  background: rgba(255, 207, 74, 0.25);
+}
+/* 輸送ヘリ・降下中: 撃てないので撃つ・照準・装填・切替・回復を隠す */
+#hud.riding #btn-fire, #hud.riding #btn-fire-left, #hud.riding #btn-ads, #hud.riding #btn-reload, #hud.riding #btn-swap, #hud.riding #btn-jump, #hud.riding #btn-heal, #hud.riding #slots, #hud.riding #crosshair,
+#hud.falling #btn-fire, #hud.falling #btn-fire-left, #hud.falling #btn-ads, #hud.falling #btn-reload, #hud.falling #btn-swap, #hud.falling #btn-heal { display: none; }
+#hud.falling #slots, #hud.chute #slots,
+#hud.chute #btn-fire, #hud.chute #btn-fire-left, #hud.chute #btn-ads, #hud.chute #btn-reload, #hud.chute #btn-swap, #hud.chute #btn-heal, #hud.chute #btn-jump { display: none; }
+#hud.falling #btn-jump span { font-size: 0; }
+#hud.falling #btn-jump span::after { content: '開く'; font-size: 13px; font-weight: 600; }
+#hud.falling #btn-jump { width: 80px; height: 80px; border-color: rgba(255, 207, 74, 0.9); background: rgba(255, 207, 74, 0.2); }
+
+#fullmap {
+  position: absolute; inset: 0;
+  z-index: 6;
+  background: rgba(6, 12, 18, 0.94);
+}
+#fullmap .fm-view { position: absolute; inset: 0; touch-action: none; }
+#fullmap .fm-view canvas { display: block; }
+#fullmap .fm-bar {
+  position: absolute;
+  right: calc(var(--sar) + 12px);
+  top: calc(var(--sat) + 10px);
+  display: flex; align-items: center; gap: 8px;
+}
+#fullmap .fm-hint { font-size: 10px; color: var(--ink-dim); margin-right: 4px; }
+#fullmap button {
+  padding: 7px 14px;
+  font: inherit; font-size: 13px;
+  color: var(--ink);
+  background: rgba(20, 30, 42, 0.85);
+  border: 1px solid rgba(232, 238, 244, 0.3);
+  border-radius: 999px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+#fullmap #btn-fm-close { background: rgba(111, 216, 234, 0.22); border-color: rgba(111, 216, 234, 0.7); }
+
+#result {
+  position: absolute; inset: 0;
+  z-index: 7;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(6, 10, 16, 0.8);
+  padding: var(--sat) var(--sar) var(--sab) var(--sal);
+}
+.rs-title { font-size: clamp(30px, 8vh, 48px); font-weight: 700; letter-spacing: 0.08em; color: #ffd6da; }
+#result.win .rs-title { color: #ffd76a; text-shadow: 0 0 18px rgba(255, 200, 80, 0.55); }
+.rs-rank { margin-top: 2px; font-size: clamp(18px, 5vh, 26px); font-weight: 600; font-variant-numeric: tabular-nums; }
+.rs-by { margin-top: 4px; font-size: 13px; color: var(--ink-dim); min-height: 1em; }
+.rs-stats { display: flex; gap: 24px; margin-top: 10px; font-size: 12px; color: var(--ink-dim); }
+.rs-stats b { margin-left: 4px; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.rs-actions { display: flex; gap: 12px; margin-top: 18px; }
+.rs-actions button {
+  padding: 11px 26px;
+  font: inherit; font-size: 15px;
+  border-radius: 999px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+#btn-again { color: var(--bg); background: var(--accent); border: 0; }
+#btn-title { color: var(--ink); background: rgba(232, 238, 244, 0.1); border: 1px solid rgba(232, 238, 244, 0.3); }
+
+/* 大きい画面（iPad）: ミニマップと枠を大きく */
+@media (min-height: 560px) and (min-width: 900px) {
+  #minimap { width: 156px; height: 156px; }
+  #royale-info { right: calc(var(--sar) + 176px); }
+  .slot { width: 110px; height: 42px; }
+  .slot-icon { width: 52px; height: 19px; top: 5px; }
+  .slot-mag { font-size: 18px; }
+  .slot-name { font-size: 10px; }
+  #btn-heal { left: calc(50% - 172px - 96px); width: 92px; height: 42px; }
+  .heal-row { font-size: 10px; }
+  .heal-row b { font-size: 13px; }
+  #compass { width: 280px; margin-left: -140px; }
+  #hud.city.driving #slots { bottom: calc(var(--sab) + 64px); }
+  #hud.city.heli #slots { bottom: calc(var(--sab) + 104px); } /* ヘリの同乗席: 高度の表示の上（上の行より後に置く） */
+}
+
+/* ===== 開始画面: ソロのモード ===== */
+#solo-panel {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  width: min(560px, 92vw);
+  margin-top: 20px;
+}
+.mode-opt {
+  position: relative;
+  flex: 1 1 150px;
+  max-width: 180px;
+  padding: 12px 12px 11px;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  background: rgba(10, 16, 24, 0.6);
+  border: 1px solid rgba(232, 238, 244, 0.18);
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex; flex-direction: column; gap: 4px;
+  touch-action: manipulation;
+}
+.mode-opt:active { transform: scale(0.97); }
+.mode-opt .mo-name { font-size: 16px; font-weight: 600; }
+.mode-opt .mo-desc { font-size: 11px; color: var(--ink-dim); }
+.mode-opt[data-mode="royale"] { border-color: rgba(255, 207, 74, 0.5); }
+.mode-opt.last { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(111, 216, 234, 0.35) inset; }
+.mode-opt.last::after { content: '前回'; position: absolute; right: 9px; top: 8px; font-size: 9px; color: var(--accent); }
+.sp-row { flex-basis: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#solo-status { font-size: 12px; color: var(--ink-dim); min-height: 1.2em; }
+#solo-panel.busy .mode-opt { opacity: 0.5; pointer-events: none; }
+#loading.solo-open .subtitle,
+#loading.solo-open .howto,
+#loading.solo-open .title.mirror,
+#loading.solo-open #progress,
+#loading.solo-open #mode-buttons { display: none; }
+#loading.solo-open #status { margin-top: 18px; }
+@media (max-width: 700px) {
+  #compass { width: 160px; margin-left: -80px; }
+}
+
+/* ===== 街のオンライン（フェーズ D2）===== */
+/* 開始画面のオンライン: 遊び方（アリーナ / 街：個人戦 / 街：バトルロイヤル）。最後に選んだものに印 */
+.op-modes { display: flex; gap: 6px; margin: 2px 0 8px; }
+.op-mode {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 7px 8px 6px;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  background: rgba(232, 238, 244, 0.06);
+  border: 1px solid rgba(232, 238, 244, 0.18);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex; flex-direction: column; gap: 2px;
+  touch-action: manipulation;
+}
+.op-mode .om-name { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.op-mode .om-desc { font-size: 9.5px; color: var(--ink-dim); line-height: 1.25; }
+.op-mode.sel { border-color: var(--accent); background: rgba(111, 216, 234, 0.16); box-shadow: 0 0 0 1px rgba(111, 216, 234, 0.35) inset; }
+.op-mode[data-mode="city_royale"].sel { border-color: rgba(255, 207, 74, 0.9); background: rgba(255, 207, 74, 0.14); box-shadow: 0 0 0 1px rgba(255, 207, 74, 0.35) inset; }
+#online-panel { width: min(460px, 92vw); }
+
+/* バトロワのロビー（画面上の中央: 見出し・あと何人・参加者） */
+#ry-lobby {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--sat) + 82px); /* 方位（compass、+42〜76px）の下 */
+  transform: translateX(-50%);
+  max-width: min(520px, 70vw);
+  padding: 8px 16px 9px;
+  border-radius: 14px;
+  background: rgba(10, 16, 24, 0.72);
+  border: 1px solid rgba(255, 207, 74, 0.45);
+  text-align: center;
+  pointer-events: none;
+}
+#ry-lobby .lb-title { font-size: 11px; color: #ffe08a; letter-spacing: 0.06em; }
+#ry-lobby .lb-text { margin-top: 2px; font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#ry-lobby.countdown .lb-text { color: #ffd76a; font-size: 20px; }
+#ry-lobby .lb-names { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-top: 6px; }
+#ry-lobby .lb-name { padding: 1px 8px; font-size: 11px; border-radius: 999px; background: rgba(232, 238, 244, 0.1); }
+#ry-lobby .lb-name.self { background: rgba(111, 216, 234, 0.25); color: var(--accent); }
+
+/* 観戦中（画面下の中央）。次の人ボタン */
+#spectate {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--sab) + 18px);
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 8px 6px 16px;
+  border-radius: 999px;
+  background: rgba(10, 16, 24, 0.72);
+  border: 1px solid rgba(232, 238, 244, 0.2);
+}
+#spectate .sp-name { font-size: 15px; font-weight: 600; white-space: nowrap; }
+#spectate button {
+  padding: 6px 14px;
+  font: inherit; font-size: 13px;
+  color: var(--ink);
+  background: rgba(111, 216, 234, 0.22);
+  border: 1px solid rgba(111, 216, 234, 0.7);
+  border-radius: 999px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+/* 観戦中: 撃つ・動く・乗る・拾う・回復のボタンは使わない */
+#hud.spectating #btn-fire, #hud.spectating #btn-fire-left, #hud.spectating #btn-ads, #hud.spectating #btn-reload, #hud.spectating #btn-swap,
+#hud.spectating #btn-jump, #hud.spectating #btn-heal, #hud.spectating #slots, #hud.spectating #crosshair, #hud.spectating #stick,
+#hud.spectating #btn-vehicle, #hud.spectating #btn-pickup, #hud.spectating #hp-wrap, #hud.spectating #armor { display: none; }
+
+/* 結果画面（オンライン）: 順位の一覧と次のラウンドまで。「もう一度」は無い */
+#result.online #btn-again { display: none; }
+#result .rs-list { margin-top: 10px; min-width: min(360px, 80vw); max-height: 34vh; overflow-y: auto; }
+#result .rs-row { display: flex; gap: 10px; padding: 3px 10px; font-size: 13px; border-top: 1px solid rgba(232, 238, 244, 0.08); font-variant-numeric: tabular-nums; }
+#result .rs-row.self { color: var(--accent); }
+#result .rs-r { width: 2.4em; color: var(--ink-dim); }
+#result .rs-row.self .rs-r { color: var(--accent); }
+#result .rs-n { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#result .rs-k { color: var(--ink-dim); }
+#result .rs-next { margin-top: 8px; min-height: 1.2em; font-size: 12px; color: #ffe08a; font-variant-numeric: tabular-nums; }
+#result.online .rs-stats span:last-child { display: none; }
+
+/* 戦闘機（フェーズ E1）: HUD のキャンバス（jethud.js）・機関砲（撃つボタン）・脚・視点・脱出。ミサイル / フレアはフェーズ E2。
+   操縦席では人の銃のボタン・照準線・持ち物を隠す。手動の操縦（.jet-manual）はジャンプ = 推力＋、下降 = 推力− */
+#jet-hud { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+#btn-gear, #btn-eject, #btn-missile, #btn-flare { display: none; }
+#settings.hidden { display: none; }
+#hud.jet #crosshair, #hud.jet #ammo, #hud.jet #weapon-name, #hud.jet #weapon-list, #hud.jet #slots, #hud.jet #btn-heal, #hud.jet #btn-pickup,
+#hud.jet #btn-ads, #hud.jet #btn-reload, #hud.jet #btn-swap, #hud.jet #btn-seat, #hud.jet #btn-jump, #hud.jet #btn-descend, #hud.jet #heli-info, #hud.jet #compass { display: none; }
+#hud.jet:not(.jet-pilot) #btn-fire, #hud.jet:not(.jet-pilot) #btn-fire-left { display: none; }
+#hud.jet-pilot .btn-fire span { font-size: 0; }
+#hud.jet-pilot .btn-fire span::after { content: '機銃'; font-size: 16px; font-weight: 600; }
+#hud.jet-pilot .btn-fire.btn-fire-left span::after { font-size: 13px; }
+#hud.jet-pilot #btn-gear { display: flex; right: calc(var(--sar) + 134px); bottom: calc(var(--sab) + 40px); border-color: rgba(255, 207, 74, 0.8); }
+#hud.jet #btn-camera { display: flex; right: calc(var(--sar) + 40px); bottom: calc(var(--sab) + 176px); }
+#hud.jet-pilot:not(.jet-stopped) #btn-eject { display: flex; right: calc(var(--sar) + 208px); bottom: calc(var(--sab) + 40px); width: 54px; height: 54px; font-size: 12px;
+  border-color: rgba(255, 84, 102, 0.85); background: rgba(255, 84, 102, 0.12); }
+#hud.jet-manual #btn-jump { display: flex; right: calc(var(--sar) + 134px); bottom: calc(var(--sab) + 192px); }
+#hud.jet-manual #btn-jump span { font-size: 0; }
+#hud.jet-manual #btn-jump span::after { content: '推力＋'; font-size: 12px; }
+#hud.jet-manual #btn-descend { display: flex; right: calc(var(--sar) + 134px); bottom: calc(var(--sab) + 116px); }
+#hud.jet-manual #btn-descend span { font-size: 0; }
+#hud.jet-manual #btn-descend span::after { content: '推力−'; font-size: 12px; }
+#hud.jet #vehicle-hud .vehicle-label, #hud.jet #vehicle-speed, #hud.jet #vehicle-hud .vehicle-unit { display: none; }
+/* 発艦ボタン: 空母の甲板（#hud.jet-deck）。右の親指の届く所（視点ボタンの左、右下のボタンの列の上）に大きく、目立つ色でゆっくり光る */
+#btn-launch { display: none; }
+#hud.jet-deck #btn-launch {
+  display: flex; right: calc(var(--sar) + 112px); bottom: calc(var(--sab) + 188px); width: 124px; height: 58px; border-radius: 29px;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.1em; color: #1b1400;
+  background: rgba(255, 207, 74, 0.92); border-color: rgba(255, 240, 190, 0.95); box-shadow: 0 0 14px rgba(255, 207, 74, 0.55);
+  animation: launch-pulse 1.4s ease-in-out infinite;
+}
+#hud.jet-deck #btn-launch.pressed { background: rgba(255, 230, 140, 1); transform: scale(0.96); }
+@keyframes launch-pulse { 0%, 100% { box-shadow: 0 0 8px rgba(255, 207, 74, 0.4); } 50% { box-shadow: 0 0 22px rgba(255, 207, 74, 0.9); } }
+/* ミサイル・フレア（視点で操縦・マニュアル）: 空中だけ。右下の列（照準・装填の場所） */
+#hud.jet-pilot.jet-air #btn-missile { display: flex; right: calc(var(--sar) + 134px); bottom: calc(var(--sab) + 116px); border-color: rgba(255, 150, 90, 0.85); font-size: 11px; }
+#hud.jet-pilot.jet-air #btn-flare { display: flex; right: calc(var(--sar) + 208px); bottom: calc(var(--sab) + 116px); width: 54px; height: 54px; font-size: 12px; border-color: rgba(255, 236, 160, 0.85); }
+/* 着艦・着陸ボタン（空中、空母の近く・道路）: 発艦ボタンと同じ所。自動着艦中は「解除」 */
+#btn-land, #btn-boost, #btn-slow { display: none; }
+#hud.jet-pilot.jet-land #btn-land {
+  display: flex; right: calc(var(--sar) + 112px); bottom: calc(var(--sab) + 188px); width: 124px; height: 58px; border-radius: 29px;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.1em; color: #00141b;
+  background: rgba(111, 216, 234, 0.92); border-color: rgba(200, 245, 255, 0.95); box-shadow: 0 0 12px rgba(111, 216, 234, 0.5);
+}
+#hud.jet-pilot.jet-land #btn-land.land-off { background: rgba(232, 238, 244, 0.85); border-color: rgba(255, 255, 255, 0.9); box-shadow: none; }
+#hud.jet-pilot.jet-land #btn-land.pressed { transform: scale(0.96); }
+
+/* かんたん操作（#hud.jet-easy）: 加速・減速・機銃・ミサイル・フレア・視点・脱出 + 発艦 / 着艦。脚・左の撃つボタン・推力± は出さない。
+   右下（右から 276 px・下から 248 px の中）に親指で届くように大きく、重ならない（スマホ 844x390 / iPad 1180x820） */
+#hud.jet-easy #btn-gear, #hud.jet-easy #btn-fire-left, #hud.jet-easy #btn-jump, #hud.jet-easy #btn-descend { display: none; }
+/* 明るい空・海の上でも字が読めるように: 戦闘機のボタンは暗い下地と影 */
+#hud.jet-pilot .btn { background-color: rgba(10, 16, 24, 0.38); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85); font-weight: 600; }
+#hud.jet-easy.jet-pilot #btn-boost {
+  display: flex; right: calc(var(--sar) + 132px); bottom: calc(var(--sab) + 104px); width: 78px; height: 78px; font-size: 17px; font-weight: 700;
+  border-color: rgba(255, 170, 60, 0.9); background: rgba(255, 170, 60, 0.2);
+}
+#hud.jet-easy.jet-pilot #btn-boost.pressed { background: rgba(255, 170, 60, 0.55); }
+#hud.jet-easy.jet-pilot #btn-slow {
+  display: flex; right: calc(var(--sar) + 140px); bottom: calc(var(--sab) + 22px); width: 64px; height: 64px; font-size: 15px; font-weight: 700;
+  border-color: rgba(140, 200, 255, 0.85); background: rgba(140, 200, 255, 0.16);
+}
+#hud.jet-easy.jet-pilot #btn-slow.pressed { background: rgba(140, 200, 255, 0.5); }
+#hud.jet-easy.jet-pilot.jet-air #btn-missile { right: calc(var(--sar) + 30px); bottom: calc(var(--sab) + 176px); width: 72px; height: 72px; font-size: 13px; font-weight: 700; }
+#hud.jet-easy.jet-pilot.jet-air #btn-flare { right: calc(var(--sar) + 218px); bottom: calc(var(--sab) + 40px); width: 58px; height: 58px; }
+#hud.jet-easy #btn-camera { right: calc(var(--sar) + 222px); bottom: calc(var(--sab) + 182px); width: 50px; height: 50px; font-size: 12px; }
+#hud.jet-easy.jet-pilot:not(.jet-stopped) #btn-eject { right: calc(var(--sar) + 214px); bottom: calc(var(--sab) + 112px); width: 54px; height: 54px; }
+#hud.jet-easy.jet-pilot.jet-deck #btn-launch, #hud.jet-easy.jet-pilot.jet-land #btn-land { right: calc(var(--sar) + 108px); bottom: calc(var(--sab) + 194px); width: 106px; height: 54px; font-size: 19px; }
+/* 甲板（地上）のかんたん: ミサイル・フレアは空中だけ。降りるボタンは脱出と同じ場所（止まっているときだけ） */
+#hud.jet-easy.jet-pilot #btn-vehicle { right: calc(var(--sar) + 214px); bottom: calc(var(--sab) + 112px); width: 54px; height: 54px; font-size: 12px; }
+
+/* 設定（#btn-settings: 上の「撃破」の左。#settings: 真ん中の板。ソロは開いている間止まる） */
+#btn-settings { display: none; }
+#hud.has-settings #btn-settings {
+  display: flex;
+  left: calc(50% - 118px); top: calc(var(--sat) + 8px); width: 54px; height: 30px; border-radius: 15px; font-size: 12px;
+  background: var(--glass); border-color: rgba(232, 238, 244, 0.35);
+}
+#settings {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(560px, calc(100% - 32px)); max-height: calc(100% - 24px); overflow-y: auto;
+  padding: 14px 16px 12px; border-radius: 16px; background: rgba(10, 16, 24, 0.92); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+  pointer-events: auto; z-index: 40; color: var(--ink); font-size: 14px;
+}
+#settings .st-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+#settings .st-sec { font-size: 12px; color: var(--ink-dim); margin: 4px 0 6px; }
+#settings .st-opts { display: flex; flex-direction: column; gap: 6px; }
+#settings button { font: inherit; color: var(--ink); background: rgba(232, 238, 244, 0.08); border: 1px solid rgba(232, 238, 244, 0.25); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+#settings .st-opt { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+#settings .st-opt .so-name { font-size: 15px; font-weight: 700; }
+#settings .st-opt .so-desc { font-size: 12px; color: var(--ink-dim); margin-top: 2px; }
+#settings .st-opt.sel { border-color: var(--accent); background: rgba(111, 216, 234, 0.18); }
+#settings .st-opt.sel .so-name::after { content: '  ✓'; color: var(--accent); }
+#settings .st-row { display: flex; gap: 8px; margin-top: 10px; }
+#settings .st-row button { flex: 1; }
+#settings .st-actions { display: flex; justify-content: flex-end; margin-top: 10px; }
+#settings #st-close { min-width: 110px; font-weight: 700; background: rgba(111, 216, 234, 0.25); border-color: var(--accent); }
+@media (max-height: 420px) {
+  #settings { padding: 10px 12px 8px; font-size: 13px; }
+  #settings .st-opt { padding: 5px 10px; }
+  #settings .st-opt .so-desc { font-size: 11px; }
+  #settings .st-row, #settings .st-actions { margin-top: 6px; }
+}
+
+/* ===== 復活する場所（ソロの街：フリー・アリーナ。respawn.js）===== */
+/* 選んでいる間（#hud.respawning）: 操作のボタン・ミニマップ・持ち物・照準・戦闘機の HUD・一時的な文字を隠す（死亡画面の板と重ねない） */
+#hud.respawning #stick-zone, #hud.respawning #look-pad, #hud.respawning #stick, #hud.respawning .btn,
+#hud.respawning #minimap, #hud.respawning #compass, #hud.respawning #slots, #hud.respawning #armor, #hud.respawning #heal-ring,
+#hud.respawning #weapon-name, #hud.respawning #weapon-list, #hud.respawning #ammo, #hud.respawning #crosshair, #hud.respawning #scope,
+#hud.respawning #jet-hud, #hud.respawning #vehicle-hud, #hud.respawning #heli-info, #hud.respawning #heli-rpm, #hud.respawning #hp-wrap,
+#hud.respawning #message, #hud.respawning #hit-marker, #hud.respawning #killfeed, #hud.respawning #debug, #hud.respawning #settings { display: none !important; }
+#death-overlay.choose {
+  pointer-events: auto; z-index: 5;
+  padding: calc(var(--sat) + 44px) calc(var(--sar) + 16px) calc(var(--sab) + 8px) calc(var(--sal) + 16px);
+  background: rgba(40, 6, 12, 0.6);
+}
+#death-overlay.choose .death-title { font-size: clamp(22px, 6vh, 40px); line-height: 1.1; }
+#death-overlay.choose .death-sub { display: none; }
+#respawn-panel {
+  margin-top: 8px; width: min(760px, 100%); max-height: calc(100% - 44px); min-height: 0;
+  display: flex; flex-direction: column;
+  padding: 10px 12px; border-radius: 16px; background: rgba(10, 16, 24, 0.9); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5); color: var(--ink);
+}
+#respawn-panel .rp-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+#respawn-panel .rp-label { font-size: 13px; color: var(--ink-dim); }
+#respawn-panel .rp-sel { font-size: 16px; font-weight: 700; color: var(--ink); }
+#respawn-panel .rp-opts {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 6px;
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; touch-action: pan-y; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+}
+#respawn-panel .rp-opt {
+  position: relative; min-height: 44px; padding: 6px 10px;
+  font: inherit; font-size: 15px; font-weight: 600; line-height: 1.2; color: var(--ink); text-align: center;
+  background: rgba(232, 238, 244, 0.08); border: 1px solid rgba(232, 238, 244, 0.25); border-radius: 10px;
+  cursor: pointer; touch-action: pan-y;
+}
+/* 長い名前（8 文字以上: グランドセントラル 9 文字 = 13 px で約 115 px）: 左右の余白を詰める（選択肢は 128 px 以上なので、iPhone の横の
+   切り欠き（左右 約 59 px）で狭くなっても「…」にならない） */
+#respawn-panel .rp-opt.long { font-size: 13px; letter-spacing: -0.02em; padding-left: 3px; padding-right: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#respawn-panel .rp-sub { display: block; font-size: 11px; font-weight: 500; line-height: 1.1; color: var(--ink-dim); }
+#respawn-panel .rp-opt.sel { border-color: var(--accent); background: rgba(111, 216, 234, 0.24); box-shadow: inset 0 0 0 1px var(--accent); }
+#respawn-panel .rp-opt.off { opacity: 0.4; cursor: default; }
+#respawn-panel .rp-key { position: absolute; left: 6px; top: 3px; font-size: 11px; font-weight: 500; color: var(--ink-dim); }
+#respawn-panel .rp-bar { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+#respawn-panel button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+#rp-map {
+  min-height: 44px; padding: 0 16px; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink);
+  background: rgba(232, 238, 244, 0.1); border: 1px solid rgba(232, 238, 244, 0.35); border-radius: 999px; cursor: pointer;
+}
+#respawn-panel .rp-note { flex: 1; min-width: 0; font-size: 12px; color: #ffe08a; text-align: center; }
+#rp-go {
+  min-width: 140px; min-height: 48px; padding: 0 20px; margin-left: auto;
+  font: inherit; font-size: 18px; font-weight: 700; letter-spacing: 0.08em; color: var(--bg);
+  background: var(--accent); border: 0; border-radius: 999px; cursor: pointer;
+}
+#rp-go.wait { color: var(--ink); background: rgba(111, 216, 234, 0.28); cursor: default; }
+#rp-go.busy { opacity: 0.65; }
+#rp-go .rp-sec { margin-left: 8px; font-variant-numeric: tabular-nums; }
+#rp-go .rp-sec:empty { display: none; }
+#respawn-panel.arena #rp-map { display: none; }
+#respawn-panel.loading .rp-opts { opacity: 0.6; pointer-events: none; }
+@media (max-height: 420px) {
+  #death-overlay.choose { padding-top: calc(var(--sat) + 40px); }
+  #respawn-panel { margin-top: 4px; padding: 8px 10px; }
+  #respawn-panel .rp-head { margin-bottom: 5px; }
+  #respawn-panel .rp-opt { font-size: 14px; padding: 4px 8px; }
+  #respawn-panel .rp-bar { margin-top: 6px; }
+}
+@media (min-height: 560px) and (min-width: 900px) {
+  #respawn-panel { width: min(860px, 100%); padding: 14px 16px; }
+  #respawn-panel .rp-opts { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+  #respawn-panel .rp-opt, #respawn-panel .rp-opt.long { min-height: 52px; font-size: 17px; letter-spacing: 0; }
+  #respawn-panel .rp-sel { font-size: 18px; }
+  #rp-go { min-height: 54px; min-width: 160px; font-size: 20px; }
+}
+/* 地図で選ぶ（#fullmap.pick）: 説明・「ここには出られません」・「ここで復活」（出られる所を選ぶまで薄い）・「戻る」 */
+#fullmap .fm-pick-hint, #fullmap .fm-pick-msg, #fullmap #btn-fm-spawn, #fullmap #btn-fm-back { display: none; }
+#fullmap.pick .fm-hint, #fullmap.pick #btn-fm-clear, #fullmap.pick #btn-fm-close { display: none; }
+#fullmap.pick .fm-bar {
+  right: calc(var(--sar) + 16px); max-width: calc(100% - var(--sal) - var(--sar) - 32px); justify-content: flex-end; flex-wrap: wrap;
+  padding: 4px 4px 4px 14px; border-radius: 28px; background: rgba(6, 12, 18, 0.78); box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+#fullmap.pick .fm-pick-hint { display: inline; font-size: 12px; color: var(--ink); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9); }
+#fullmap.pick .fm-pick-msg { display: inline; font-size: 12px; font-weight: 700; color: #ff8a96; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9); }
+#fullmap.pick .fm-pick-msg:empty { display: none; }
+#fullmap.pick #btn-fm-spawn, #fullmap.pick #btn-fm-back { display: inline-block; min-height: 44px; padding: 0 18px; font-size: 15px; font-weight: 700; }
+#fullmap.pick #btn-fm-spawn { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+#fullmap.pick #btn-fm-spawn.off { color: var(--ink-dim); background: rgba(111, 216, 234, 0.16); border-color: rgba(111, 216, 234, 0.35); }
+/* 復活の直後の暗転（立っている所の近景ができるまで） */
+#respawn-fade { position: absolute; inset: 0; z-index: 8; background: #000; opacity: 0; pointer-events: none !important; transition: opacity 0.35s ease-out; }
+#respawn-fade.show { opacity: 1; transition: none; }

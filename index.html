@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mirrsona">
+  <meta name="theme-color" content="#0b1118">
+  <title>Mirrsona</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="hud" class="hidden">
+    <div id="stick-zone"></div>
+    <div id="look-pad"></div>
+    <div id="stick"><div id="stick-knob"></div></div>
+
+    <canvas id="jet-hud" class="hidden"></canvas>
+    <div id="crosshair"><i></i><i></i><i></i><i></i></div>
+    <div id="hit-marker"><i></i><i></i></div>
+    <div id="damage-vignette"></div>
+
+    <div id="hp-wrap"><div id="hp-bar"></div></div>
+    <div id="kills-wrap"><span class="kills-label">撃破</span><span id="kills">0</span></div>
+    <div id="ammo"><span id="ammo-mag">30</span><span id="ammo-sep">/</span><span id="ammo-reserve">150</span></div>
+    <div id="weapon-name">ライフル</div>
+    <div id="weapon-list"></div>
+    <div id="vehicle-hud" class="hidden"><span id="vehicle-name"></span><span class="vehicle-label">速度</span><span id="vehicle-speed">0</span><span class="vehicle-unit">km/h</span><div id="vehicle-hp-wrap"><div id="vehicle-hp"></div></div></div>
+    <!-- ヘリ: 高度（地面から・海から）と始動の回転数の輪 -->
+    <div id="heli-info" class="hidden"><span class="heli-label">高度</span><span id="heli-alt">0</span><span class="heli-unit">m</span><span class="heli-sub">海抜 <span id="heli-asl">0</span> m</span></div>
+    <div id="heli-rpm" class="hidden"><div class="rpm-ring"></div><span class="rpm-label">始動中</span><span id="heli-rpm-text">0%</span></div>
+    <div id="scope" class="hidden"><div class="scope-mask"></div><i class="scope-h"></i><i class="scope-v"></i><b class="scope-dot"></b></div>
+    <div id="message"></div>
+    <div id="debug" class="hidden"></div>
+
+    <!-- オンライン: 接続表示・キルフィード・接続の帯・スコアボード（撃破数をタップで開閉） -->
+    <div id="net-info" class="hidden"></div>
+    <div id="killfeed"></div>
+    <div id="net-banner" class="hidden"><span class="nb-text"></span><button id="btn-leave-banner" class="nb-leave hidden" type="button">タイトルへ</button></div>
+    <div id="scoreboard" class="hidden">
+      <table>
+        <thead><tr><th class="rank">#</th><th class="name">名前</th><th>撃破</th><th>死亡</th><th class="ping">Ping</th></tr></thead>
+        <tbody id="scoreboard-body"></tbody>
+      </table>
+      <div class="sb-actions"><span class="sb-hint">タップで閉じる</span><button id="btn-leave" type="button">退出してタイトルへ</button></div>
+    </div>
+
+    <div id="btn-fire" class="btn btn-fire" role="button"><span>撃つ</span></div>
+    <div id="btn-fire-left" class="btn btn-fire btn-fire-left" role="button"><span>撃つ</span></div>
+    <div id="btn-jump" class="btn btn-small" role="button"><span>ジャンプ</span></div>
+    <div id="btn-ads" class="btn btn-small" role="button"><span>照準</span></div>
+    <div id="btn-reload" class="btn btn-small" role="button"><span>装填</span></div>
+    <div id="btn-swap" class="btn btn-small" role="button"><span>切替</span></div>
+    <div id="btn-vehicle" class="btn btn-small hidden" role="button"><span>乗る</span></div>
+    <div id="btn-descend" class="btn btn-small" role="button"><span>下降</span></div>
+    <div id="btn-camera" class="btn btn-small" role="button"><span>視点</span></div>
+    <div id="btn-seat" class="btn btn-small hidden" role="button"><span>席</span></div>
+    <!-- 戦闘機: 脚・脱出・ミサイル・フレア・発艦と HUD（jethud.js が描く） -->
+    <div id="btn-gear" class="btn btn-small" role="button"><span>脚</span></div>
+    <div id="btn-eject" class="btn btn-small" role="button"><span>脱出</span></div>
+    <div id="btn-missile" class="btn btn-small" role="button"><span>ミサイル</span></div>
+    <div id="btn-flare" class="btn btn-small" role="button"><span>フレア</span></div>
+    <div id="btn-launch" class="btn" role="button"><span>発艦</span></div>
+    <!-- 戦闘機（かんたん操作）: 加速・減速（押している間）、着艦・着陸（空中で自動着艦。もう一度で解除） -->
+    <div id="btn-boost" class="btn" role="button"><span>加速</span></div>
+    <div id="btn-slow" class="btn" role="button"><span>減速</span></div>
+    <div id="btn-land" class="btn" role="button"><span class="land-label">着艦</span></div>
+    <!-- 設定（操作の種類など。ソロは開いている間止まる） -->
+    <div id="btn-settings" class="btn" role="button" aria-label="設定"><span>設定</span></div>
+    <div id="settings" class="hidden">
+      <div class="st-title">設定</div>
+      <div class="st-sec">戦闘機の操作</div>
+      <div class="st-opts">
+        <button id="st-easy" class="st-opt" type="button"><span class="so-name">かんたん</span><span class="so-desc">左スティックで行きたい方向へ。速さは自動・地面は自動でよける</span></button>
+        <button id="st-aim" class="st-opt" type="button"><span class="so-name">視点で操縦</span><span class="so-desc">見た方へ飛ぶ。左スティックの上下は推力</span></button>
+        <button id="st-manual" class="st-opt" type="button"><span class="so-name">マニュアル</span><span class="so-desc">スティックで機首と傾き。推力はボタン</span></button>
+      </div>
+      <div class="st-row"><button id="st-invert" class="st-toggle" type="button">上下反転 <b>オフ</b></button><button id="st-flare" class="st-toggle" type="button">自動フレア <b>オン</b></button></div>
+      <div class="st-actions"><button id="st-close" type="button">閉じる</button></div>
+    </div>
+
+    <!-- 街: ミニマップ（タップで全体の地図）・方位・防具・武器の枠・回復・拾う・バトルロイヤル・降下・結果 -->
+    <div id="minimap" class="hidden"><div class="mm-n">N</div></div>
+    <div id="compass" class="hidden"><div class="cmp-strip"></div><i class="cmp-mark"></i><b class="cmp-wp hidden"></b><span class="cmp-dist hidden"></span></div>
+    <div id="armor" class="hidden"><div id="ar-vest" class="ar-row hidden"><span class="ar-icon ar-vest"></span><span class="ar-bar"><i></i></span></div><div id="ar-helmet" class="ar-row hidden"><span class="ar-icon ar-helmet"></span><span class="ar-bar"><i></i></span></div></div>
+    <div id="slots" class="hidden">
+      <div class="slot empty" data-i="0"><span class="slot-key">1</span><span class="slot-icon"></span><span class="slot-name">空き</span><span class="slot-ammo"><b class="slot-mag"></b><em class="slot-res"></em></span></div>
+      <div class="slot empty" data-i="1"><span class="slot-key">2</span><span class="slot-icon"></span><span class="slot-name">空き</span><span class="slot-ammo"><b class="slot-mag"></b><em class="slot-res"></em></span></div>
+      <div class="slot empty" data-i="2"><span class="slot-key">3</span><span class="slot-icon"></span><span class="slot-name">サブ</span><span class="slot-ammo"><b class="slot-mag"></b><em class="slot-res"></em></span></div>
+    </div>
+    <div id="btn-heal" class="btn hidden" role="button"><span class="heal-icon"></span><span class="heal-counts"><span class="heal-row">救急 <b class="heal-mk">0</b></span><span class="heal-row">包帯 <b class="heal-bd">0</b></span></span></div>
+    <div id="heal-ring" class="hidden"><div class="hr-ring"></div><span class="hr-text">回復中</span><span class="hr-sec"></span></div>
+    <div id="btn-pickup" class="btn hidden" role="button"><span class="pk-main">拾う</span><span class="pk-sub hidden"></span></div>
+    <div id="royale-info" class="hidden"><div class="ry-row"><span class="ry-label">残り</span><span class="ry-alive">0</span></div><div class="ry-zone"></div><div class="ry-dist hidden"></div></div>
+    <!-- オンラインのバトロワ: ロビー（参加者・開始までの秒）と観戦中の表示 -->
+    <div id="ry-lobby" class="hidden"><div class="lb-title"></div><div class="lb-text"></div><div class="lb-names"></div></div>
+    <div id="spectate" class="hidden"><span class="sp-name">観戦中</span><button id="btn-spec-next" type="button">次の人</button></div>
+    <div id="zone-tint"></div>
+    <div id="btn-drop" class="btn hidden" role="button"><span>降下</span></div>
+    <div id="fullmap" class="hidden">
+      <div class="fm-view"></div>
+      <div class="fm-bar"><span class="fm-hint">タップで目印・2 本指で拡大</span><button id="btn-fm-clear" type="button">目印を消す</button><button id="btn-fm-close" type="button">閉じる</button>
+        <!-- 復活する場所を地図で選ぶ（#fullmap.pick のときだけ。respawn.js） -->
+        <span class="fm-pick-hint">復活する場所をタップ</span><span class="fm-pick-msg"></span><button id="btn-fm-spawn" class="off" type="button">ここで復活</button><button id="btn-fm-back" type="button">戻る</button></div>
+    </div>
+    <div id="result" class="hidden">
+      <div class="rs-title">優勝！</div>
+      <div class="rs-rank">#1 / 31</div>
+      <div class="rs-by"></div>
+      <div class="rs-stats"><span>撃破 <b class="rs-kills">0</b></span><span>生存 <b class="rs-time">0:00</b></span></div>
+      <div class="rs-list hidden"></div>
+      <div class="rs-next"></div>
+      <div class="rs-actions"><button id="btn-again" type="button">もう一度</button><button id="btn-title" type="button">タイトルへ</button></div>
+    </div>
+
+    <div id="death-overlay" class="hidden">
+      <div class="death-title">やられた</div>
+      <div class="death-by hidden"></div>
+      <div class="death-sub">数秒後に復活します</div>
+      <!-- ソロ（街：フリー・アリーナ）: 復活する場所を選ぶ（respawn.js。#death-overlay.choose のときだけ） -->
+      <div id="respawn-panel" class="hidden">
+        <div class="rp-head"><span class="rp-label">復活する場所</span><span class="rp-sel"></span></div>
+        <div id="rp-opts" class="rp-opts"></div>
+        <div class="rp-bar">
+          <button id="rp-map" type="button">地図で選ぶ</button>
+          <span class="rp-note"></span>
+          <button id="rp-go" class="wait" type="button"><span class="rp-go-label">復活</span><b class="rp-sec">3</b></button>
+        </div>
+      </div>
+    </div>
+    <!-- 復活の直後、立っている所の近景ができるまで暗くする -->
+    <div id="respawn-fade"></div>
+  </div>
+
+  <div id="loading">
+    <div class="title-wrap">
+      <div class="title">MIRRSONA</div>
+      <div class="title mirror" aria-hidden="true">MIRRSONA</div>
+    </div>
+    <div class="subtitle">鏡写しのペルソナ</div>
+    <div id="progress"><div id="progress-bar"></div></div>
+    <div id="status">データを確認中</div>
+    <!-- 前回が途中で終わったとき: 続きから（session.js。Web は 1 回タップ、アプリはすぐ始める。続けて落ちたら「続きから」）-->
+    <div id="resume-card" class="hidden">
+      <button id="btn-resume" type="button">前回の続きから再開 ▶</button>
+      <div id="resume-sub"></div>
+    </div>
+    <div id="mode-buttons">
+      <button id="btn-start" class="hidden">ソロ</button>
+      <button id="btn-online" class="hidden">オンライン</button>
+    </div>
+    <!-- ソロのモード（最後に選んだものを覚える） -->
+    <div id="solo-panel" class="hidden">
+      <button class="mode-opt" data-mode="free" type="button"><span class="mo-name">街：フリー</span><span class="mo-desc">広い街で戦い続ける</span></button>
+      <button class="mode-opt" data-mode="royale" type="button"><span class="mo-name">街：バトルロイヤル</span><span class="mo-desc">安全地帯・最後の 1 人</span></button>
+      <button class="mode-opt" data-mode="arena" type="button"><span class="mo-name">アリーナ</span><span class="mo-desc">いつもの小さなマップ</span></button>
+      <div class="sp-row"><span id="solo-status"></span><button id="btn-solo-back" class="op-small" type="button">戻る</button></div>
+    </div>
+    <div id="online-panel" class="hidden">
+      <!-- 遊び方（最後に選んだものを覚える。mirrsona.onlineMode） -->
+      <div class="op-modes">
+        <button class="op-mode" data-mode="arena" type="button"><span class="om-name">アリーナ</span><span class="om-desc">小さなマップの撃ち合い</span></button>
+        <button class="op-mode" data-mode="city_dm" type="button"><span class="om-name">街：個人戦</span><span class="om-desc">試合範囲の中で戦い続ける</span></button>
+        <button class="op-mode" data-mode="city_royale" type="button"><span class="om-name">街：バトルロイヤル</span><span class="om-desc">2 人から・最後の 1 人</span></button>
+      </div>
+      <div class="op-row"><span class="op-label">コールサイン</span><span id="callsign"></span><button id="btn-reroll" class="op-small" type="button">変更</button></div>
+      <div class="op-row"><span class="op-label">ルーム</span><input id="room-code" type="text" maxlength="24" value="public" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></div>
+      <div id="online-status"></div>
+      <div class="op-row op-actions"><button id="btn-online-back" class="op-small" type="button">戻る</button><button id="btn-connect" type="button">接続</button></div>
+    </div>
+    <div id="version"></div>
+    <!-- 前回が落ちて終わったときの 1 行（session.js の足あと） -->
+    <div id="crumb" class="hidden"></div>
+    <!-- 続けて落ちたときの省メモリ（タップで解除） -->
+    <button id="btn-saver-off" class="hidden" type="button">省メモリモード（解除）</button>
+    <div class="howto">左: タッチした所にスティック　右: スワイプで視点</div>
+  </div>
+
+  <div id="rotate-hint"><div>横向きにしてください</div></div>
+
+  <script src="lib/three.min.js"></script>
+  <script src="lib/GLTFLoader.js"></script>
+  <script src="lib/SkeletonUtils.js"></script>
+  <script src="lib/post/CopyShader.js"></script>
+  <script src="lib/post/LuminosityHighPassShader.js"></script>
+  <script src="lib/post/FXAAShader.js"></script>
+  <script src="lib/post/GammaCorrectionShader.js"></script>
+  <script src="lib/post/EffectComposer.js"></script>
+  <script src="lib/post/RenderPass.js"></script>
+  <script src="lib/post/ShaderPass.js"></script>
+  <script src="lib/post/UnrealBloomPass.js"></script>
+  <script src="lib/post/BufferGeometryUtils.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/defaults.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/assets.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/citygen.js"></script>
+  <script src="js/nav3d.js"></script>
+  <script src="js/netproto.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/textures.js"></script>
+  <script src="js/materials.js"></script>
+  <script src="js/sky.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/models.js"></script>
+  <script src="js/character.js"></script>
+  <script src="js/character_glb.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/water.js"></script>
+  <script src="js/streamer.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/weapon.js"></script>
+  <script src="js/enemy.js"></script>
+  <script src="js/vehicle.js"></script>
+  <script src="js/heli.js"></script>
+  <script src="js/jet.js"></script>
+  <script src="js/missile.js"></script>
+  <script src="js/remote_player.js"></script>
+  <script src="js/net.js"></script>
+  <script src="js/hud.js"></script>
+  <script src="js/jethud.js"></script>
+  <script src="js/loot.js"></script>
+  <script src="js/loot_view.js"></script>
+  <script src="js/minimap.js"></script>
+  <script src="js/royale.js"></script>
+  <script src="js/cityplay.js"></script>
+  <script src="js/respawn.js"></script>
+  <script src="js/cityonline.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
