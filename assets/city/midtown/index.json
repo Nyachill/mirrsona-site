@@ -1,0 +1,53 @@
+{
+ "v": 1,
+ "level": "midtown",
+ "format": 1,
+ "builtFrom": "e4e7294576b7299712d98c6c7f24944e315c3e7f",
+ "builds": [
+  {
+   "id": "head",
+   "src": "e4e7294576b7299712d98c6c7f24944e315c3e7f",
+   "fmt": "056335c187084ad1",
+   "gen": "ccb8b2ad769e4ad6",
+   "far": {
+    "f": "far.a553aeb73f55faac.bin",
+    "size": 2568906,
+    "sha256": "a553aeb73f55faac9286ee41f0726639b390e825f3a760a241a86c2abe093f0a"
+   },
+   "packs": {},
+   "tool": "2e632f7f8d7c5d58",
+   "checked": "check 1096 (memo)",
+   "ids": [
+    "tf:7fcd8d0"
+   ]
+  },
+  {
+   "id": "tf:85a776b",
+   "src": "85a776bd42c77f81bec208aeac708ad9c389ff0e",
+   "fmt": "44d6ee7b8761cb93",
+   "gen": "a9a7378b92150329",
+   "far": {
+    "f": "far.6f8c899492cc6ccf.bin",
+    "size": 2567027,
+    "sha256": "6f8c899492cc6ccf74a496d04b0bc705774ac44d69e543594c3b140d36b5b6d6"
+   },
+   "packs": {},
+   "tool": "8740578188a04bad",
+   "checked": "check 1096 (memo)"
+  },
+  {
+   "id": "tf:d8468d4",
+   "src": "d8468d4830897ed5b77d1c063523de882498c895",
+   "fmt": "44d6ee7b8761cb93",
+   "gen": "3ba5cf3639c99edc",
+   "far": {
+    "f": "far.38c32ef0b81456a6.bin",
+    "size": 2563592,
+    "sha256": "38c32ef0b81456a6539ccf0086963289b88a65c2c75d0c5c27a203c4e26c9425"
+   },
+   "packs": {},
+   "tool": "389a2bb864dd7fe4",
+   "checked": "check 1096 (memo)"
+  }
+ ]
+}

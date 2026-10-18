@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mirrsona サポート / Support</title>
+<!-- App Store Connect の「サポート URL」用（https://nyachill.github.io/mirrsona-site/legal/support.html）。【連絡先】はオーナーが記入する -->
+<style>
+  :root { color-scheme: dark; }
+  /* アプリは WKWebView のスクロールを止めている（capacitor.config.json の scrollEnabled: false）ので、main の中でスクロールする */
+  html, body { height: 100%; overflow: hidden; }
+  body { margin: 0; background: #0b1118; color: #e8eef4; font: 15px/1.7 -apple-system, "Hiragino Sans", "Helvetica Neue", sans-serif; }
+  main { box-sizing: border-box; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; max-width: 760px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) 48px max(20px, env(safe-area-inset-left)); }
+  h1 { font-size: 22px; } h2 { font-size: 17px; margin-top: 28px; color: #ffcf7a; }
+  a { color: #8cc8ff; } .back { display: inline-block; margin-bottom: 12px; }
+  hr { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.15); margin: 40px 0; }
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="../index.html">← ゲームに戻る / Back to the game</a>
+<h1>Mirrsona サポート</h1>
+<h2>遊び方</h2>
+<ul>
+  <li>画面の左をタッチするとその場所にスティックが出ます（移動）。右をスワイプすると視点が動きます。</li>
+  <li>「ソロ」→「街：フリー」「街：バトルロイヤル」「アリーナ」から選べます。ヘリ・戦闘機・車には近づいて「乗る」で乗れます。</li>
+  <li>戦闘機は「かんたん」操作が既定です。空母の甲板では「発艦」ボタン、空母の近くでは「着艦」ボタンで自動で離着艦します。</li>
+</ul>
+<h2>よくある質問</h2>
+<ul>
+  <li><b>初回の起動に時間がかかる</b>: ゲームのデータを端末にダウンロードしています（2 回目からは差分だけ）。通信できないときは内蔵のデータで起動します。</li>
+  <li><b>動作が重い・途中で終わる</b>: 開始画面に「省メモリモード」が出たときはそのまま遊んでください。前回の続きから再開できます。</li>
+</ul>
+<h2>お問い合わせ</h2>
+<p>【連絡先：オーナーが記入】</p>
+<p><a href="privacy.html">プライバシーポリシー</a></p>
+<hr>
+<h1>Mirrsona Support</h1>
+<ul>
+  <li>Touch the left side of the screen to get a movement stick; swipe on the right side to look around.</li>
+  <li>Choose “ソロ” (Solo) → City: Free, City: Battle Royale or Arena. Walk up to a helicopter, jet or car and tap “乗る” (Enter).</li>
+  <li>Jets use the Easy controls by default: the “発艦” (Launch) button takes off from the carrier, “着艦” (Land) lands automatically.</li>
+  <li>The first launch downloads game data; later launches only download changes.</li>
+</ul>
+<p>Contact: [to be filled in by the owner]</p>
+<p><a href="privacy.html">Privacy Policy</a></p>
+</main>
+</body>
+</html>

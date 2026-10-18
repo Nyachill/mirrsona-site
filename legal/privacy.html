@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mirrsona プライバシーポリシー / Privacy Policy</title>
+<!-- アプリにも同梱（開始画面の「プライバシーポリシー」）。Web 版は https://nyachill.github.io/mirrsona-site/legal/privacy.html。
+     文面の元は docs/appstore/privacy.md。【連絡先】はオーナーが記入してから審査に出す（docs/appstore/review-risks.md の「提出前に必ず」） -->
+<style>
+  :root { color-scheme: dark; }
+  /* アプリは WKWebView のスクロールを止めている（capacitor.config.json の scrollEnabled: false）ので、main の中でスクロールする */
+  html, body { height: 100%; overflow: hidden; }
+  body { margin: 0; background: #0b1118; color: #e8eef4; font: 15px/1.7 -apple-system, "Hiragino Sans", "Helvetica Neue", sans-serif; }
+  main { box-sizing: border-box; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; max-width: 760px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) 48px max(20px, env(safe-area-inset-left)); }
+  h1 { font-size: 22px; } h2 { font-size: 17px; margin-top: 28px; color: #ffcf7a; }
+  a { color: #8cc8ff; } .back { display: inline-block; margin-bottom: 12px; }
+  .muted { color: rgba(232, 238, 244, 0.6); font-size: 13px; } hr { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.15); margin: 40px 0; }
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="../index.html">← ゲームに戻る / Back to the game</a>
+<h1>Mirrsona プライバシーポリシー</h1>
+<p class="muted">最終更新日: 2026 年 10 月 10 日</p>
+<p>Mirrsona（以下「本アプリ」）は、利用者を特定できる個人情報を集めません。広告・行動の分析・トラッキングは行いません。</p>
+<h2>1. 集める情報</h2>
+<p>本アプリは、氏名・メールアドレス・電話番号・位置情報・連絡先・写真・端末の識別子（広告 ID など）を集めません。アカウントの登録もありません。</p>
+<h2>2. 端末の中だけに保存する情報</h2>
+<p>ゲームのデータ（マップ・モデル・音など）、設定（操作の選び方・最後に選んだモード・コールサイン・ルーム名など）、続きから遊ぶための進み具合は、お使いの端末の中だけに保存します。開発者には送られません。アプリを削除すると消えます。</p>
+<h2>3. 通信</h2>
+<ul>
+  <li><b>ゲームデータのダウンロード</b>: 起動時に、ゲームのデータを配信用のサーバー（GitHub Pages）から取得します。このとき、一般的なインターネット通信と同じく、お使いの端末の IP アドレスなどが配信サーバーに届きます。開発者はこれを集めたり利用したりしません。</li>
+  <li><b>オンライン対戦（使ったときだけ）</b>: 「オンライン」で接続すると、対戦用のサーバー（Cloudflare）へ、ゲーム内の名前（あらかじめ用意された「コールサイン」から選ばれるもの）、ルーム名、ゲーム内の位置・向き・射撃などのプレイの情報を送ります。これらは対戦をその場で進めるためだけに使い、対戦が終われば残しません。短い時間に大量の接続をされないよう、本アプリのサーバーのプログラムは IP アドレスを一時的にメモリの中だけで使い、ファイルやログには書きません（しばらくすると、またはサーバーが入れ替わると消えます）。サーバーを提供する Cloudflare は、通信の情報を同社のプライバシーポリシーに従って扱うことがあります。自由に入力した文章を他の利用者に送る機能（チャットなど）はありません。</li>
+</ul>
+<h2>4. 第三者への提供</h2>
+<p>集める個人情報が無いため、第三者へ提供することはありません。広告・分析・クラッシュレポートのための外部のサービス（SDK）は使っていません。</p>
+<h2>5. お子さまのプライバシー</h2>
+<p>本アプリは、お子さまを含め、どなたの個人情報も集めません。</p>
+<h2>6. 変更</h2>
+<p>このポリシーを変更するときは、このページを更新し、最終更新日を改めます。</p>
+<h2>7. お問い合わせ</h2>
+<p>【連絡先：オーナーが記入】</p>
+
+<hr>
+
+<h1>Mirrsona Privacy Policy</h1>
+<p class="muted">Last updated: October 10, 2026</p>
+<p>Mirrsona (“the app”) does not collect personal information that identifies you. It does not show ads, run analytics, or track you.</p>
+<h2>1. Information we collect</h2>
+<p>None. The app does not collect your name, email address, phone number, location, contacts, photos or device identifiers (such as the advertising identifier). There are no accounts.</p>
+<h2>2. Information stored only on your device</h2>
+<p>Game data (maps, models, sounds), settings (control scheme, last selected mode, callsign, room name) and progress used to resume a game are stored only on your device. They are never sent to the developer and are removed when you delete the app.</p>
+<h2>3. Network communication</h2>
+<ul>
+  <li><b>Game data download</b>: at launch the app downloads game data from a content server (GitHub Pages). As with any internet request, your device’s IP address reaches that server. The developer does not collect or use it.</li>
+  <li><b>Online play (only when you use it)</b>: when you connect via “Online”, the app sends your in-game name (a preset callsign), the room name and gameplay information such as in-game position, direction and shots to the game server (Cloudflare). This is used only to run the match in real time and is not kept after the match. To limit bursts of connections, our server code keeps your IP address only in memory and does not write it to storage or logs; it is discarded after a short time or when the server restarts. Our hosting provider (Cloudflare) may process connection metadata under its own privacy policy. There is no chat or other way to send free-form text to other players.</li>
+</ul>
+<h2>4. Sharing with third parties</h2>
+<p>Because no personal information is collected, none is shared. The app contains no advertising, analytics or crash-reporting SDKs.</p>
+<h2>5. Children’s privacy</h2>
+<p>The app does not collect personal information from anyone, including children.</p>
+<h2>6. Changes</h2>
+<p>If this policy changes, this page will be updated together with the “Last updated” date.</p>
+<h2>7. Contact</h2>
+<p>[Contact: to be filled in by the owner]</p>
+</main>
+</body>
+</html>
