@@ -1,0 +1,739 @@
+{
+ "id": "c3",
+ "v": 1,
+ "needs": 2,
+ "level": "midtown",
+ "city": "midtown",
+ "title": "第3章　スクリーンの声",
+ "en": "Voice on the Screens",
+ "caption": [
+  "封鎖 4 日目　17:30",
+  "タイムズスクエア"
+ ],
+ "weather": "rain",
+ "systems": {
+  "ambient": 0,
+  "airDefense": false,
+  "jets": false,
+  "boats": false,
+  "helis": false,
+  "cityVehicles": false
+ },
+ "loadout": {
+  "slots": [
+   "rifle",
+   null,
+   "pistol"
+  ],
+  "ammo": {
+   "556": 210,
+   "9mm": 45
+  },
+  "meds": {
+   "bandage": 2,
+   "medkit": 1
+  },
+  "vest": true
+ },
+ "zones": {
+  "dark": [
+   "times",
+   "rock",
+   "hy",
+   "carrier",
+   "un",
+   "roosevelt",
+   "lic",
+   "boathouse",
+   "skyhigh"
+  ]
+ },
+ "start": {
+  "p": [
+   -716,
+   0,
+   -150
+  ],
+  "yaw": 100
+ },
+ "actors": {
+  "ren": {
+   "kind": "ally",
+   "name": "レン",
+   "look": "crew",
+   "weapon": "rifle",
+   "at": "ren0",
+   "fire": "tagged"
+  },
+  "no7": {
+   "kind": "vtol",
+   "name": "七号機",
+   "at": "no7_drop",
+   "air": true
+  }
+ },
+ "anchors": {
+  "ren0": {
+   "p": [
+    -712,
+    0,
+    -146
+   ],
+   "ground": true
+  },
+  "no7_drop": {
+   "p": [
+    -700,
+    24,
+    -160
+   ],
+   "yaw": 90
+  },
+  "no7_away": {
+   "p": [
+    -700,
+    150,
+    -160
+   ]
+  },
+  "ladder": {
+   "p": [
+    -736.5,
+    0.1,
+    -175
+   ],
+   "ground": true
+  },
+  "ren_ladder": {
+   "p": [
+    -732,
+    0,
+    -168
+   ],
+   "ground": true
+  },
+  "roof": {
+   "p": [
+    -755,
+    21.8,
+    -200
+   ],
+   "r": 22
+  },
+  "antenna": {
+   "p": [
+    -755,
+    21.8,
+    -188
+   ],
+   "ground": true
+  },
+  "s1": {
+   "p": [
+    -700,
+    0,
+    -122
+   ],
+   "ground": true
+  },
+  "s2": {
+   "p": [
+    -692,
+    0,
+    -205
+   ],
+   "ground": true
+  },
+  "s3": {
+   "p": [
+    -718,
+    0,
+    -238
+   ],
+   "ground": true
+  },
+  "r1": {
+   "p": [
+    -763,
+    21.8,
+    -218
+   ],
+   "ground": true
+  },
+  "r2": {
+   "p": [
+    -751,
+    21.8,
+    -222
+   ],
+   "ground": true
+  },
+  "r3": {
+   "p": [
+    -747,
+    21.8,
+    -206
+   ],
+   "ground": true
+  },
+  "c1": {
+   "p": [
+    -710,
+    0,
+    -182
+   ],
+   "ground": true
+  },
+  "c2": {
+   "p": [
+    -706,
+    0,
+    -150
+   ],
+   "ground": true
+  },
+  "edge": {
+   "p": [
+    -741,
+    21.8,
+    -195
+   ],
+   "ground": true
+  },
+  "cam_v0": {
+   "p": [
+    -750,
+    26,
+    -196
+   ]
+  },
+  "cam_v1": {
+   "p": [
+    -745,
+    24.5,
+    -201
+   ]
+  },
+  "screens": {
+   "p": [
+    -690,
+    30,
+    -190
+   ]
+  },
+  "cam_r0": {
+   "p": [
+    -700,
+    60,
+    -120
+   ]
+  },
+  "cam_r1": {
+   "p": [
+    -690,
+    90,
+    -150
+   ]
+  },
+  "times_look": {
+   "p": [
+    -725,
+    20,
+    -200
+   ]
+  },
+  "land_c3": {
+   "p": [
+    -706,
+    0.05,
+    -195
+   ],
+   "yaw": 90
+  }
+ },
+ "groups": {
+  "street": {
+   "at": [
+    "s1",
+    "s2",
+    "s3"
+   ],
+   "n": 3,
+   "roles": [
+    "guard",
+    "hunt",
+    "hunt"
+   ],
+   "look": "veil",
+   "tag": "street",
+   "acc": 0.75
+  },
+  "roof": {
+   "at": [
+    "r1",
+    "r2",
+    "r3"
+   ],
+   "n": 3,
+   "roles": [
+    "guard",
+    "hunt",
+    "hunt"
+   ],
+   "look": "veil",
+   "tag": "roof",
+   "acc": 0.75
+  },
+  "climb": {
+   "at": [
+    "c1",
+    "c2"
+   ],
+   "n": 2,
+   "role": "climber",
+   "look": "veil",
+   "tag": "climb",
+   "waves": 2,
+   "gap": 9,
+   "acc": 0.7
+  },
+  "chase": {
+   "at": [
+    "r1",
+    "r2"
+   ],
+   "n": 2,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "chase",
+   "acc": 0.65
+  }
+ },
+ "interact": {
+  "antenna": {
+   "at": "antenna",
+   "label": "放送の中継器",
+   "verb": "乗っ取る",
+   "hold": 20,
+   "cancelOnHit": true,
+   "radius": 2.6
+  },
+  "intel_c3": {
+   "at": {
+    "p": [
+     -767,
+     21.8,
+     -185
+    ],
+    "ground": true
+   },
+   "label": "訓練記録",
+   "verb": "調べる",
+   "intel": "c3_1",
+   "always": true
+  }
+ },
+ "fail": [
+  [
+   "playerDead"
+  ],
+  [
+   "vehicleDead",
+   "no7"
+  ]
+ ],
+ "lines": {
+  "c3_drop": [
+   [
+    "mio",
+    "タイムズスクエア。\n雨で視界が悪い"
+   ],
+   [
+    "genji",
+    "看板が全部あいつらの\n宣伝だ。気分が悪い"
+   ]
+  ],
+  "c3_street": [
+   [
+    "ren",
+    "通りに三人。\n片付けてから屋根だ"
+   ]
+  ],
+  "c3_climb": [
+   [
+    "ren",
+    "東の壁に梯子。\n上で中継器を探せ"
+   ]
+  ],
+  "c3_roof": [
+   [
+    "haru",
+    "……（雑音）……"
+   ],
+   [
+    "genji",
+    "中継器を 20 秒。\n撃たれたら戻るぞ"
+   ]
+  ],
+  "c3_hold": [
+   [
+    "ren",
+    "下から登ってくる。\n梯子は任せろ"
+   ]
+  ],
+  "c3_rescue": [
+   [
+    "mio",
+    "看板が変わった。\n救助の知らせが出てる"
+   ]
+  ],
+  "c3_reveal": [
+   [
+    "kagami",
+    "久しぶりだな。\nおかえり、R-07"
+   ],
+   [
+    "rui",
+    "（……見られた）"
+   ],
+   [
+    "mio",
+    "ルイ？\n今のは……"
+   ],
+   [
+    "ren",
+    "話はあとだ。\n走れ、新入り"
+   ]
+  ],
+  "c3_run": [
+   [
+    "mio",
+    "広場に降りる。\n梯子で下りて乗って"
+   ]
+  ],
+  "c3_relit": [
+   [
+    "mio",
+    "ルイは昨日、\n子どもを運んだ"
+   ],
+   [
+    "mio",
+    "それで十分。\n第七班、帰投する"
+   ]
+  ]
+ },
+ "intel": [
+  {
+   "id": "c3_1",
+   "title": "ペルソナ計画　訓練記録",
+   "body": "R-07：適性 A。\n顔を外す手術の前日に施設から離脱。\n行方不明。――R-01"
+  }
+ ],
+ "shots": {
+  "c3_reveal": {
+   "letterbox": true,
+   "hold": 1.2,
+   "pre": [
+    [
+     "billboard",
+     "kagami"
+    ]
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "p": "cam_v0",
+     "look": "screens",
+     "fov": 55
+    },
+    {
+     "t": 7,
+     "p": "cam_v1",
+     "look": "screens",
+     "fov": 38,
+     "ease": "inOut"
+    }
+   ],
+   "lines": "c3_reveal"
+  },
+  "c3_relit": {
+   "letterbox": true,
+   "hold": 1.5,
+   "pre": [
+    [
+     "billboard",
+     "off"
+    ],
+    [
+     "fade",
+     0,
+     0.8
+    ]
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "p": "cam_r0",
+     "look": "times_look",
+     "fov": 52
+    },
+    {
+     "t": 8,
+     "p": "cam_r1",
+     "look": "times_look",
+     "fov": 42,
+     "ease": "inOut"
+    }
+   ],
+   "lines": "c3_relit",
+   "relight": {
+    "zone": "times",
+    "at": 1.2
+   }
+  }
+ },
+ "steps": [
+  {
+   "id": "drop",
+   "obj": "通りのヴェール兵を倒す",
+   "count": [
+    "alive",
+    "street"
+   ],
+   "do": [
+    [
+     "vtol",
+     "hover",
+     "no7_drop",
+     90,
+     true
+    ],
+    [
+     "radio",
+     "c3_drop"
+    ],
+    [
+     "spawn",
+     "street"
+    ],
+    [
+     "ally",
+     "ren",
+     "follow"
+    ],
+    [
+     "wait",
+     4
+    ],
+    [
+     "vtol",
+     "hover",
+     "no7_away",
+     90
+    ],
+    [
+     "radio",
+     "c3_street"
+    ]
+   ],
+   "until": [
+    "dead",
+    "street"
+   ]
+  },
+  {
+   "id": "climb",
+   "checkpoint": true,
+   "obj": "梯子で屋根へ上がる",
+   "mark": [
+    "ladder"
+   ],
+   "do": [
+    [
+     "radio",
+     "c3_climb"
+    ],
+    [
+     "ally",
+     "ren",
+     "moveTo",
+     "ren_ladder"
+    ]
+   ],
+   "until": [
+    "inside",
+    "roof",
+    22,
+    3
+   ]
+  },
+  {
+   "id": "roof",
+   "obj": "屋根のヴェール兵を倒す",
+   "count": [
+    "alive",
+    "roof"
+   ],
+   "do": [
+    [
+     "spawn",
+     "roof"
+    ],
+    [
+     "radio",
+     "c3_roof"
+    ]
+   ],
+   "until": [
+    "dead",
+    "roof"
+   ]
+  },
+  {
+   "id": "hack",
+   "checkpoint": true,
+   "obj": "中継器を乗っ取る（20 秒）",
+   "count": [
+    "held",
+    "antenna"
+   ],
+   "mark": [
+    "antenna"
+   ],
+   "do": [
+    [
+     "spawn",
+     "climb"
+    ],
+    [
+     "radio",
+     "c3_hold"
+    ]
+   ],
+   "fail": [
+    [
+     "leave",
+     "roof",
+     60
+    ]
+   ],
+   "until": [
+    "held",
+    "antenna"
+   ]
+  },
+  {
+   "id": "reveal",
+   "do": [
+    [
+     "billboard",
+     "rescue"
+    ],
+    [
+     "radio",
+     "c3_rescue"
+    ],
+    [
+     "wait",
+     3
+    ],
+    [
+     "despawn",
+     "climb"
+    ],
+    [
+     "cine",
+     "c3_reveal"
+    ]
+   ],
+   "until": [
+    "done",
+    "c3_reveal"
+   ]
+  },
+  {
+   "id": "run",
+   "checkpoint": true,
+   "obj": "梯子で降りて七号機に乗る",
+   "mark": [
+    "ladder",
+    "@no7.ramp"
+   ],
+   "do": [
+    [
+     "billboard",
+     "kagami"
+    ],
+    [
+     "spawn",
+     "chase"
+    ],
+    [
+     "vtol",
+     "hover",
+     "land_c3",
+     90
+    ],
+    [
+     "vtol",
+     "ramp",
+     true
+    ],
+    [
+     "vtol",
+     "board"
+    ],
+    [
+     "radio",
+     "c3_run"
+    ],
+    [
+     "ally",
+     "ren",
+     "board",
+     "@no7.ramp"
+    ]
+   ],
+   "until": [
+    "boarded"
+   ]
+  },
+  {
+   "id": "relit",
+   "do": [
+    [
+     "despawn",
+     "chase"
+    ],
+    [
+     "cine",
+     "c3_relit"
+    ]
+   ],
+   "until": [
+    "done",
+    "c3_relit"
+   ]
+  },
+  {
+   "id": "fin",
+   "do": [
+    [
+     "end",
+     "success"
+    ]
+   ],
+   "until": [
+    "always"
+   ]
+  }
+ ],
+ "rewards": {
+  "relight": "times",
+  "unlock": [],
+  "next": "c4"
+ },
+ "rating": {
+  "par": 840
+ }
+}

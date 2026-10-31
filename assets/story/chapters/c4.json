@@ -1,0 +1,858 @@
+{
+ "id": "c4",
+ "v": 1,
+ "needs": 2,
+ "level": "midtown",
+ "city": "midtown",
+ "title": "第4章　ふたつの声",
+ "en": "Two Voices",
+ "caption": [
+  "封鎖 5 日目　18:10",
+  "プラザ"
+ ],
+ "weather": "fog",
+ "systems": {
+  "ambient": 0,
+  "airDefense": false,
+  "jets": false,
+  "boats": false,
+  "helis": false,
+  "cityVehicles": false
+ },
+ "loadout": {
+  "slots": [
+   "rifle",
+   null,
+   "pistol"
+  ],
+  "ammo": {
+   "556": 220,
+   "9mm": 45
+  },
+  "meds": {
+   "bandage": 2,
+   "medkit": 1
+  },
+  "vest": true
+ },
+ "zones": {
+  "dark": [
+   "rock",
+   "hy",
+   "carrier",
+   "un",
+   "roosevelt",
+   "lic",
+   "boathouse",
+   "skyhigh"
+  ]
+ },
+ "start": {
+  "p": [
+   -318,
+   0,
+   -604
+  ],
+  "yaw": 90
+ },
+ "actors": {
+  "ren": {
+   "kind": "ally",
+   "name": "レン",
+   "look": "crew",
+   "weapon": "rifle",
+   "at": "ren0",
+   "fire": "tagged"
+  },
+  "no7": {
+   "kind": "vtol",
+   "name": "七号機",
+   "at": "no7_drop",
+   "air": true
+  }
+ },
+ "anchors": {
+  "ren0": {
+   "p": [
+    -314,
+    0,
+    -598
+   ],
+   "ground": true
+  },
+  "no7_drop": {
+   "p": [
+    -330,
+    22,
+    -600
+   ],
+   "yaw": -90
+  },
+  "no7_away": {
+   "p": [
+    -330,
+    70,
+    -600
+   ]
+  },
+  "plaza": {
+   "p": [
+    -345,
+    0,
+    -600
+   ],
+   "r": 60
+  },
+  "p1": {
+   "p": [
+    -352,
+    -3.95,
+    -622
+   ],
+   "ground": true
+  },
+  "p2": {
+   "p": [
+    -342,
+    0,
+    -574
+   ],
+   "ground": true
+  },
+  "p3": {
+   "p": [
+    -372,
+    -3.95,
+    -590
+   ],
+   "ground": true
+  },
+  "front": {
+   "p": [
+    -388,
+    0,
+    -600
+   ],
+   "ground": true
+  },
+  "side": {
+   "p": [
+    -380,
+    0,
+    -646
+   ],
+   "ground": true
+  },
+  "ren_front": {
+   "p": [
+    -378,
+    -3.95,
+    -606
+   ],
+   "ground": true
+  },
+  "ren_side": {
+   "p": [
+    -372,
+    0,
+    -640
+   ],
+   "ground": true
+  },
+  "a1": {
+   "p": [
+    -372,
+    -3.95,
+    -620
+   ],
+   "ground": true
+  },
+  "a2": {
+   "p": [
+    -374,
+    -3.95,
+    -580
+   ],
+   "ground": true
+  },
+  "a3": {
+   "p": [
+    -360,
+    0,
+    -636
+   ],
+   "ground": true
+  },
+  "a4": {
+   "p": [
+    -362,
+    0,
+    -566
+   ],
+   "ground": true
+  },
+  "lobby": {
+   "p": [
+    -405,
+    0,
+    -600
+   ],
+   "r": 14
+  },
+  "radio_set": {
+   "p": [
+    -404,
+    0,
+    -604
+   ],
+   "ground": true
+  },
+  "apc_pt": {
+   "p": [
+    -300,
+    0,
+    -560
+   ],
+   "yaw": -135,
+   "ground": true
+  },
+  "lz": {
+   "p": [
+    -340,
+    0,
+    -600
+   ],
+   "r": 40
+  },
+  "lz_land": {
+   "p": [
+    -318,
+    0.15,
+    -614
+   ],
+   "yaw": -90
+  },
+  "lz_hover": {
+   "p": [
+    -318,
+    30,
+    -614
+   ],
+   "yaw": -90
+  },
+  "h1": {
+   "p": [
+    -300,
+    0,
+    -640
+   ],
+   "ground": true
+  },
+  "h2": {
+   "p": [
+    -296,
+    0,
+    -575
+   ],
+   "ground": true
+  },
+  "h3": {
+   "p": [
+    -320,
+    0,
+    -650
+   ],
+   "ground": true
+  },
+  "cam_r0": {
+   "p": [
+    -300,
+    40,
+    -560
+   ]
+  },
+  "cam_r1": {
+   "p": [
+    -290,
+    90,
+    -580
+   ]
+  },
+  "rock_look": {
+   "p": [
+    -420,
+    120,
+    -620
+   ]
+  }
+ },
+ "groups": {
+  "plaza": {
+   "at": [
+    "p1",
+    "p2",
+    "p3"
+   ],
+   "n": 3,
+   "roles": [
+    "guard",
+    "guard",
+    "hunt"
+   ],
+   "look": "veil",
+   "tag": "plaza",
+   "acc": 0.75
+  },
+  "ambush": {
+   "at": [
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "n": 4,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "ambush",
+   "acc": 0.8
+  },
+  "inside": {
+   "at": [
+    "radio_set"
+   ],
+   "n": 1,
+   "role": "guard",
+   "look": "veil",
+   "tag": "inside",
+   "acc": 0.7
+  },
+  "apcg": {
+   "at": [
+    "h1",
+    "h2"
+   ],
+   "n": 2,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "apcg",
+   "acc": 0.7
+  },
+  "hz": {
+   "at": [
+    "h1",
+    "h2",
+    "h3"
+   ],
+   "n": 3,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "hz",
+   "waves": 2,
+   "gap": 14,
+   "acc": 0.7
+  }
+ },
+ "interact": {
+  "radio_set": {
+   "at": "radio_set",
+   "label": "ヴェールの無線機",
+   "verb": "調べる",
+   "hold": 4,
+   "cancelOnHit": true,
+   "radius": 2.6
+  },
+  "intel_c4": {
+   "at": {
+    "p": [
+     -300,
+     0,
+     -615
+    ],
+    "ground": true
+   },
+   "label": "放送の台本",
+   "verb": "調べる",
+   "intel": "c4_1",
+   "always": true
+  }
+ },
+ "fail": [
+  [
+   "playerDead"
+  ],
+  [
+   "vehicleDead",
+   "no7"
+  ]
+ ],
+ "lines": {
+  "c4_drop": [
+   [
+    "mio",
+    "プラザ。霧が濃い。\n降下、どうぞ"
+   ],
+   [
+    "ren",
+    "見張りが三人。\n片付けるぞ"
+   ]
+  ],
+  "c4_tower": [
+   [
+    "haru",
+    "タワーより七号機。\n……聞こえる？"
+   ],
+   [
+    "mio",
+    "ハル!?\n生きてたの"
+   ]
+  ],
+  "c4_two": [
+   [
+    "haru",
+    "西の正面から入って。\n無線機は受付の奥"
+   ],
+   [
+    "haru",
+    "東の通用口から。\nタワー、以上"
+   ],
+   [
+    "haru",
+    "帰ったらお茶にしよ"
+   ]
+  ],
+  "c4_ambush": [
+   [
+    "ren",
+    "罠だ！\n囲まれてるぞ"
+   ],
+   [
+    "genji",
+    "偽物の声だ。\nあいつらの放送だ"
+   ]
+  ],
+  "c4_short": [
+   [
+    "ren",
+    "通用口は空いてる。\n本物のハルだ"
+   ]
+  ],
+  "c4_inside": [
+   [
+    "ren",
+    "受付の奥に無線機。\n見張りがひとり"
+   ]
+  ],
+  "c4_coords": [
+   [
+    "genji",
+    "座標が入ってる。\nルーズベルト島"
+   ],
+   [
+    "mio",
+    "ハルの印だ。\n迎えに行く"
+   ]
+  ],
+  "c4_hold": [
+   [
+    "mio",
+    "装甲車が来る。\n支援射撃で止めて"
+   ],
+   [
+    "genji",
+    "線を引け。\n味方の近くは撃てない"
+   ]
+  ],
+  "c4_board": [
+   [
+    "mio",
+    "プラザに降りる。\n乗って"
+   ]
+  ],
+  "c4_relit": [
+   [
+    "mio",
+    "本物の声は\nお茶の約束だった"
+   ],
+   [
+    "ren",
+    "……新入り。\nいい耳だ"
+   ]
+  ]
+ },
+ "intel": [
+  {
+   "id": "c4_1",
+   "title": "ヴェールの放送台本",
+   "body": "タワーの声を真似ること。\n終わりの言葉は使わない（本人しか知らない）。\n――R-01"
+  }
+ ],
+ "shots": {
+  "c4_relit": {
+   "letterbox": true,
+   "hold": 1.5,
+   "pre": [
+    [
+     "fade",
+     0,
+     0.8
+    ]
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "p": "cam_r0",
+     "look": "rock_look",
+     "fov": 52
+    },
+    {
+     "t": 8,
+     "p": "cam_r1",
+     "look": "rock_look",
+     "fov": 42,
+     "ease": "inOut"
+    }
+   ],
+   "lines": "c4_relit",
+   "relight": {
+    "zone": "rock",
+    "at": 1.2
+   }
+  }
+ },
+ "steps": [
+  {
+   "id": "drop",
+   "obj": "プラザの見張りを倒す",
+   "count": [
+    "alive",
+    "plaza"
+   ],
+   "do": [
+    [
+     "vtol",
+     "hover",
+     "no7_drop",
+     -90,
+     true
+    ],
+    [
+     "radio",
+     "c4_drop"
+    ],
+    [
+     "spawn",
+     "plaza"
+    ],
+    [
+     "ally",
+     "ren",
+     "follow"
+    ],
+    [
+     "wait",
+     4
+    ],
+    [
+     "vtol",
+     "hover",
+     "no7_away",
+     -90
+    ]
+   ],
+   "until": [
+    "dead",
+    "plaza"
+   ]
+  },
+  {
+   "id": "voices",
+   "checkpoint": true,
+   "obj": "タワーの声を聞く",
+   "do": [
+    [
+     "radio",
+     "c4_tower"
+    ],
+    [
+     "wait",
+     5
+    ],
+    [
+     "radio",
+     "c4_two"
+    ],
+    [
+     "wait",
+     6
+    ],
+    [
+     "choice",
+     {
+      "id": "tower",
+      "prompt": "どちらのタワーを信じる？",
+      "sec": 30,
+      "options": [
+       {
+        "label": "西の正面から",
+        "flag": "fake"
+       },
+       {
+        "label": "東の通用口（お茶の約束）",
+        "flag": "real"
+       }
+      ],
+      "timeout": 0
+     }
+    ]
+   ],
+   "until": [
+    "done",
+    "tower"
+   ],
+   "then": {
+    "flag:real": "short",
+    "else": "ambush"
+   }
+  },
+  {
+   "id": "ambush",
+   "obj": "待ち伏せを切り抜ける",
+   "count": [
+    "alive",
+    "ambush"
+   ],
+   "mark": [
+    "front"
+   ],
+   "do": [
+    [
+     "spawn",
+     "ambush"
+    ],
+    [
+     "ally",
+     "ren",
+     "moveTo",
+     "ren_front"
+    ],
+    [
+     "radio",
+     "c4_ambush"
+    ]
+   ],
+   "until": [
+    "dead",
+    "ambush"
+   ],
+   "then": "inside"
+  },
+  {
+   "id": "short",
+   "obj": "東の通用口から受付へ",
+   "mark": [
+    "side"
+   ],
+   "do": [
+    [
+     "ally",
+     "ren",
+     "moveTo",
+     "ren_side"
+    ],
+    [
+     "radio",
+     "c4_short"
+    ]
+   ],
+   "until": [
+    "near",
+    "side",
+    4
+   ]
+  },
+  {
+   "id": "inside",
+   "checkpoint": true,
+   "obj": "受付の奥の無線機を調べる",
+   "count": [
+    "held",
+    "radio_set"
+   ],
+   "mark": [
+    "radio_set"
+   ],
+   "do": [
+    [
+     "spawn",
+     "inside"
+    ],
+    [
+     "ally",
+     "ren",
+     "follow"
+    ],
+    [
+     "radio",
+     "c4_inside"
+    ]
+   ],
+   "until": [
+    "held",
+    "radio_set"
+   ]
+  },
+  {
+   "id": "hold",
+   "checkpoint": true,
+   "obj": "装甲車を止めて七号機を待つ",
+   "count": [
+    "strike"
+   ],
+   "do": [
+    [
+     "radio",
+     "c4_coords"
+    ],
+    [
+     "wait",
+     4
+    ],
+    [
+     "vehicle",
+     "spawn",
+     "apc",
+     "apc_pt",
+     "apc_c4"
+    ],
+    [
+     "spawn",
+     "apcg"
+    ],
+    [
+     "support",
+     2
+    ],
+    [
+     "radio",
+     "c4_hold"
+    ],
+    [
+     "area",
+     "lz",
+     60
+    ],
+    [
+     "spawn",
+     "hz"
+    ],
+    [
+     "timer",
+     60
+    ]
+   ],
+   "fail": [
+    [
+     "leave",
+     "lz",
+     150
+    ]
+   ],
+   "until": [
+    "all",
+    [
+     "vehicleDead",
+     "apc_c4"
+    ],
+    [
+     "timerDone"
+    ]
+   ]
+  },
+  {
+   "id": "board",
+   "obj": "七号機に乗る",
+   "mark": [
+    "@no7.ramp"
+   ],
+   "do": [
+    [
+     "area",
+     "off"
+    ],
+    [
+     "support",
+     "off"
+    ],
+    [
+     "despawn",
+     "hz"
+    ],
+    [
+     "despawn",
+     "apcg"
+    ],
+    [
+     "vtol",
+     "hover",
+     "lz_land",
+     -90
+    ],
+    [
+     "vtol",
+     "ramp",
+     true
+    ],
+    [
+     "vtol",
+     "board"
+    ],
+    [
+     "radio",
+     "c4_board"
+    ],
+    [
+     "ally",
+     "ren",
+     "board",
+     "@no7.ramp"
+    ]
+   ],
+   "until": [
+    "boarded"
+   ]
+  },
+  {
+   "id": "relit",
+   "do": [
+    [
+     "cine",
+     "c4_relit"
+    ]
+   ],
+   "until": [
+    "done",
+    "c4_relit"
+   ]
+  },
+  {
+   "id": "fin",
+   "do": [
+    [
+     "end",
+     "success"
+    ]
+   ],
+   "until": [
+    "always"
+   ]
+  }
+ ],
+ "rewards": {
+  "relight": "rock",
+  "unlock": [],
+  "next": "c5"
+ },
+ "rating": {
+  "par": 780
+ }
+}

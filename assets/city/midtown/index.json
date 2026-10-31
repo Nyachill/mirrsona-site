@@ -1,0 +1,42 @@
+{
+ "v": 1,
+ "level": "midtown",
+ "format": 1,
+ "builtFrom": "b73d0e6e518dbc451e7a8385343d4cad80ef921d",
+ "builds": [
+  {
+   "id": "head",
+   "src": "b73d0e6e518dbc451e7a8385343d4cad80ef921d",
+   "fmt": "94725380a62009a5",
+   "gen": "016e87bd38db79cb",
+   "far": {
+    "f": "far.b328d7026d0fa8dc.bin",
+    "size": 2570349,
+    "sha256": "b328d7026d0fa8dc4a6fcf096b3efd8810dc8784b0f44330a20292cd789677a8"
+   },
+   "packs": {},
+   "tool": "b8e132e4c6568b00",
+   "checked": "check 1096 (memo)",
+   "ids": [
+    "tf:063ea02"
+   ]
+  },
+  {
+   "id": "tf:d6b270f",
+   "src": "d6b270fe2b8de3dfb9bf3d8cb20c08dba8c8fee1",
+   "fmt": "7cfe79a1e98dd87f",
+   "gen": "6f74a1c17886ad78",
+   "far": {
+    "f": "far.40cf5ab127bb6950.bin",
+    "size": 2570349,
+    "sha256": "40cf5ab127bb69501b84f85b797e304e208fdb0bd63cf6bf5530cbbca08bf286"
+   },
+   "packs": {},
+   "tool": "cef55fe9a793f787",
+   "checked": "check 1096 (memo)",
+   "ids": [
+    "tf:e195f9b"
+   ]
+  }
+ ]
+}

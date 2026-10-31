@@ -1,0 +1,667 @@
+{
+ "id": "p0",
+ "v": 1,
+ "needs": 1,
+ "level": "midtown",
+ "city": "midtown",
+ "title": "序章　スカイハイ陥落",
+ "en": "The Fall",
+ "caption": [
+  "封鎖 1 日目　17:05",
+  "MIRRSONA 本社　スカイハイ"
+ ],
+ "weather": "cloudy",
+ "systems": {
+  "ambient": 0,
+  "airDefense": false,
+  "jets": false,
+  "boats": false,
+  "helis": false,
+  "cityVehicles": false
+ },
+ "loadout": {
+  "slots": [
+   "rifle",
+   null,
+   "pistol"
+  ],
+  "ammo": {
+   "556": 160,
+   "9mm": 45
+  },
+  "meds": {
+   "bandage": 2,
+   "medkit": 1
+  },
+  "vest": true
+ },
+ "zones": {
+  "dark": []
+ },
+ "start": {
+  "landmark": "skyhigh",
+  "d": [
+   -16,
+   0.15,
+   14
+  ],
+  "yaw": 0
+ },
+ "anchors": {
+  "lift0": {
+   "lift": "L0"
+  },
+  "ren0": {
+   "landmark": "skyhigh",
+   "d": [
+    -13,
+    0.15,
+    15
+   ],
+   "yaw": 0
+  },
+  "ren_deck": {
+   "lift": "L1",
+   "d": [
+    5,
+    0,
+    7
+   ]
+  },
+  "no7_wait": {
+   "landmark": "skyhigh",
+   "d": [
+    -120,
+    260,
+    0
+   ]
+  },
+  "no7_near": {
+   "landmark": "skyhigh",
+   "d": [
+    -120,
+    140,
+    0
+   ]
+  },
+  "lb1": {
+   "landmark": "skyhigh",
+   "d": [
+    -26,
+    0.15,
+    -4
+   ]
+  },
+  "lb2": {
+   "landmark": "skyhigh",
+   "d": [
+    -14,
+    0.15,
+    -8
+   ]
+  },
+  "lb3": {
+   "landmark": "skyhigh",
+   "d": [
+    -28,
+    0.15,
+    -12
+   ]
+  },
+  "lb4": {
+   "landmark": "skyhigh",
+   "d": [
+    -12,
+    0.15,
+    -14
+   ]
+  },
+  "lb5": {
+   "landmark": "skyhigh",
+   "d": [
+    -20,
+    0.15,
+    -1
+   ]
+  },
+  "dk1": {
+   "landmark": "skyhigh",
+   "d": [
+    14,
+    128,
+    -12
+   ]
+  },
+  "dk2": {
+   "landmark": "skyhigh",
+   "d": [
+    16,
+    128,
+    4
+   ]
+  },
+  "dk3": {
+   "landmark": "skyhigh",
+   "d": [
+    10,
+    128,
+    10
+   ]
+  },
+  "dk4": {
+   "landmark": "skyhigh",
+   "d": [
+    18,
+    128,
+    -4
+   ]
+  },
+  "cam_b0": {
+   "landmark": "skyhigh",
+   "d": [
+    -44,
+    133,
+    6
+   ]
+  },
+  "cam_b1": {
+   "landmark": "skyhigh",
+   "d": [
+    -48,
+    140,
+    14
+   ]
+  },
+  "look_city": {
+   "zone": "times",
+   "d": [
+    300,
+    40,
+    0
+   ]
+  },
+  "look_gct": {
+   "zone": "gct",
+   "d": [
+    0,
+    20,
+    0
+   ]
+  },
+  "lift1": {
+   "lift": "L1"
+  },
+  "roof_pad": {
+   "landmark": "skyhigh",
+   "d": [
+    0,
+    274,
+    0
+   ],
+   "yaw": 0
+  }
+ },
+ "actors": {
+  "ren": {
+   "kind": "ally",
+   "name": "レン",
+   "look": "crew",
+   "weapon": "rifle",
+   "at": "ren0",
+   "fire": "tagged"
+  },
+  "no7": {
+   "kind": "vtol",
+   "name": "七号機",
+   "at": "no7_wait",
+   "air": true
+  }
+ },
+ "groups": {
+  "lobby": {
+   "at": [
+    "lb1",
+    "lb2",
+    "lb3",
+    "lb4",
+    "lb5"
+   ],
+   "n": 5,
+   "roles": [
+    "guard",
+    "guard",
+    "guard",
+    "hunt",
+    "hunt"
+   ],
+   "look": "veil",
+   "tag": "lobby",
+   "hp": 0.9,
+   "acc": 0.75
+  },
+  "perch128": {
+   "perch": [
+    1,
+    2,
+    3
+   ],
+   "lm": "skyhigh",
+   "n": 3,
+   "role": "overwatch",
+   "look": "veil",
+   "tag": "snipers",
+   "hp": 0.8,
+   "acc": 0.45,
+   "dmg": 0.8
+  },
+  "deckwave": {
+   "at": [
+    "dk1",
+    "dk2",
+    "dk3",
+    "dk4"
+   ],
+   "n": 2,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "deckwave",
+   "waves": 2,
+   "gap": 14,
+   "acc": 0.7
+  }
+ },
+ "interact": {
+  "intel_p0": {
+   "at": {
+    "landmark": "skyhigh",
+    "d": [
+     -30,
+     0.15,
+     -2
+    ]
+   },
+   "label": "端末",
+   "verb": "調べる",
+   "intel": "p0_1",
+   "always": true
+  }
+ },
+ "steps": [
+  {
+   "id": "lobby",
+   "checkpoint": true,
+   "obj": "ロビーのヴェール兵を倒す",
+   "count": [
+    "alive",
+    "lobby"
+   ],
+   "do": [
+    [
+     "radio",
+     "p0_alarm"
+    ],
+    [
+     "spawn",
+     "lobby"
+    ],
+    [
+     "ally",
+     "ren",
+     "follow"
+    ]
+   ],
+   "until": [
+    "dead",
+    "lobby"
+   ]
+  },
+  {
+   "id": "lift",
+   "obj": "エレベーターで 128 m のデッキへ",
+   "mark": [
+    "lift0"
+   ],
+   "do": [
+    [
+     "radio",
+     "p0_lift"
+    ]
+   ],
+   "until": [
+    "lifted",
+    "L1"
+   ]
+  },
+  {
+   "id": "deck",
+   "checkpoint": true,
+   "obj": "七号機が来るまでデッキを守る",
+   "do": [
+    [
+     "ally",
+     "ren",
+     "place",
+     "ren_deck"
+    ],
+    [
+     "ally",
+     "ren",
+     "hold",
+     "ren_deck"
+    ],
+    [
+     "spawn",
+     "perch128"
+    ],
+    [
+     "spawn",
+     "deckwave"
+    ],
+    [
+     "timer",
+     60
+    ],
+    [
+     "radio",
+     "p0_deck"
+    ]
+   ],
+   "on": [
+    {
+     "when": [
+      "time",
+      25
+     ],
+     "do": [
+      [
+       "radio",
+       "p0_haru"
+      ]
+     ]
+    },
+    {
+     "when": [
+      "time",
+      40
+     ],
+     "do": [
+      [
+       "radio",
+       "p0_mio"
+      ],
+      [
+       "vtol",
+       "hover",
+       "roof_pad",
+       0
+      ]
+     ]
+    }
+   ],
+   "until": [
+    "timerDone"
+   ]
+  },
+  {
+   "id": "up",
+   "checkpoint": true,
+   "obj": "エレベーターでスカイフロアへ",
+   "mark": [
+    "lift1"
+   ],
+   "do": [
+    [
+     "radio",
+     "p0_up"
+    ],
+    [
+     "ally",
+     "ren",
+     "follow"
+    ]
+   ],
+   "until": [
+    "lifted",
+    "L2"
+   ]
+  },
+  {
+   "id": "roof",
+   "obj": "屋上の七号機に乗る（ランプ）",
+   "mark": [
+    "@no7.ramp"
+   ],
+   "do": [
+    [
+     "despawn",
+     "perch128"
+    ],
+    [
+     "despawn",
+     "deckwave"
+    ],
+    [
+     "vtol",
+     "hover",
+     "roof_pad",
+     0
+    ],
+    [
+     "vtol",
+     "ramp",
+     true
+    ],
+    [
+     "vtol",
+     "board"
+    ],
+    [
+     "radio",
+     "p0_ramp"
+    ],
+    [
+     "ally",
+     "ren",
+     "board",
+     "@no7.ramp"
+    ]
+   ],
+   "until": [
+    "boarded"
+   ]
+  },
+  {
+   "id": "black",
+   "do": [
+    [
+     "cine",
+     "p0_blackout"
+    ]
+   ],
+   "until": [
+    "done",
+    "p0_blackout"
+   ]
+  },
+  {
+   "id": "fin",
+   "do": [
+    [
+     "end",
+     "success"
+    ]
+   ],
+   "until": [
+    "never"
+   ]
+  }
+ ],
+ "fail": [
+  [
+   "playerDead"
+  ]
+ ],
+ "shots": {
+  "p0_blackout": {
+   "letterbox": true,
+   "hold": 1.2,
+   "keys": [
+    {
+     "t": 0,
+     "p": "cam_b0",
+     "look": "look_city",
+     "fov": 55
+    },
+    {
+     "t": 9,
+     "p": "cam_b1",
+     "look": "look_gct",
+     "fov": 46,
+     "ease": "inOut"
+    }
+   ],
+   "lines": "p0_black",
+   "pre": [
+    [
+     "fade",
+     0,
+     0.8
+    ]
+   ],
+   "blackout": {
+    "at": 1.0,
+    "stagger": 0.7,
+    "zones": [
+     "roosevelt",
+     "lic",
+     "un",
+     "boathouse",
+     "hy",
+     "carrier",
+     "rock",
+     "times",
+     "library",
+     "gct",
+     "skyhigh"
+    ]
+   }
+  }
+ },
+ "lines": {
+  "p0_alarm": [
+   [
+    "haru",
+    "侵入者！ロビーに鏡の仮面…\nヴェールです！"
+   ],
+   [
+    "ren",
+    "新入り、初日に悪いな。\n撃てるか？"
+   ]
+  ],
+  "p0_lift": [
+   [
+    "ren",
+    "上だ。128 m のデッキで\n七号機を待つ"
+   ]
+  ],
+  "p0_deck": [
+   [
+    "haru",
+    "タワーより七号機。\nデッキに敵、狙撃手もいます"
+   ],
+   [
+    "ren",
+    "一分だ。持ちこたえろ"
+   ]
+  ],
+  "p0_haru": [
+   [
+    "haru",
+    "わたしは残って七号機の\n暗号を消します"
+   ],
+   [
+    "ren",
+    "ハル、無茶するな"
+   ]
+  ],
+  "p0_mio": [
+   [
+    "mio",
+    "こちら七号機、ミオ。\n屋上のパッドに降りる"
+   ]
+  ],
+  "p0_ramp": [
+   [
+    "mio",
+    "ランプを下ろした。\n乗って！"
+   ],
+   [
+    "genji",
+    "新入り、早く！"
+   ]
+  ],
+  "p0_black": [
+   [
+    "haru",
+    "タワー、以上。\n帰ったらお茶にしよ",
+    {
+     "box": true
+    }
+   ],
+   [
+    "mio",
+    "……街の灯が消えていく",
+    {
+     "box": true
+    }
+   ],
+   [
+    "ren",
+    "ヴェールが送電を止めた。\n地区ごとにな",
+    {
+     "box": true
+    }
+   ],
+   [
+    "genji",
+    "ようこそ第七班へ、新入り",
+    {
+     "box": true
+    }
+   ],
+   [
+    "rui",
+    "（必ず、この灯を取り戻す）",
+    {
+     "box": true,
+     "inner": true
+    }
+   ]
+  ],
+  "p0_up": [
+   [
+    "mio",
+    "降りた。エレベーターで\nスカイフロアから屋上へ"
+   ],
+   [
+    "ren",
+    "走れ、新入り"
+   ]
+  ]
+ },
+ "intel": [
+  {
+   "id": "p0_1",
+   "title": "ヴェールの通達",
+   "body": "第七班の撤収は認めない。\nスカイハイは本日 17:00 をもって「緊急管理」下に置く。\nペルソナ部隊は鏡面バイザーを外すな。"
+  }
+ ],
+ "rewards": {
+  "relight": null,
+  "unlock": [],
+  "next": "c1"
+ },
+ "rating": {
+  "par": 540
+ }
+}

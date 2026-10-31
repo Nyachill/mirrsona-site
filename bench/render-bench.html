@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Render Bench</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { --bg: #111418; --fg: #e8e8e8; --dim: #9aa3ad; --line: #2c333b; --ok: #3fb950; --ng: #f85149; --na: #8b949e; --tile: #1a1f25; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #f6f6f4; --fg: #1b1d20; --dim: #5d6670; --line: #d7dade; --ok: #1a7f37; --ng: #cf222e; --na: #6e7781; --tile: #ffffff; } }
+  :root[data-theme="dark"] { --bg: #111418; --fg: #e8e8e8; --dim: #9aa3ad; --line: #2c333b; --tile: #1a1f25; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 -apple-system, system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+  #wrap { padding: 12px 16px calc(24px + env(safe-area-inset-bottom)); max-width: 980px; box-sizing: border-box; }
+  h3 { margin: 4px 0 8px; }
+  h4 { margin: 18px 0 4px; }
+  canvas#c { display: block; width: 100%; max-width: 640px; height: auto; border: 1px solid var(--line); }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; margin-top: 8px; width: 100%; }
+  td, th { border-bottom: 1px solid var(--line); padding: 4px 6px; text-align: left; font-variant-numeric: tabular-nums; vertical-align: top; }
+  th { color: var(--dim); font-weight: 600; }
+  td.k { color: var(--dim); font-size: 12px; font-family: ui-monospace, Menlo, monospace; }
+  button { font: inherit; padding: 10px 16px; margin: 8px 8px 0 0; min-height: 44px; border-radius: 8px; border: 1px solid var(--line); background: var(--tile); color: var(--fg); }
+  #log { color: var(--dim); white-space: pre-wrap; font-size: 12px; }
+  #state { font-weight: 600; margin-top: 8px; }
+  #summary { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 10px 0; }
+  .tile { background: var(--tile); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+  .tile .l { font-size: 12px; color: var(--dim); }
+  .tile .v { font-size: 22px; font-weight: 700; margin-top: 2px; word-break: break-word; }
+  .tile .k2 { font-size: 10px; color: var(--dim); font-family: ui-monospace, Menlo, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tile.wide { grid-column: 1 / -1; } .tile.wide .v { font-size: 15px; font-weight: 600; }
+  @media (max-width: 600px) { #caps th:nth-child(2), #caps td:nth-child(2) { display: none; } td.det { min-width: 140px !important; } }
+  #log { word-break: break-all; }
+  td.st { white-space: nowrap; } td.det { word-break: break-all; min-width: 200px; }
+  .ok { color: var(--ok); } .ng { color: var(--ng); } .na { color: var(--na); }
+  #device { border: 2px solid var(--ok); border-radius: 10px; padding: 8px 10px; margin: 6px 0 10px; background: var(--tile); }
+  #device .devhead { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  #device table.dev { margin-top: 0; } #device th { width: 6.5em; white-space: nowrap; } #device td { word-break: break-word; }
+  #device small { color: var(--dim); } #device .devask { font-size: 13px; margin-top: 6px; }
+  pre#json { white-space: pre-wrap; word-break: break-all; font-size: 11px; max-height: 360px; overflow: auto; border: 1px solid var(--line); padding: 8px; background: var(--tile); }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <h3>描画ベンチ（Render bench・three.js r128）</h3>
+  <div id="device"></div>
+  <div id="info"></div>
+  <button id="go">すべて実行（run all）</button><button id="goCaps">機能テストだけ（caps only）</button>
+  <div id="state">待機中</div>
+  <div id="summary"></div>
+  <h4>機能テスト（caps）</h4>
+  <div class="scroll"><table id="caps"><thead><tr><th>テスト</th><th>key</th><th>結果</th><th>詳細</th></tr></thead><tbody></tbody></table></div>
+  <h4>後処理・シェーダー（post / shader cases）</h4>
+  <div class="scroll"><table id="tab"><thead><tr><th>case</th><th>ms / frame (median)</th><th>Δ vs standard</th><th>first-use ms</th></tr></thead><tbody></tbody></table></div>
+  <p id="note"></p>
+  <h4>結果 JSON（result JSON）</h4>
+  <button id="copy">コピー（copy）</button><span id="copied"></span>
+  <pre id="json">（まだ）</pre>
+  <div id="log"></div>
+  <canvas id="c"></canvas>
+</div>
+<script>
+// three.js r128 + its post files. On the Pages site the page is /bench/ and three is /lib/ (= ../lib/);
+// in the repo (tools/bench/) it falls back to ../../www/lib/. ?lib=<dir>/ overrides.
+(function () {
+  const q = new URLSearchParams(location.search);
+  const bases = q.get('lib') ? [q.get('lib')] : ['../lib/', '../../www/lib/'];
+  const files = ['three.min.js', 'post/CopyShader.js', 'post/EffectComposer.js', 'post/RenderPass.js', 'post/ShaderPass.js',
+    'post/LuminosityHighPassShader.js', 'post/UnrealBloomPass.js', 'post/FXAAShader.js', 'post/GammaCorrectionShader.js'];
+  let i = 0, b = 0;
+  window.__benchErrors = [];
+  window.addEventListener('error', (e) => { window.__benchErrors.push(String(e.message || e)); });
+  window.addEventListener('unhandledrejection', (e) => { window.__benchErrors.push('promise: ' + String(e.reason && e.reason.message || e.reason)); });
+  function next() {
+    if (i >= files.length) { window.__libBase = bases[b]; window.dispatchEvent(new Event('libs-ready')); return; }
+    const s = document.createElement('script'); s.src = bases[b] + files[i]; s.onload = () => { i++; next(); };
+    s.onerror = () => {
+      if (i === 0 && b + 1 < bases.length) { b++; next(); return; }
+      window.__libFailed = s.src; window.dispatchEvent(new Event('libs-failed'));
+    };
+    document.head.appendChild(s);
+  }
+  next();
+})();
+</script>
+<script src="bench-caps.js"></script>
+<script src="bench-device.js"></script>
+<script>
+window.addEventListener('libs-ready', function () {
+  'use strict';
+  const q = new URLSearchParams(location.search);
+  const W = +(q.get('w') || 1477), H = +(q.get('h') || 682);     // iPhone 844x390 CSS px × maxPixelRatio 1.75 (render.mobile)
+  const REPS = +(q.get('reps') || 8), RUNS = +(q.get('runs') || 5);
+  const log = (s) => { if (window.__benchLog) window.__benchLog(s); };
+  const canvas = document.getElementById('c');
+  canvas.width = W; canvas.height = H;
+  let renderer;
+  try {
+    // ?webgl1=1: three on a WebGL1 context (r128 picks WebGL2 by itself otherwise)
+    const ctxAttr = { antialias: false, alpha: false, depth: true, stencil: true, powerPreference: 'high-performance' };
+    const ctx1 = q.get('webgl1') === '1' ? (canvas.getContext('webgl', ctxAttr) || canvas.getContext('experimental-webgl', ctxAttr)) : null;
+    renderer = new THREE.WebGLRenderer(Object.assign({ canvas, antialias: false, powerPreference: 'high-performance' }, ctx1 ? { context: ctx1 } : {}));
+  } catch (e) {
+    window.__threeFailed = 'WebGLRenderer: ' + (e && e.message || e);
+    window.dispatchEvent(new Event('three-ready'));
+    return;
+  }
+  renderer.setPixelRatio(1);
+  renderer.setSize(W, H, false);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const gl = renderer.getContext();
+  const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+  const gpu = dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
+  document.getElementById('info').textContent = '描画サイズ ' + W + '×' + H + ' · three: WebGL' + (renderer.capabilities.isWebGL2 ? '2' : '1') + ' · ' + gpu + ' · DPR ' + window.devicePixelRatio;
+
+  // ---------- textures (canvas, 1024²) ----------
+  function canvasTex(draw, srgb, size) {
+    const c = document.createElement('canvas'); c.width = c.height = size || 1024;
+    draw(c.getContext('2d'), c.width);
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4;
+    if (srgb) t.encoding = THREE.sRGBEncoding;
+    return t;
+  }
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const albedo = canvasTex((g, n) => {
+    g.fillStyle = '#8a6b55'; g.fillRect(0, 0, n, n);
+    for (let k = 0; k < 4000; k++) { const v = 90 + rnd() * 70 | 0; g.fillStyle = 'rgb(' + (v + 30) + ',' + v + ',' + (v - 15) + ')'; g.fillRect(rnd() * n, rnd() * n, 18, 6); }
+    g.fillStyle = '#1d242c'; for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) g.fillRect(x * n / 4 + n * 0.1, y * n / 4 + n * 0.08, n * 0.3, n * 0.16);
+  }, true);
+  const normal = canvasTex((g, n) => { g.fillStyle = 'rgb(128,128,255)'; g.fillRect(0, 0, n, n); for (let k = 0; k < 3000; k++) { g.fillStyle = 'rgb(' + (100 + rnd() * 56 | 0) + ',' + (100 + rnd() * 56 | 0) + ',240)'; g.fillRect(rnd() * n, rnd() * n, 16, 5); } }, false);
+  const orm = canvasTex((g, n) => { g.fillStyle = 'rgb(230,200,10)'; g.fillRect(0, 0, n, n); for (let k = 0; k < 2000; k++) { g.fillStyle = 'rgb(' + (180 + rnd() * 70 | 0) + ',' + (120 + rnd() * 120 | 0) + ',0)'; g.fillRect(rnd() * n, rnd() * n, 12, 12); } }, false);
+  const emis = canvasTex((g, n) => { g.fillStyle = '#000'; g.fillRect(0, 0, n, n); g.fillStyle = '#ffc77a'; for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) if (rnd() < 0.4) g.fillRect(x * n / 4 + n * 0.1, y * n / 4 + n * 0.08, n * 0.3, n * 0.16); }, true);
+  const height = canvasTex((g, n) => { g.fillStyle = '#fff'; g.fillRect(0, 0, n, n); g.fillStyle = '#222'; for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) g.fillRect(x * n / 4 + n * 0.1, y * n / 4 + n * 0.08, n * 0.3, n * 0.16); }, false);
+  // interior atlas: 4 × 4 one-point-perspective rooms
+  const rooms = canvasTex((g, n) => {
+    const s = n / 4;
+    for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) {
+      const x0 = x * s, y0 = y * s, b = s * 0.25;
+      const hue = rnd() * 360, wall = 'hsl(' + hue + ',25%,' + (45 + rnd() * 25) + '%)';
+      g.fillStyle = 'hsl(' + hue + ',20%,30%)'; g.fillRect(x0, y0, s, s);                   // side walls
+      g.fillStyle = '#d8d4cc'; g.beginPath(); g.moveTo(x0, y0); g.lineTo(x0 + s, y0); g.lineTo(x0 + s - b, y0 + b); g.lineTo(x0 + b, y0 + b); g.fill(); // ceiling
+      g.fillStyle = 'hsl(' + (30 + rnd() * 20) + ',35%,28%)'; g.beginPath(); g.moveTo(x0, y0 + s); g.lineTo(x0 + s, y0 + s); g.lineTo(x0 + s - b, y0 + s - b); g.lineTo(x0 + b, y0 + s - b); g.fill(); // floor
+      g.fillStyle = wall; g.fillRect(x0 + b, y0 + b, s - 2 * b, s - 2 * b);             // back wall
+      g.fillStyle = 'rgba(255,240,200,0.9)'; g.fillRect(x0 + s * 0.45, y0 + b + 2, s * 0.1, 6); // ceiling light
+    }
+  }, true);
+
+  // ---------- scene ----------
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(MRsrgb('#c88a6a'), 250, 1300);
+  const cam = new THREE.PerspectiveCamera(74, W / H, 0.15, 2200);
+  cam.position.set(0, 6, 14); cam.lookAt(0, 6, 0);
+  const sunDir = new THREE.Vector3(-0.55, 0.32, -0.45).normalize().negate(); // light comes from the camera side so the wall is lit
+  const sun = new THREE.DirectionalLight(MRsrgb('#ffd9a8'), 2.2);
+  sun.position.copy(sunDir).multiplyScalar(50); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+  Object.assign(sun.shadow.camera, { left: -30, right: 30, top: 30, bottom: -30, near: 1, far: 120 });
+  scene.add(sun, sun.target, new THREE.HemisphereLight(MRsrgb('#9fb4d6'), MRsrgb('#3a2e2a'), 0.9));
+  const caster = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshStandardMaterial({ color: 0x777777 }));
+  caster.position.set(-6, 4, 6); caster.castShadow = true; scene.add(caster);
+  function MRsrgb(h) { return new THREE.Color(h).convertSRGBToLinear(); }
+
+  // env map: PMREM of a gradient dome (game: dusk_env.jpg through fromEquirectangular)
+  const envScene = new THREE.Scene();
+  envScene.add(new THREE.Mesh(new THREE.SphereGeometry(10, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide,
+    vertexShader: 'varying vec3 d; void main(){ d = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+    fragmentShader: 'varying vec3 d; void main(){ float h = normalize(d).y; gl_FragColor = vec4(mix(vec3(0.9,0.5,0.3), vec3(0.1,0.2,0.4), clamp(h,0.0,1.0)), 1.0); }' })));
+  // ?noenv=1: SwiftShader breaks PMREM (NaN → black PBR surfaces, see CLAUDE.md); use a plain 6-face gradient CubeTexture instead
+  let envTex;
+  if (q.get('noenv') === '1') {
+    const faces = [];
+    for (let f = 0; f < 6; f++) faces.push(canvasTex((g, n) => { const gr = g.createLinearGradient(0, 0, 0, n); const top = f === 2, bot = f === 3;
+      gr.addColorStop(0, top ? '#1a3358' : bot ? '#3a2e2a' : '#1d3358'); gr.addColorStop(1, top ? '#1a3358' : bot ? '#3a2e2a' : '#e9985a'); g.fillStyle = gr; g.fillRect(0, 0, n, n); }, true, 128).image);
+    envTex = new THREE.CubeTexture(faces); envTex.encoding = THREE.sRGBEncoding; envTex.needsUpdate = true;
+  } else {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    envTex = pmrem.fromScene(envScene).texture;
+  }
+
+  const geo = new THREE.PlaneGeometry(40, 20, 1, 1);
+  const uv = geo.attributes.uv; for (let k = 0; k < uv.count; k++) uv.setXY(k, uv.getX(k) * 40 / 12, uv.getY(k) * 20 / 14.4); // 12 m × 14.4 m texture tile (4 bays × 4 storeys)
+  geo.setAttribute('uv2', uv.clone());
+  const wall = new THREE.Mesh(geo, null);
+  wall.position.set(0, 6, 0); wall.receiveShadow = true; scene.add(wall);
+
+  function stdMat(extra) {
+    const m = new THREE.MeshStandardMaterial({ map: albedo, normalMap: normal, aoMap: orm, roughnessMap: orm, metalnessMap: orm,
+      emissiveMap: emis, emissive: new THREE.Color(1, 1, 1), emissiveIntensity: 1.4, envMap: envTex, roughness: 1, metalness: 1 });
+    if (extra) extra(m);
+    return m;
+  }
+  const VWP = (s) => s.replace('#include <common>', '#include <common>\nvarying vec3 vWPb;')
+    .replace('#include <project_vertex>', '#include <project_vertex>\nvWPb = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+  const FWP = (s, decl) => s.replace('#include <common>', '#include <common>\nvarying vec3 vWPb;\n' + (decl || ''));
+
+  // Interior mapping (2D one-point-perspective atlas, 4×4 rooms, one fetch per window pixel).
+  // Facade frame: u = world x, v = world y, inward = −z (the wall faces +z). Bay 3 m, storey 3.6 m, room depth 4 m.
+  const INTERIOR_DECL = [
+    'uniform sampler2D uRooms;',
+    'float h21(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
+    'vec3 interior(vec3 wp, vec3 cam, out float win) {',
+    '  vec2 cell = vec2(wp.x / 3.0, (wp.y - 0.15) / 3.6);',
+    '  vec2 f = fract(cell); vec2 id = floor(cell);',
+    '  win = step(0.2, f.x) * step(f.x, 0.8) * step(0.22, f.y) * step(f.y, 0.78);',
+    '  vec3 rd = normalize(wp - cam);',
+    '  vec3 d = vec3(rd.x / 3.0, rd.y / 3.6, -rd.z / 4.0);',         // into the room, in cell units
+    '  vec3 p = vec3(f, 0.0);',
+    '  vec3 tt = (step(vec3(0.0), d) - p) / d;',                        // distance to the far planes (x, y) and the back wall (z)
+    '  float t = min(min(tt.x, tt.y), tt.z);',
+    '  vec3 hp = p + d * t;',
+    '  float z = clamp(hp.z, 0.0, 1.0);',
+    '  vec2 uv = (hp.xy - 0.5) / (1.0 + z * 3.0) + 0.5;',              // project onto the 1-point image (back wall = 1/4 of the image)
+    '  float r = h21(id + 0.37);',
+    '  vec2 ac = floor(vec2(r * 4.0, fract(r * 13.7) * 4.0));',
+    '  vec3 c = texture2D(uRooms, (ac + clamp(uv, 0.02, 0.98)) / 4.0).rgb;',
+    '  float lit = step(0.55, h21(id * 1.71 + 3.1));',
+    '  return c * mix(0.08, 1.2, lit);',
+    '}'
+  ].join('\n');
+  function withInterior(m) {
+    m.onBeforeCompile = (sh) => {
+      sh.uniforms.uRooms = { value: rooms };
+      sh.vertexShader = VWP(sh.vertexShader);
+      sh.fragmentShader = FWP(sh.fragmentShader, INTERIOR_DECL)
+        .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\n{ float win; vec3 ic = interior(vWPb, cameraPosition, win);\n diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 0.15, win);\n totalEmissiveRadiance = mix(totalEmissiveRadiance, ic, win); roughnessFactor = mix(roughnessFactor, 0.06, win); metalnessFactor = mix(metalnessFactor, 0.0, win); }');
+    };
+    m.customProgramCacheKey = () => 'interior';
+  }
+  // Parallax occlusion mapping, 16 layers (+ the uv macro so every map uses the displaced uv)
+  function withPom(m) {
+    m.onBeforeCompile = (sh) => {
+      sh.uniforms.uHeight = { value: height };
+      sh.vertexShader = VWP(sh.vertexShader);
+      sh.fragmentShader = FWP(sh.fragmentShader, 'uniform sampler2D uHeight;\nvec2 pom(vec2 uv, vec3 v) {\n  const int N = 16; float layer = 1.0 / float(N); vec2 dUv = v.xy / max(v.z, 0.2) * 0.04 * layer;\n  float cur = 0.0; vec2 u = uv; float h = 1.0 - texture2D(uHeight, u).r;\n  for (int i = 0; i < N; i++) { if (cur >= h) break; u -= dUv; h = 1.0 - texture2D(uHeight, u).r; cur += layer; }\n  return u;\n}')
+        .replace('#include <map_fragment>', 'vec3 vts = normalize(cameraPosition - vWPb); vec2 uvP = pom(vUv, vec3(vts.x, vts.y, vts.z));\n#define vUv uvP\n#include <map_fragment>');
+    };
+    m.customProgramCacheKey = () => 'pom';
+  }
+  // Analytic exponential height fog + sun-side inscatter, applied in linear HDR before tone mapping (aerial perspective, cheap form)
+  function withHeightFog(m) {
+    m.fog = false;
+    m.onBeforeCompile = (sh) => {
+      sh.uniforms.uSunDir = { value: sunDir.clone().negate() };
+      sh.vertexShader = VWP(sh.vertexShader);
+      sh.fragmentShader = FWP(sh.fragmentShader, 'uniform vec3 uSunDir;\nvec3 aerial(vec3 col, vec3 wp, vec3 cam) {\n  vec3 rd = wp - cam; float dist = length(rd); rd /= dist;\n  float a = 0.0009, b = 0.012;\n  float k = abs(rd.y) > 1e-3 ? (1.0 - exp(-dist * rd.y * b)) / (rd.y * b) : dist;\n  float od = a * exp(-cam.y * b) * k;\n  float tr = exp(-od);\n  float s = pow(max(dot(rd, -uSunDir), 0.0), 6.0);\n  vec3 ins = mix(vec3(0.42, 0.36, 0.40), vec3(1.6, 0.95, 0.55), s);\n  return col * tr + ins * (1.0 - tr);\n}')
+        .replace('#include <tonemapping_fragment>', 'gl_FragColor.rgb = aerial(gl_FragColor.rgb, vWPb, cameraPosition);\n#include <tonemapping_fragment>');
+    };
+    m.customProgramCacheKey = () => 'hfog';
+  }
+  // Glass curtain wall: box-projected (parallax-corrected) env reflection + Schlick Fresnel, one extra env fetch
+  function withGlassBox(m) {
+    m.onBeforeCompile = (sh) => {
+      sh.uniforms.uBoxMin = { value: new THREE.Vector3(-60, 0, -60) };
+      sh.uniforms.uBoxMax = { value: new THREE.Vector3(60, 120, 60) };
+      sh.vertexShader = VWP(sh.vertexShader);
+      sh.fragmentShader = FWP(sh.fragmentShader, 'uniform vec3 uBoxMin; uniform vec3 uBoxMax;')
+        .replace('#include <aomap_fragment>', '#include <aomap_fragment>\n{ vec3 V = normalize(vWPb - cameraPosition); vec3 Nw = inverseTransformDirection(normal, viewMatrix);\n  vec3 R = reflect(V, Nw);\n  vec3 t1 = (uBoxMax - vWPb) / R; vec3 t2 = (uBoxMin - vWPb) / R; vec3 tf = max(t1, t2);\n  float t = min(min(tf.x, tf.y), tf.z); vec3 dir = vWPb + R * t - vec3(0.0, 20.0, 0.0);\n\n#ifdef ENVMAP_TYPE_CUBE_UV\n  vec3 env = textureCubeUV(envMap, dir, 0.05).rgb;\n#else\n  vec3 env = envMapTexelToLinear(textureCube(envMap, vec3(-dir.x, dir.yz))).rgb;\n#endif\n\n  float F = 0.04 + 0.96 * pow(1.0 - max(dot(-V, Nw), 0.0), 5.0);\n  reflectedLight.indirectSpecular += env * F * 1.5; }');
+    };
+    m.customProgramCacheKey = () => 'glassbox';
+  }
+
+  const CASES = [
+    ['basic (MeshBasic + map)', () => new THREE.MeshBasicMaterial({ map: albedo })],
+    ['standard, no shadow receive', () => stdMat(), { receiveShadow: false }],
+    ['standard (city facade today)', () => stdMat()],
+    ['standard + interior mapping', () => stdMat(withInterior)],
+    ['standard + box-projected glass', () => stdMat(withGlassBox)],
+    ['standard + height fog / aerial', () => stdMat(withHeightFog)],
+    ['standard + POM 16', () => stdMat(withPom)]
+  ];
+
+  // ---------- post chains ----------
+  const fsCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const fsGeo = new THREE.PlaneGeometry(2, 2);
+  const fsMesh = new THREE.Mesh(fsGeo, null); const fsScene = new THREE.Scene(); fsScene.add(fsMesh);
+  const FSV = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }';
+  function fsPass(mat, target) { fsMesh.material = mat; renderer.setRenderTarget(target); renderer.render(fsScene, fsCam); }
+  const half = renderer.capabilities.isWebGL2 && (renderer.extensions.has('EXT_color_buffer_half_float') || renderer.extensions.has('EXT_color_buffer_float'));
+  const rtOpts = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat, type: half ? THREE.HalfFloatType : THREE.UnsignedByteType, stencilBuffer: true };
+  // P0: the game's chain (game.js _setupComposer)
+  const composer = new THREE.EffectComposer(renderer, new THREE.WebGLRenderTarget(W, H, rtOpts));
+  composer.addPass(new THREE.RenderPass(scene, cam));
+  composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(W, H), 0.3, 0.4, 0.62));
+  composer.addPass(new THREE.ShaderPass(THREE.GammaCorrectionShader));
+  const grade = new THREE.ShaderPass({ uniforms: { tDiffuse: { value: null }, vignette: { value: 0.35 }, saturation: { value: 1.06 } }, vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+    fragmentShader: 'uniform sampler2D tDiffuse; uniform float vignette; uniform float saturation; varying vec2 vUv; void main(){ vec4 c = texture2D(tDiffuse, vUv); float l = dot(c.rgb, vec3(0.2126,0.7152,0.0722)); c.rgb = mix(vec3(l), c.rgb, saturation); vec2 d = (vUv-0.5)*vec2(1.0,0.85); float v = 1.0 - smoothstep(0.35,1.05,length(d)*1.4142)*vignette; gl_FragColor = vec4(c.rgb*v, c.a); }' });
+  composer.addPass(grade);
+  const fxaa = new THREE.ShaderPass(THREE.FXAAShader); fxaa.uniforms.resolution.value.set(1 / W, 1 / H); composer.addPass(fxaa);
+  composer.setSize(W, H);
+
+  // P1: dual-filter (Kawase) bloom at 1/2..1/32 + one final pass (bloom add + gamma + 32³ LUT + vignette + saturation) + FXAA
+  const sceneRT = new THREE.WebGLRenderTarget(W, H, rtOpts);
+  const finalRT = new THREE.WebGLRenderTarget(W, H, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat });
+  const mips = []; { let w = W, h = H; for (let k = 0; k < 5; k++) { w = Math.max(1, Math.round(w / 2)); h = Math.max(1, Math.round(h / 2)); mips.push(new THREE.WebGLRenderTarget(w, h, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat, type: rtOpts.type })); } }
+  const ups = mips.slice(0, 4).map((m) => m.clone());
+  const prefilter = new THREE.ShaderMaterial({ uniforms: { t: { value: null }, px: { value: new THREE.Vector2() }, thr: { value: 0.62 } }, vertexShader: FSV,
+    fragmentShader: 'uniform sampler2D t; uniform vec2 px; uniform float thr; varying vec2 vUv; void main(){ vec3 c = texture2D(t, vUv + px*vec2(-1.0,-1.0)).rgb + texture2D(t, vUv + px*vec2(1.0,-1.0)).rgb + texture2D(t, vUv + px*vec2(-1.0,1.0)).rgb + texture2D(t, vUv + px*vec2(1.0,1.0)).rgb; c *= 0.25; float l = max(c.r, max(c.g, c.b)); c *= smoothstep(thr, thr + 0.1, l); gl_FragColor = vec4(c, 1.0); }' });
+  const down = new THREE.ShaderMaterial({ uniforms: { t: { value: null }, px: { value: new THREE.Vector2() } }, vertexShader: FSV,
+    fragmentShader: 'uniform sampler2D t; uniform vec2 px; varying vec2 vUv; void main(){ vec3 c = texture2D(t, vUv).rgb * 4.0 + texture2D(t, vUv - px).rgb + texture2D(t, vUv + px).rgb + texture2D(t, vUv + vec2(px.x, -px.y)).rgb + texture2D(t, vUv - vec2(px.x, -px.y)).rgb; gl_FragColor = vec4(c / 8.0, 1.0); }' });
+  const up = new THREE.ShaderMaterial({ uniforms: { t: { value: null }, base: { value: null }, px: { value: new THREE.Vector2() } }, vertexShader: FSV,
+    fragmentShader: 'uniform sampler2D t; uniform sampler2D base; uniform vec2 px; varying vec2 vUv; void main(){ vec3 c = texture2D(t, vUv + vec2(-px.x*2.0,0.0)).rgb + texture2D(t, vUv + vec2(px.x*2.0,0.0)).rgb + texture2D(t, vUv + vec2(0.0,-px.y*2.0)).rgb + texture2D(t, vUv + vec2(0.0,px.y*2.0)).rgb; c += (texture2D(t, vUv + px).rgb + texture2D(t, vUv - px).rgb + texture2D(t, vUv + vec2(px.x,-px.y)).rgb + texture2D(t, vUv + vec2(-px.x,px.y)).rgb) * 2.0; gl_FragColor = vec4(c / 12.0 + texture2D(base, vUv).rgb, 1.0); }' });
+  // 32³ LUT as a 1024×32 strip (a mild cool-shadow / warm-highlight grade, generated here; the game would generate it in tools/gen)
+  const N = 32, lutData = new Uint8Array(N * N * N * 4);
+  for (let b = 0; b < N; b++) for (let g = 0; g < N; g++) for (let r = 0; r < N; r++) {
+    let R = r / (N - 1), G = g / (N - 1), B = b / (N - 1); const L = 0.2126 * R + 0.7152 * G + 0.0722 * B;
+    R += (L - 0.5) * 0.06; B -= (L - 0.5) * 0.06; G += 0.0;
+    const i = 4 * (g * N * N + b * N + r);
+    lutData[i] = Math.max(0, Math.min(255, R * 255)); lutData[i + 1] = Math.max(0, Math.min(255, G * 255)); lutData[i + 2] = Math.max(0, Math.min(255, B * 255)); lutData[i + 3] = 255;
+  }
+  const lut = new THREE.DataTexture(lutData, N * N, N, THREE.RGBAFormat); lut.minFilter = lut.magFilter = THREE.LinearFilter; lut.needsUpdate = true;
+  const finalMat = new THREE.ShaderMaterial({ uniforms: { t: { value: sceneRT.texture }, bloom: { value: null }, lut: { value: lut }, strength: { value: 0.3 }, vignette: { value: 0.35 }, saturation: { value: 1.06 } }, vertexShader: FSV,
+    fragmentShader: [
+      'uniform sampler2D t; uniform sampler2D bloom; uniform sampler2D lut; uniform float strength; uniform float vignette; uniform float saturation; varying vec2 vUv;',
+      'vec3 lutLookup(vec3 c) { float s = 32.0; float b = c.b * (s - 1.0); float b0 = floor(b); float b1 = min(b0 + 1.0, s - 1.0);',
+      '  vec2 o = vec2((c.r * (s - 1.0) + 0.5) / (s * s), (c.g * (s - 1.0) + 0.5) / s);',
+      '  vec3 x0 = texture2D(lut, o + vec2(b0 / s, 0.0)).rgb; vec3 x1 = texture2D(lut, o + vec2(b1 / s, 0.0)).rgb; return mix(x0, x1, b - b0); }',
+      'void main(){ vec3 c = texture2D(t, vUv).rgb + texture2D(bloom, vUv).rgb * strength;',
+      '  c = clamp(LinearTosRGB(vec4(c, 1.0)).rgb, 0.0, 1.0);',
+      '  c = lutLookup(c);',
+      '  float l = dot(c, vec3(0.2126,0.7152,0.0722)); c = mix(vec3(l), c, saturation);',
+      '  vec2 d = (vUv-0.5)*vec2(1.0,0.85); c *= 1.0 - smoothstep(0.35,1.05,length(d)*1.4142)*vignette;',
+      '  gl_FragColor = vec4(c, 1.0); }'
+    ].join('\n') });
+  const fxaa2 = new THREE.ShaderMaterial({ uniforms: THREE.UniformsUtils.clone(THREE.FXAAShader.uniforms), vertexShader: THREE.FXAAShader.vertexShader, fragmentShader: THREE.FXAAShader.fragmentShader });
+  fxaa2.uniforms.resolution.value.set(1 / W, 1 / H);
+  function chainP1() {
+    renderer.setRenderTarget(sceneRT); renderer.clear(); renderer.render(scene, cam);
+    prefilter.uniforms.t.value = sceneRT.texture; prefilter.uniforms.px.value.set(0.5 / W, 0.5 / H); fsPass(prefilter, mips[0]);
+    for (let k = 1; k < 5; k++) { down.uniforms.t.value = mips[k - 1].texture; down.uniforms.px.value.set(1 / mips[k - 1].width, 1 / mips[k - 1].height); fsPass(down, mips[k]); }
+    let src = mips[4];
+    for (let k = 3; k >= 0; k--) { up.uniforms.t.value = src.texture; up.uniforms.base.value = mips[k].texture; up.uniforms.px.value.set(0.5 / src.width, 0.5 / src.height); fsPass(up, ups[k]); src = ups[k]; }
+    finalMat.uniforms.bloom.value = ups[0].texture; fsPass(finalMat, finalRT);
+    fxaa2.uniforms.tDiffuse.value = finalRT.texture; fsPass(fxaa2, null);
+  }
+  function mainOnly() { renderer.setRenderTarget(sceneRT); renderer.clear(); renderer.render(scene, cam); }
+  // P2 (WebGL2 only): 4× MSAA main pass (WebGLMultisampleRenderTarget, resolved by three) + the P1 bloom/final pass straight to the screen, no FXAA
+  const msaaRT = renderer.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget ? new THREE.WebGLMultisampleRenderTarget(W, H, Object.assign({}, rtOpts, { samples: 4 })) : null;
+  function chainP2() {
+    renderer.setRenderTarget(msaaRT); renderer.clear(); renderer.render(scene, cam);
+    prefilter.uniforms.t.value = msaaRT.texture; prefilter.uniforms.px.value.set(0.5 / W, 0.5 / H); fsPass(prefilter, mips[0]);
+    for (let k = 1; k < 5; k++) { down.uniforms.t.value = mips[k - 1].texture; down.uniforms.px.value.set(1 / mips[k - 1].width, 1 / mips[k - 1].height); fsPass(down, mips[k]); }
+    let src = mips[4];
+    for (let k = 3; k >= 0; k--) { up.uniforms.t.value = src.texture; up.uniforms.base.value = mips[k].texture; up.uniforms.px.value.set(0.5 / src.width, 0.5 / src.height); fsPass(up, ups[k]); src = ups[k]; }
+    finalMat.uniforms.t.value = msaaRT.texture; finalMat.uniforms.bloom.value = ups[0].texture; fsPass(finalMat, null); finalMat.uniforms.t.value = sceneRT.texture;
+  }
+  // texture upload: 2048² canvas (texImage2D + generateMipmap) vs 2048² ASTC 6×6 with a full mip chain (compressedTexImage2D, void-extent blocks)
+  // draw one 1×1 sample of `tex` into the default framebuffer (so a deferred upload has to finish before the closing sync())
+  let sampleProg = null, sampleBuf = null;
+  function sampleTex(tex) {
+    if (!sampleProg) {
+      const mk = (type, src) => { const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); return sh; };
+      sampleProg = gl.createProgram();
+      gl.attachShader(sampleProg, mk(gl.VERTEX_SHADER, 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }'));
+      gl.attachShader(sampleProg, mk(gl.FRAGMENT_SHADER, 'precision mediump float; uniform sampler2D t; void main(){ gl_FragColor = texture2D(t, vec2(0.5)); }'));
+      gl.bindAttribLocation(sampleProg, 0, 'p'); gl.linkProgram(sampleProg);
+      sampleBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, sampleBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    }
+    renderer.state.reset(); renderer.setRenderTarget(null);
+    gl.viewport(0, 0, 1, 1); gl.disable(gl.DEPTH_TEST); gl.disable(gl.BLEND);
+    gl.useProgram(sampleProg);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(gl.getUniformLocation(sampleProg, 't'), 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, sampleBuf); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  // upload numbers include one sample of the texture; a GL error during the upload → 'fail'
+  function uploadTests() {
+    const out = {};
+    const cv = document.createElement('canvas'); cv.width = cv.height = 2048; const g = cv.getContext('2d');
+    g.fillStyle = '#865'; g.fillRect(0, 0, 2048, 2048); for (let k = 0; k < 3000; k++) { g.fillStyle = 'hsl(' + (k % 360) + ',40%,50%)'; g.fillRect(rnd() * 2048, rnd() * 2048, 30, 10); }
+    const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+    sync(); while (gl.getError()) { /* clear */ } let t0 = performance.now();
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, cv); gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    let err = gl.getError();
+    if (!err) sampleTex(t);
+    sync(); out.rgba2048ms = err ? 'fail' : +(performance.now() - t0).toFixed(2); if (err) out.rgba2048err = '0x' + err.toString(16); gl.deleteTexture(t);
+    const astc = q.get('noastc') === '1' ? null : gl.getExtension('WEBGL_compressed_texture_astc');
+    if (astc) {
+      const t2 = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t2);
+      const blk = BenchCaps.astcBlock([140, 110, 90, 255]);
+      const levels = []; for (let s = 2048; s >= 1; s >>= 1) { const n = Math.ceil(s / 6) * Math.ceil(s / 6); const a = new Uint8Array(n * 16); for (let k = 0; k < n; k++) a.set(blk, k * 16); levels.push([s, a]); }
+      sync(); while (gl.getError()) { /* clear */ } t0 = performance.now();
+      levels.forEach(([s, a], l) => gl.compressedTexImage2D(gl.TEXTURE_2D, l, astc.COMPRESSED_RGBA_ASTC_6x6_KHR, s, s, 0, a));
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+      err = gl.getError();
+      if (!err) sampleTex(t2);
+      sync(); out.astc6x6_2048ms = err ? 'fail' : +(performance.now() - t0).toFixed(2); if (err) out.astcErr = '0x' + err.toString(16); out.astcBytes = levels.reduce((n, l) => n + l[1].length, 0); gl.deleteTexture(t2);
+    } else out.astc6x6_2048ms = 'unsupported';
+    renderer.state.reset();
+    return out;
+  }
+
+  // ---------- timing ----------
+  const px = new Uint8Array(4);
+  function sync() { renderer.setRenderTarget(null); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px); }
+  function time(fn, reps) { sync(); const t0 = performance.now(); for (let k = 0; k < reps; k++) fn(); sync(); return (performance.now() - t0) / reps; }
+  function median(a) { const s = a.slice().sort((x, y) => x - y); return s[s.length >> 1]; }
+  function pct(a, p) { const s = a.slice().sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.floor(s.length * p))]; }
+  const nextFrame = () => new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0)));
+  // one render of fn per requestAnimationFrame for `frames` frames, + a 1-pixel readPixels each frame (so the GPU work is inside the interval)
+  function rafIntervals(fn, frames) {
+    return new Promise((resolve) => {
+      const iv = []; let last = 0, n = 0;
+      function tick(ts) {
+        const t = performance.now();
+        if (last) iv.push(t - last);
+        last = t;
+        if (n++ >= frames) { resolve(iv); return; }
+        fn(); sync();
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+  const r2 = (x) => (x == null || isNaN(x)) ? null : +x.toFixed(2);
+
+  function addRow(r, stdMs) {
+    const tbody = document.querySelector('#tab tbody');
+    const tr = document.createElement('tr');
+    const d = (stdMs != null && !r.post) ? (r.ms - stdMs) : null;
+    tr.innerHTML = '<td>' + r.name + '</td><td>' + r.ms.toFixed(2) + '</td><td>' + (d == null ? '' : (d >= 0 ? '+' : '') + d.toFixed(2)) + '</td><td>' + (r.first ? r.first.toFixed(0) : '') + '</td>';
+    tbody.appendChild(tr);
+  }
+
+  // P0 / P1 / P2 post cost: (a) readPixels-synced loop, (b) requestAnimationFrame intervals (vsync-capped: compare with main-only)
+  async function runPost(results) {
+    wall.material = stdMat(); wall.receiveShadow = true;
+    renderer.shadowMap.autoUpdate = true; mainOnly(); sync(); renderer.shadowMap.autoUpdate = false;
+    await nextFrame(); mainOnly(); sync();
+    const mainS = [], p0S = [], p1S = [], p2S = [];
+    let c0 = performance.now(); composer.render(); sync(); const p0First = performance.now() - c0;
+    c0 = performance.now(); chainP1(); sync(); const p1First = performance.now() - c0;
+    if (msaaRT) { chainP2(); sync(); }
+    for (let r = 0; r < RUNS; r++) { mainS.push(time(mainOnly, REPS)); p0S.push(time(() => composer.render(), REPS)); p1S.push(time(chainP1, REPS)); if (msaaRT) p2S.push(time(chainP2, REPS)); await nextFrame(); }
+    const mainMs = median(mainS);
+    const post = { w: W, h: H, reps: REPS, runs: RUNS, halfFloatRT: half, msaa: !!msaaRT,
+      sync: { mainMs: r2(mainMs), p0Ms: r2(median(p0S) - mainMs), p1Ms: r2(median(p1S) - mainMs), p2Ms: msaaRT ? r2(median(p2S) - mainMs) : null,
+        p0TotalMs: r2(median(p0S)), p1TotalMs: r2(median(p1S)) },
+      firstUse: { p0Ms: r2(p0First), p1Ms: r2(p1First) } };
+    const F = +(q.get('frames') || 60);
+    const ivMain = await rafIntervals(mainOnly, F), iv0 = await rafIntervals(() => composer.render(), F), iv1 = await rafIntervals(chainP1, F);
+    post.raf = { frames: F, mainMed: r2(median(ivMain)), mainP90: r2(pct(ivMain, 0.9)), p0Med: r2(median(iv0)), p0P90: r2(pct(iv0, 0.9)),
+      p1Med: r2(median(iv1)), p1P90: r2(pct(iv1, 0.9)) };
+    post.raf.p0Ms = r2(post.raf.p0Med - post.raf.mainMed); post.raf.p1Ms = r2(post.raf.p1Med - post.raf.mainMed);
+    try { post.upload = uploadTests(); } catch (e) { post.upload = { error: String(e) }; }
+    results.post = post;
+    const rows = [
+      { name: 'main pass only（本体のみ）', ms: mainMs, first: 0, post: true },
+      { name: 'post P0: game chain (UnrealBloom 5 mips + gamma + grade + FXAA), excl. main pass', ms: median(p0S) - mainMs, first: p0First, post: true },
+      { name: 'post P1: dual-filter bloom + 1 final pass (gamma + 32³ LUT + vignette) + FXAA, excl. main pass', ms: median(p1S) - mainMs, first: p1First, post: true }];
+    if (msaaRT) rows.push({ name: 'post P2: 4× MSAA main pass + P1 bloom/final, no FXAA, minus the 1× main pass', ms: median(p2S) - mainMs, first: 0, post: true });
+    rows.push({ name: 'rAF interval: main only / P0 / P1（median, ms）', ms: post.raf.mainMed, first: 0, post: true, extra: post.raf.p0Med + ' / ' + post.raf.p1Med });
+    rows.forEach((r) => { addRow(r, null); if (r.extra) document.querySelector('#tab tbody').lastChild.children[1].textContent += ' / ' + r.extra; });
+    log('post ' + JSON.stringify(post));
+    return post;
+  }
+
+  // shader cases on one facade wall (the original bench)
+  async function runCases(results) {
+    wall.material = stdMat(); renderer.shadowMap.autoUpdate = true; mainOnly(); sync(); renderer.shadowMap.autoUpdate = false;
+    let stdMs = null;
+    const rows = [], mats = [];
+    for (const [name, make, opt] of CASES) {
+      const m = make(); mats.push(m);
+      wall.material = m; wall.receiveShadow = !(opt && opt.receiveShadow === false);
+      await nextFrame();
+      sync(); const c0 = performance.now(); mainOnly(); sync(); const first = performance.now() - c0;
+      rows.push({ name, ms: 0, first, samples: [] });
+    }
+    for (let r = 0; r < RUNS; r++) {
+      for (let k = 0; k < CASES.length; k++) {
+        const opt = CASES[k][2];
+        wall.material = mats[k]; wall.receiveShadow = !(opt && opt.receiveShadow === false);
+        mainOnly(); sync();
+        rows[k].samples.push(time(mainOnly, REPS));
+      }
+      await nextFrame();
+    }
+    for (const row of rows) { row.ms = median(row.samples); if (row.name.indexOf('city facade today') >= 0) stdMs = row.ms; }
+    rows.forEach((r) => addRow(r, stdMs));
+    results.cases = rows.map((r) => ({ name: r.name, ms: r2(r.ms), firstMs: r2(r.first) }));
+    document.getElementById('note').textContent = 'ms = ' + RUNS + ' 回 × ' + REPS + ' 描画の中央値（1 ピクセルの readPixels で同期）。first-use = 新しいマテリアルで最初の描画（コンパイル・リンク・アップロード込み）。rAF = 1 フレーム 1 回描いたときの間隔（画面のリフレッシュで頭打ち）。';
+  }
+
+  window.__threeBench = { runPost, runCases, W, H, webgl2: renderer.capabilities.isWebGL2, gpu };
+  // ?show=<case index>[&cam=oblique]: render that case once through the P1 chain (for a visual check) and stop
+  window.__show = function (k, oblique) {
+    renderer.shadowMap.autoUpdate = true;
+    const c = CASES[k]; wall.material = c[1](); wall.receiveShadow = !(c[2] && c[2].receiveShadow === false);
+    if (oblique === 'mid') { cam.position.set(-5, 4, 8); cam.lookAt(3, 7, 0); } else if (oblique) { cam.position.set(-12, 3, 9); cam.lookAt(4, 7, 0); } else { cam.position.set(0, 6, 14); cam.lookAt(0, 6, 0); }
+    chainP1(); sync(); window.__shown = c[0];
+  };
+  window.dispatchEvent(new Event('three-ready'));
+});
+</script>
+<script>
+// ---------- controller: caps (raw WebGL, no three) + three bench; summary, table and JSON ----------
+(function () {
+  'use strict';
+  const q = new URLSearchParams(location.search);
+  const logEl = document.getElementById('log');
+  window.__benchLog = (s) => { logEl.textContent += s + '\n'; };
+  const stateEl = document.getElementById('state');
+  const setState = (s) => { stateEl.textContent = s; };
+  let threeState = 'loading';   // loading | ready | failed
+  const waiters = [];
+  window.addEventListener('three-ready', () => { threeState = window.__threeBench ? 'ready' : 'failed'; waiters.splice(0).forEach((f) => f()); });
+  window.addEventListener('libs-failed', () => { threeState = 'failed'; window.__threeFailed = 'three.js を読めません: ' + window.__libFailed; waiters.splice(0).forEach((f) => f()); });
+  const threeReady = () => new Promise((r) => { if (threeState !== 'loading') r(); else waiters.push(r); });
+
+  const LABELS = [
+    ['astc4x4', 'ASTC 4×4（2D）'], ['astc6x6', 'ASTC 6×6（2D）'], ['astc4x4srgb', 'ASTC 4×4 sRGB（2D）'],
+    ['astcArray', 'ASTC 4×4 2D 配列（compressedTexImage3D）'], ['astcArray6x6Storage', 'ASTC 6×6 2D 配列（texStorage3D）'],
+    ['s3tcArray', 'S3TC 2D 配列（経路の確認）'], ['rgba8Array', 'RGBA8 2D 配列'],
+    ['halfLinear', 'RGBA16F 線形フィルタ'], ['halfRender', 'RGBA16F に描画'], ['floatTargets', '浮動小数の描画先（color_buffer_float）'],
+    ['parallelCompile', '並列コンパイル（KHR_parallel_shader_compile）'], ['timerQuery', 'GPU タイマー（EXT_disjoint_timer_query）']
+  ];
+  const ST = { ok: ['○ 可', 'ok'], fail: ['× 不可', 'ng'], unsupported: ['— 未対応', 'na'], error: ['× エラー', 'ng'] };
+  const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+
+  function detail(o) {
+    if (!o) return '';
+    const c = {}; for (const k in o) if (k !== 'status') c[k] = o[k];
+    return esc(JSON.stringify(c)).slice(0, 400);
+  }
+  function capsTable(caps) {
+    const tb = document.querySelector('#caps tbody'); tb.innerHTML = '';
+    const add = (label, key, st, det) => {
+      const tr = document.createElement('tr'); const s = ST[st] || [st == null ? '' : String(st), ''];
+      tr.innerHTML = '<td>' + esc(label) + '</td><td class="k">' + esc(key) + '</td><td class="st ' + s[1] + '">' + esc(s[0]) + '</td><td class="k det">' + det + '</td>';
+      tb.appendChild(tr);
+    };
+    for (const [k, l] of LABELS) { const o = caps[k]; add(l, k, o ? o.status : null, detail(o)); }
+    if (caps.compile) for (const w of ['facade', 'vat']) {
+      const r = caps.compile[w]; if (!r) continue;
+      add(w === 'facade' ? 'コンパイル+リンク: ファサードの最悪シェーダー' : 'コンパイル+リンク: VAT + インスタンス', 'compile.' + w, r.status,
+        esc('初回 ' + r.firstTotalMs + ' ms · 中央値 ' + r.medianTotalMs + ' ms（link ' + r.medianLinkMs + '）' +
+          (r.parallelMedianCompleteMs != null ? ' · 並列: 完了 ' + r.parallelMedianCompleteMs + ' ms / 止まる ' + r.parallelMedianBlockingMs + ' ms' : '') +
+          (r.log ? ' · ' + r.log : '')));
+    }
+    if (caps.limits) for (const k in caps.limits) add('上限', 'limits.' + k, null, esc(caps.limits[k] == null ? 'n/a' : JSON.stringify(caps.limits[k])));
+  }
+
+  function tile(label, key, value, cls, wide) {
+    return '<div class="tile' + (wide ? ' wide' : '') + '"><div class="l">' + esc(label) + '</div><div class="v ' + (cls || '') + '">' + esc(value) + '</div><div class="k2">' + esc(key) + '</div></div>';
+  }
+  function stTile(label, key, o) { const s = ST[o && o.status] || ['?', 'na']; return tile(label, key, s[0], s[1]); }
+  function summary(R) {
+    const c = R.caps || {}, p = R.post || {};
+    const h = [];
+    h.push(tile('端末（device）', 'info', ((c.info && (c.info.unmaskedRenderer || c.info.renderer)) || '?') + (c.info ? ' · DPR ' + c.info.dpr + ' · ' + c.info.screen + ' · CPU ' + (c.info.hardwareConcurrency || '?') + (c.info.deviceMemory ? ' · ' + c.info.deviceMemory + ' GB' : '') : ''), '', true));
+    h.push(tile('WebGL', 'info.webgl', c.info ? 'WebGL' + c.info.webgl : '?', c.info && c.info.webgl === 2 ? 'ok' : 'ng'));
+    h.push(stTile('ASTC 4×4', 'astc4x4', c.astc4x4));
+    h.push(stTile('ASTC 6×6', 'astc6x6', c.astc6x6));
+    h.push(stTile('ASTC 配列', 'astcArray', c.astcArray));
+    h.push(stTile('RGBA16F 線形', 'halfLinear', c.halfLinear));
+    h.push(stTile('RGBA16F 描画', 'halfRender', c.halfRender));
+    h.push(stTile('float 描画先', 'floatTargets', c.floatTargets));
+    h.push(stTile('並列コンパイル', 'parallelCompile', c.parallelCompile));
+    h.push(stTile('GPU タイマー', 'timerQuery', c.timerQuery));
+    const cf = c.compile && c.compile.facade, cv = c.compile && c.compile.vat;
+    h.push(tile('ファサード compile', 'compile.facade.firstTotalMs', cf && cf.firstTotalMs != null ? cf.firstTotalMs + ' ms' : (cf ? '× 失敗' : '…'), cf && cf.status === 'ok' ? '' : 'ng'));
+    h.push(tile('VAT compile', 'compile.vat.firstTotalMs', cv && cv.firstTotalMs != null ? cv.firstTotalMs + ' ms' : (cv ? '× 失敗' : '…'), cv && cv.status === 'ok' ? '' : 'ng'));
+    const L = c.limits || {};
+    h.push(tile('テクスチャユニット', 'limits.MAX_TEXTURE_IMAGE_UNITS', L.MAX_TEXTURE_IMAGE_UNITS != null ? L.MAX_TEXTURE_IMAGE_UNITS : '?', ''));
+    h.push(tile('varying / attrib', 'limits.MAX_VARYING_VECTORS', (L.MAX_VARYING_VECTORS != null ? L.MAX_VARYING_VECTORS : '?') + ' / ' + (L.MAX_VERTEX_ATTRIBS != null ? L.MAX_VERTEX_ATTRIBS : '?'), ''));
+    h.push(tile('frag uniform', 'limits.MAX_FRAGMENT_UNIFORM_VECTORS', L.MAX_FRAGMENT_UNIFORM_VECTORS != null ? L.MAX_FRAGMENT_UNIFORM_VECTORS : '?', ''));
+    h.push(tile('最大テクスチャ / 配列', 'limits.MAX_TEXTURE_SIZE', (L.MAX_TEXTURE_SIZE || '?') + ' / ' + (L.MAX_ARRAY_TEXTURE_LAYERS != null ? L.MAX_ARRAY_TEXTURE_LAYERS : 'n/a'), ''));
+    if (p.sync) {
+      h.push(tile('後処理 P0（今）', 'post.sync.p0Ms', p.sync.p0Ms + ' ms', ''));
+      h.push(tile('後処理 P1（1 パス）', 'post.sync.p1Ms', p.sync.p1Ms + ' ms', p.sync.p1Ms <= p.sync.p0Ms ? 'ok' : ''));
+      h.push(tile('rAF 本体 / P0 / P1', 'post.raf', p.raf.mainMed + ' / ' + p.raf.p0Med + ' / ' + p.raf.p1Med, ''));
+    } else if (R.threeError) h.push(tile('後処理', 'post', '× ' + R.threeError, 'ng'));
+    h.push(tile('エラー', 'errors', (R.errors || []).length ? (R.errors || []).length + ' 件' : 'なし', (R.errors || []).length ? 'ng' : 'ok'));
+    document.getElementById('summary').innerHTML = h.join('');
+  }
+  function showJson(R) { document.getElementById('json').textContent = JSON.stringify(R, null, 1); }
+
+  let running = false;
+  async function runAll(capsOnly) {
+    if (running) return; running = true;
+    document.getElementById('go').disabled = document.getElementById('goCaps').disabled = true;
+    const R = { page: 'render-bench', v: 2, time: new Date().toISOString(), url: location.search, done: false, errors: [] };
+    try { await Promise.race([window.__benchDeviceReady, new Promise((r) => setTimeout(r, 3000))]); } catch (e) { /* なし */ }
+    R.device = window.__benchDevice || null;
+    window.__benchResult = null;
+    try {
+      setState('機能テスト中…（caps）');
+      await new Promise((r) => setTimeout(r, 50));
+      R.caps = await BenchCaps.run({ gl1: q.get('webgl1') === '1', noAstc: q.get('noastc') === '1', compileReps: +(q.get('compileReps') || 3) });
+      (R.caps.errors || []).forEach((e) => R.errors.push('caps ' + e));
+    } catch (e) { R.errors.push('caps: ' + (e && e.message || e)); }
+    try { capsTable(R.caps || {}); } catch (e) { R.errors.push('table: ' + e); }
+    summary(R); showJson(R);
+    window.__capsResult = R.caps;
+    if (!capsOnly) {
+      setState('three.js を準備中…');
+      await threeReady();
+      if (threeState !== 'ready') { R.threeError = window.__threeFailed || 'three'; R.errors.push(R.threeError); }
+      else {
+        const TB = window.__threeBench;
+        R.three = { w: TB.W, h: TB.H, webgl2: TB.webgl2, gpu: TB.gpu };
+        try { setState('後処理 P0 / P1 を測定中…'); await TB.runPost(R); } catch (e) { R.errors.push('post: ' + (e && e.message || e)); }
+        summary(R); showJson(R);
+        if (q.get('cases') !== '0') {
+          try { setState('シェーダーの比較を測定中…'); await TB.runCases(R); } catch (e) { R.errors.push('cases: ' + (e && e.message || e)); }
+        }
+      }
+    }
+    (window.__benchErrors || []).forEach((e) => R.errors.push('page: ' + e));
+    R.done = true;
+    summary(R); showJson(R);
+    setState(R.errors.length ? '完了（エラー ' + R.errors.length + ' 件。JSON を見てください）' : '完了 — 「コピー」で結果を送ってください');
+    window.__benchResult = R;
+    running = false;
+    document.getElementById('go').disabled = document.getElementById('goCaps').disabled = false;
+  }
+  document.getElementById('go').onclick = () => runAll(false);
+  document.getElementById('goCaps').onclick = () => runAll(true);
+  document.getElementById('copy').onclick = () => {
+    const txt = document.getElementById('json').textContent;
+    const done = (m) => { document.getElementById('copied').textContent = ' ' + m; };
+    const fallback = () => {
+      try {
+        const ta = document.createElement('textarea'); ta.value = txt; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, txt.length);
+        const ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok ? 'コピーしました' : 'コピーできません（長押しで選択してください）');
+      } catch (e) { done('コピーできません'); }
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(() => done('コピーしました'), fallback);
+    else fallback();
+  };
+  window.__runBench = runAll;
+  const start = () => {
+    if (q.get('show') != null) { threeReady().then(() => { if (window.__show) window.__show(+q.get('show'), q.get('cam') === 'mid' ? 'mid' : q.get('cam') === 'oblique'); }); return; }
+    if (q.get('auto') === '1') runAll(q.get('caps') === '1');
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+</body>
+</html>

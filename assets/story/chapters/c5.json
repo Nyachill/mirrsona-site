@@ -1,0 +1,586 @@
+{
+ "id": "c5",
+ "v": 1,
+ "needs": 2,
+ "level": "midtown",
+ "city": "midtown",
+ "title": "第5章　甲板の夕焼け",
+ "en": "Sunset Deck",
+ "caption": [
+  "封鎖 6 日目　18:00",
+  "空母"
+ ],
+ "weather": "clear",
+ "systems": {
+  "ambient": 0,
+  "airDefense": true,
+  "jets": false,
+  "boats": false,
+  "helis": false,
+  "cityVehicles": false
+ },
+ "airDefense": {
+  "sites": [
+   [
+    -1896,
+    -265
+   ],
+   [
+    -1719,
+    -507
+   ],
+   [
+    -1611,
+    -107
+   ]
+  ],
+  "cfg": {
+   "respawn": 1000000000,
+   "carrierSafe": 150
+  }
+ },
+ "loadout": {
+  "slots": [
+   "rifle",
+   null,
+   "pistol"
+  ],
+  "ammo": {
+   "556": 300,
+   "9mm": 45
+  },
+  "meds": {
+   "bandage": 2,
+   "medkit": 1
+  },
+  "vest": true
+ },
+ "zones": {
+  "dark": [
+   "carrier",
+   "hy",
+   "un",
+   "roosevelt",
+   "lic",
+   "boathouse",
+   "skyhigh"
+  ]
+ },
+ "start": {
+  "p": [
+   -2120,
+   15,
+   -345
+  ],
+  "yaw": 90
+ },
+ "actors": {
+  "ren": {
+   "kind": "ally",
+   "name": "レン",
+   "look": "crew",
+   "weapon": "rifle",
+   "at": "ren0",
+   "fire": "tagged"
+  },
+  "no7": {
+   "kind": "vtol",
+   "name": "七号機",
+   "at": "deck_pad"
+  }
+ },
+ "anchors": {
+  "ren0": {
+   "p": [
+    -2124,
+    15,
+    -340
+   ],
+   "ground": true
+  },
+  "deck_pad": {
+   "p": [
+    -2291,
+    15,
+    -353
+   ],
+   "yaw": 0
+  },
+  "d1": {
+   "p": [
+    -2180,
+    15,
+    -336
+   ],
+   "ground": true
+  },
+  "d2": {
+   "p": [
+    -2205,
+    15,
+    -362
+   ],
+   "ground": true
+  },
+  "d3": {
+   "p": [
+    -2230,
+    15,
+    -340
+   ],
+   "ground": true
+  },
+  "d4": {
+   "p": [
+    -2250,
+    15,
+    -360
+   ],
+   "ground": true
+  },
+  "w1": {
+   "p": [
+    -2255,
+    15,
+    -343
+   ],
+   "ground": true
+  },
+  "w2": {
+   "p": [
+    -2160,
+    15,
+    -361
+   ],
+   "ground": true
+  },
+  "ren_pad": {
+   "p": [
+    -2262,
+    15,
+    -350
+   ],
+   "ground": true
+  },
+  "aa1": {
+   "p": [
+    -1896,
+    39.75,
+    -265
+   ]
+  },
+  "aa2": {
+   "p": [
+    -1719,
+    32.55,
+    -507
+   ]
+  },
+  "aa3": {
+   "p": [
+    -1611,
+    32.55,
+    -107
+   ]
+  },
+  "cam_r0": {
+   "p": [
+    -2150,
+    40,
+    -300
+   ]
+  },
+  "cam_r1": {
+   "p": [
+    -2120,
+    90,
+    -260
+   ]
+  },
+  "carrier_look": {
+   "p": [
+    -2230,
+    15,
+    -350
+   ]
+  }
+ },
+ "groups": {
+  "deck": {
+   "at": [
+    "d1",
+    "d2",
+    "d3",
+    "d4"
+   ],
+   "n": 4,
+   "roles": [
+    "guard",
+    "hunt",
+    "hunt",
+    "guard"
+   ],
+   "look": "veil",
+   "tag": "deck",
+   "acc": 0.75
+  },
+  "deckwave": {
+   "at": [
+    "w1",
+    "w2"
+   ],
+   "n": 2,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "deckwave",
+   "waves": 2,
+   "gap": 10,
+   "acc": 0.7
+  }
+ },
+ "interact": {
+  "intel_c5": {
+   "at": {
+    "p": [
+     -2140,
+     15,
+     -330
+    ],
+    "ground": true
+   },
+   "label": "飛行記録",
+   "verb": "調べる",
+   "intel": "c5_1",
+   "always": true
+  }
+ },
+ "fail": [
+  [
+   "playerDead"
+  ],
+  [
+   "vehicleDead",
+   "no7"
+  ]
+ ],
+ "lines": {
+  "c5_deck": [
+   [
+    "mio",
+    "空母の甲板。\n七号機は艦首に置いた"
+   ],
+   [
+    "ren",
+    "ヴェールが四人。\n取り返すぞ"
+   ]
+  ],
+  "c5_wave": [
+   [
+    "ren",
+    "艦橋から増援だ"
+   ]
+  ],
+  "c5_board": [
+   [
+    "mio",
+    "ルイ、操縦席へ。\n私は砲手に回る"
+   ],
+   [
+    "genji",
+    "おいおい、新入りが\n操縦かよ"
+   ]
+  ],
+  "c5_fly": [
+   [
+    "mio",
+    "川沿いの屋根に\n対空陣地が三つ"
+   ],
+   [
+    "genji",
+    "ミサイルは自動。\n爆弾は低く遅く"
+   ]
+  ],
+  "c5_aa": [
+   [
+    "genji",
+    "一つ黙った！"
+   ]
+  ],
+  "c5_land": [
+   [
+    "mio",
+    "全部黙った。\n甲板に戻って"
+   ],
+   [
+    "ren",
+    "……悪くない腕だ"
+   ]
+  ],
+  "c5_relit": [
+   [
+    "mio",
+    "空母の灯が戻る。\n夕焼けがきれい"
+   ],
+   [
+    "genji",
+    "今夜はカレーだ。\n新入り、大盛りな"
+   ]
+  ],
+  "c5_seat": [
+   [
+    "mio",
+    "前の席で「操縦する」"
+   ]
+  ]
+ },
+ "intel": [
+  {
+   "id": "c5_1",
+   "title": "七号機の飛行記録",
+   "body": "副操縦士：白瀬 カイ（R-01）\n最後の飛行：封鎖の 1 年前。\n記録はここで途切れている。"
+  }
+ ],
+ "shots": {
+  "c5_relit": {
+   "letterbox": true,
+   "hold": 1.5,
+   "pre": [
+    [
+     "fade",
+     0,
+     0.8
+    ]
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "p": "cam_r0",
+     "look": "carrier_look",
+     "fov": 52
+    },
+    {
+     "t": 8,
+     "p": "cam_r1",
+     "look": "carrier_look",
+     "fov": 42,
+     "ease": "inOut"
+    }
+   ],
+   "lines": "c5_relit",
+   "relight": {
+    "zone": "carrier",
+    "at": 1.2
+   }
+  }
+ },
+ "steps": [
+  {
+   "id": "deck",
+   "obj": "甲板のヴェール兵を倒す",
+   "count": [
+    "alive",
+    "deck"
+   ],
+   "do": [
+    [
+     "radio",
+     "c5_deck"
+    ],
+    [
+     "spawn",
+     "deck"
+    ],
+    [
+     "ally",
+     "ren",
+     "follow"
+    ]
+   ],
+   "until": [
+    "dead",
+    "deck"
+   ]
+  },
+  {
+   "id": "wave",
+   "obj": "増援を倒す",
+   "count": [
+    "alive",
+    "deckwave"
+   ],
+   "do": [
+    [
+     "spawn",
+     "deckwave"
+    ],
+    [
+     "radio",
+     "c5_wave"
+    ]
+   ],
+   "until": [
+    "dead",
+    "deckwave"
+   ]
+  },
+  {
+   "id": "board",
+   "checkpoint": true,
+   "obj": "七号機のランプから乗る",
+   "mark": [
+    "@no7.ramp"
+   ],
+   "do": [
+    [
+     "vtol",
+     "ramp",
+     true
+    ],
+    [
+     "vtol",
+     "board"
+    ],
+    [
+     "radio",
+     "c5_board"
+    ],
+    [
+     "ally",
+     "ren",
+     "board",
+     "@no7.ramp"
+    ]
+   ],
+   "until": [
+    "boarded"
+   ]
+  },
+  {
+   "id": "cockpit",
+   "obj": "操縦席に座る",
+   "do": [
+    [
+     "vtol",
+     "seats",
+     true
+    ],
+    [
+     "radio",
+     "c5_seat"
+    ]
+   ],
+   "until": [
+    "inVehicle",
+    "no7"
+   ]
+  },
+  {
+   "id": "aa",
+   "checkpoint": true,
+   "obj": "対空陣地を黙らせる",
+   "count": [
+    "counter",
+    "aa",
+    3
+   ],
+   "mark": [
+    "aa1",
+    "aa2",
+    "aa3"
+   ],
+   "do": [
+    [
+     "vtol",
+     "seats",
+     true
+    ],
+    [
+     "vtol",
+     "ramp",
+     false
+    ],
+    [
+     "vtol",
+     "pilot"
+    ],
+    [
+     "radio",
+     "c5_fly"
+    ]
+   ],
+   "on": [
+    {
+     "when": [
+      "counter",
+      "aa",
+      1
+     ],
+     "do": [
+      [
+       "radio",
+       "c5_aa"
+      ]
+     ]
+    }
+   ],
+   "until": [
+    "counter",
+    "aa",
+    3
+   ]
+  },
+  {
+   "id": "land",
+   "checkpoint": true,
+   "obj": "空母の甲板に降りる",
+   "mark": [
+    "deck_pad"
+   ],
+   "do": [
+    [
+     "radio",
+     "c5_land"
+    ]
+   ],
+   "until": [
+    "landed",
+    "no7",
+    "deck_pad",
+    20
+   ]
+  },
+  {
+   "id": "relit",
+   "do": [
+    [
+     "cine",
+     "c5_relit"
+    ]
+   ],
+   "until": [
+    "done",
+    "c5_relit"
+   ]
+  },
+  {
+   "id": "fin",
+   "do": [
+    [
+     "end",
+     "success"
+    ]
+   ],
+   "until": [
+    "always"
+   ]
+  }
+ ],
+ "rewards": {
+  "relight": "carrier",
+  "unlock": [],
+  "next": null
+ },
+ "rating": {
+  "par": 720
+ }
+}

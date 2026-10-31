@@ -1,0 +1,1031 @@
+{
+ "id": "c2",
+ "v": 1,
+ "needs": 1,
+ "level": "midtown",
+ "city": "midtown",
+ "title": "第2章　図書館の灯",
+ "en": "Library Lights",
+ "caption": [
+  "封鎖 3 日目　17:48",
+  "図書館の分館・ブライアントパーク"
+ ],
+ "weather": "cloudy",
+ "systems": {
+  "ambient": 0,
+  "airDefense": false,
+  "jets": false,
+  "boats": false,
+  "helis": false,
+  "cityVehicles": false
+ },
+ "loadout": {
+  "slots": [
+   "rifle",
+   null,
+   "pistol"
+  ],
+  "ammo": {
+   "556": 220,
+   "9mm": 60
+  },
+  "meds": {
+   "bandage": 3,
+   "medkit": 1
+  },
+  "vest": true
+ },
+ "zones": {
+  "dark": [
+   "gct",
+   "library",
+   "times",
+   "rock",
+   "hy",
+   "carrier",
+   "un",
+   "roosevelt",
+   "lic",
+   "boathouse",
+   "skyhigh"
+  ]
+ },
+ "start": {
+  "p": [
+   -358,
+   0,
+   154
+  ],
+  "yaw": -60
+ },
+ "anchors": {
+  "ren0": {
+   "p": [
+    -360,
+    0,
+    150
+   ],
+   "ground": true
+  },
+  "no7_drop": {
+   "p": [
+    -380,
+    26,
+    150
+   ]
+  },
+  "no7_away": {
+   "p": [
+    -392,
+    110,
+    120
+   ]
+  },
+  "charge": {
+   "p": [
+    -298,
+    0.1,
+    172.4
+   ],
+   "ground": true
+  },
+  "ren_door": {
+   "p": [
+    -302,
+    0.1,
+    166
+   ],
+   "ground": true
+  },
+  "rr": {
+   "p": [
+    -290,
+    0.1,
+    187
+   ],
+   "ground": true
+  },
+  "civ1_at": {
+   "p": [
+    -292,
+    0.1,
+    191
+   ],
+   "ground": true
+  },
+  "civ2_at": {
+   "p": [
+    -284,
+    0.1,
+    184
+   ],
+   "ground": true
+  },
+  "civ3_at": {
+   "p": [
+    -298,
+    0.1,
+    180
+   ],
+   "ground": true
+  },
+  "ren_rr": {
+   "p": [
+    -300,
+    0.1,
+    186
+   ],
+   "ground": true
+  },
+  "w1": {
+   "p": [
+    -276,
+    0.1,
+    178
+   ],
+   "ground": true
+  },
+  "w2": {
+   "p": [
+    -276,
+    0.1,
+    196
+   ],
+   "ground": true
+  },
+  "w3": {
+   "p": [
+    -300,
+    0.1,
+    196
+   ],
+   "ground": true
+  },
+  "w4": {
+   "p": [
+    -286,
+    0.1,
+    197
+   ],
+   "ground": true
+  },
+  "lz": {
+   "p": [
+    -392,
+    0,
+    88
+   ],
+   "r": 34
+  },
+  "c2_cover": {
+   "cover": [
+    [
+     -289,
+     0.1,
+     170
+    ],
+    [
+     -310,
+     0,
+     160
+    ],
+    [
+     -335,
+     0,
+     140
+    ],
+    [
+     -360,
+     0,
+     115
+    ],
+    [
+     -390,
+     0,
+     92
+    ]
+   ]
+  },
+  "e1": {
+   "p": [
+    -345,
+    0,
+    150
+   ],
+   "ground": true
+  },
+  "e2": {
+   "p": [
+    -380,
+    0,
+    128
+   ],
+   "ground": true
+  },
+  "apc_pt": {
+   "p": [
+    -436,
+    0,
+    64
+   ],
+   "yaw": 90,
+   "ground": true
+  },
+  "ap1": {
+   "p": [
+    -432,
+    0,
+    56
+   ],
+   "ground": true
+  },
+  "ap2": {
+   "p": [
+    -440,
+    0,
+    74
+   ],
+   "ground": true
+  },
+  "hz1": {
+   "p": [
+    -440,
+    0,
+    40
+   ],
+   "ground": true
+  },
+  "hz2": {
+   "p": [
+    -440,
+    0,
+    120
+   ],
+   "ground": true
+  },
+  "hz3": {
+   "p": [
+    -350,
+    0,
+    130
+   ],
+   "ground": true
+  },
+  "ren_lz": {
+   "p": [
+    -386,
+    0,
+    92
+   ],
+   "ground": true
+  },
+  "lz_land": {
+   "p": [
+    -392,
+    0.05,
+    83
+   ],
+   "yaw": 90
+  },
+  "lz_hover": {
+   "p": [
+    -392,
+    30,
+    83
+   ],
+   "yaw": 90
+  },
+  "cam_r0": {
+   "p": [
+    -400,
+    28,
+    110
+   ]
+  },
+  "cam_r1": {
+   "p": [
+    -372,
+    52,
+    128
+   ]
+  },
+  "lib_look": {
+   "landmark": "library",
+   "d": [
+    0,
+    14,
+    0
+   ]
+  }
+ },
+ "actors": {
+  "ren": {
+   "kind": "ally",
+   "name": "レン",
+   "look": "crew",
+   "weapon": "rifle",
+   "at": "ren0",
+   "fire": "tagged"
+  },
+  "civ1": {
+   "kind": "civ",
+   "name": "司書",
+   "look": "civ",
+   "at": "civ1_at"
+  },
+  "civ2": {
+   "kind": "civ",
+   "name": "学生",
+   "look": "civ",
+   "at": "civ2_at"
+  },
+  "civ3": {
+   "kind": "civ",
+   "name": "警備員",
+   "look": "civ",
+   "at": "civ3_at"
+  },
+  "no7": {
+   "kind": "vtol",
+   "name": "七号機",
+   "at": "no7_drop",
+   "air": true
+  }
+ },
+ "groups": {
+  "door": {
+   "at": [
+    "ren_door"
+   ],
+   "n": 1,
+   "role": "guard",
+   "look": "veil",
+   "tag": "door",
+   "acc": 0.7
+  },
+  "win": {
+   "at": [
+    "w1",
+    "w2",
+    "w3",
+    "w4"
+   ],
+   "n": 4,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "win",
+   "acc": 0.75
+  },
+  "esc": {
+   "at": [
+    "e1",
+    "e2"
+   ],
+   "n": 2,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "esc",
+   "acc": 0.7
+  },
+  "apcg": {
+   "at": [
+    "ap1",
+    "ap2"
+   ],
+   "n": 2,
+   "role": "guard",
+   "look": "veil",
+   "tag": "apcg",
+   "acc": 0.7
+  },
+  "hz": {
+   "at": [
+    "hz1",
+    "hz2",
+    "hz3"
+   ],
+   "n": 3,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "hz",
+   "waves": 3,
+   "gap": 16,
+   "acc": 0.7
+  }
+ },
+ "interact": {
+  "charge": {
+   "at": "charge",
+   "label": "南の壁",
+   "verb": "爆薬を仕掛ける",
+   "hold": 3,
+   "cancelOnHit": true
+  },
+  "civ1": {
+   "at": "@civ1",
+   "label": "司書",
+   "verb": "話す",
+   "radius": 2.6
+  },
+  "civ2": {
+   "at": "@civ2",
+   "label": "学生",
+   "verb": "話す",
+   "radius": 2.6
+  },
+  "civ3": {
+   "at": "@civ3",
+   "label": "警備員",
+   "verb": "話す",
+   "radius": 2.6
+  },
+  "intel_c2": {
+   "at": {
+    "p": [
+     -280,
+     0.1,
+     192
+    ],
+    "ground": true
+   },
+   "label": "名簿",
+   "verb": "調べる",
+   "intel": "c2_1",
+   "always": true
+  }
+ },
+ "steps": [
+  {
+   "id": "drop",
+   "obj": "図書館の通用口へ",
+   "mark": [
+    "charge"
+   ],
+   "do": [
+    [
+     "vtol",
+     "hover",
+     "no7_drop",
+     -90,
+     true
+    ],
+    [
+     "radio",
+     "c2_drop"
+    ],
+    [
+     "ally",
+     "ren",
+     "lead",
+     "ren_door"
+    ],
+    [
+     "spawn",
+     "door"
+    ],
+    [
+     "wait",
+     4
+    ],
+    [
+     "vtol",
+     "hover",
+     "no7_away",
+     -60
+    ]
+   ],
+   "until": [
+    "all",
+    [
+     "near",
+     "charge",
+     4
+    ],
+    [
+     "dead",
+     "door"
+    ]
+   ]
+  },
+  {
+   "id": "plant",
+   "obj": "爆薬を仕掛ける（3 秒）",
+   "count": [
+    "held",
+    "charge"
+   ],
+   "mark": [
+    "charge"
+   ],
+   "do": [
+    [
+     "radio",
+     "c2_plant"
+    ]
+   ],
+   "until": [
+    "held",
+    "charge"
+   ]
+  },
+  {
+   "id": "blast",
+   "obj": "離れろ！",
+   "do": [
+    [
+     "hint",
+     "離れろ！",
+     2
+    ],
+    [
+     "wait",
+     2.5
+    ],
+    [
+     "breach",
+     "charge"
+    ],
+    [
+     "radio",
+     "c2_in"
+    ]
+   ],
+   "until": [
+    "time",
+    3.2
+   ]
+  },
+  {
+   "id": "search",
+   "checkpoint": true,
+   "obj": "閲覧室で市民を見つける",
+   "mark": [
+    "civ1",
+    "civ2",
+    "civ3"
+   ],
+   "do": [
+    [
+     "ally",
+     "ren",
+     "lead",
+     "ren_rr"
+    ],
+    [
+     "wait",
+     6
+    ],
+    [
+     "spawn",
+     "win"
+    ],
+    [
+     "radio",
+     "c2_win"
+    ]
+   ],
+   "until": [
+    "all",
+    [
+     "interact",
+     "civ1"
+    ],
+    [
+     "interact",
+     "civ2"
+    ],
+    [
+     "interact",
+     "civ3"
+    ],
+    [
+     "dead",
+     "win"
+    ]
+   ]
+  },
+  {
+   "id": "escort",
+   "checkpoint": true,
+   "obj": "市民を公園まで連れて行く",
+   "mark": [
+    "@civ1",
+    "@civ2",
+    "@civ3"
+   ],
+   "do": [
+    [
+     "radio",
+     "c2_escort"
+    ],
+    [
+     "civ",
+     "civ1",
+     "hide",
+     "c2_cover"
+    ],
+    [
+     "civ",
+     "civ2",
+     "hide",
+     "c2_cover"
+    ],
+    [
+     "civ",
+     "civ3",
+     "hide",
+     "c2_cover"
+    ],
+    [
+     "ally",
+     "ren",
+     "follow"
+    ],
+    [
+     "spawn",
+     "esc"
+    ]
+   ],
+   "until": [
+    "all",
+    [
+     "actorNear",
+     "civ1",
+     "lz",
+     12
+    ],
+    [
+     "actorNear",
+     "civ2",
+     "lz",
+     12
+    ],
+    [
+     "actorNear",
+     "civ3",
+     "lz",
+     12
+    ]
+   ]
+  },
+  {
+   "id": "strike",
+   "obj": "支援射撃で装甲車を止める",
+   "count": [
+    "strike"
+   ],
+   "do": [
+    [
+     "vehicle",
+     "spawn",
+     "apc",
+     "apc_pt",
+     "apc_c2"
+    ],
+    [
+     "spawn",
+     "apcg"
+    ],
+    [
+     "support",
+     2
+    ],
+    [
+     "radio",
+     "c2_strike"
+    ],
+    [
+     "vtol",
+     "hover",
+     "lz_hover",
+     90
+    ]
+   ],
+   "until": [
+    "vehicleDead",
+    "apc_c2"
+   ]
+  },
+  {
+   "id": "hold",
+   "checkpoint": true,
+   "obj": "七号機が降りるまで公園を守る",
+   "do": [
+    [
+     "area",
+     "lz",
+     46
+    ],
+    [
+     "ally",
+     "ren",
+     "hold",
+     "ren_lz"
+    ],
+    [
+     "spawn",
+     "hz"
+    ],
+    [
+     "timer",
+     90
+    ],
+    [
+     "radio",
+     "c2_hold"
+    ]
+   ],
+   "on": [
+    {
+     "when": [
+      "time",
+      30
+     ],
+     "do": [
+      [
+       "radio",
+       "c2_r07"
+      ]
+     ]
+    }
+   ],
+   "fail": [
+    [
+     "leave",
+     "lz",
+     140
+    ]
+   ],
+   "until": [
+    "timerDone"
+   ]
+  },
+  {
+   "id": "board",
+   "obj": "市民を七号機に乗せる",
+   "count": [
+    "civBoarded",
+    3
+   ],
+   "mark": [
+    "@no7.ramp"
+   ],
+   "do": [
+    [
+     "area",
+     "off"
+    ],
+    [
+     "support",
+     "off"
+    ],
+    [
+     "despawn",
+     "hz"
+    ],
+    [
+     "despawn",
+     "win"
+    ],
+    [
+     "despawn",
+     "esc"
+    ],
+    [
+     "despawn",
+     "apcg"
+    ],
+    [
+     "vtol",
+     "hover",
+     "lz_land",
+     90
+    ],
+    [
+     "vtol",
+     "ramp",
+     true
+    ],
+    [
+     "vtol",
+     "board"
+    ],
+    [
+     "radio",
+     "c2_board"
+    ],
+    [
+     "civ",
+     "civ1",
+     "board",
+     "@no7.ramp"
+    ],
+    [
+     "civ",
+     "civ2",
+     "board",
+     "@no7.ramp"
+    ],
+    [
+     "civ",
+     "civ3",
+     "board",
+     "@no7.ramp"
+    ],
+    [
+     "ally",
+     "ren",
+     "board",
+     "@no7.ramp"
+    ]
+   ],
+   "until": [
+    "all",
+    [
+     "civBoarded",
+     3
+    ],
+    [
+     "boarded"
+    ]
+   ]
+  },
+  {
+   "id": "relit",
+   "do": [
+    [
+     "cine",
+     "c2_relit"
+    ]
+   ],
+   "until": [
+    "done",
+    "c2_relit"
+   ]
+  },
+  {
+   "id": "fin",
+   "do": [
+    [
+     "end",
+     "success"
+    ]
+   ],
+   "until": [
+    "never"
+   ]
+  }
+ ],
+ "fail": [
+  [
+   "playerDead"
+  ]
+ ],
+ "shots": {
+  "c2_relit": {
+   "letterbox": true,
+   "hold": 1.5,
+   "pre": [
+    [
+     "fade",
+     0,
+     0.8
+    ]
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "p": "cam_r0",
+     "look": "lib_look",
+     "fov": 52
+    },
+    {
+     "t": 8,
+     "p": "cam_r1",
+     "look": "lib_look",
+     "fov": 42,
+     "ease": "inOut"
+    }
+   ],
+   "lines": "c2_relit",
+   "relight": {
+    "zone": "library",
+    "at": 1.2
+   }
+  }
+ },
+ "lines": {
+  "c2_drop": [
+   [
+    "mio",
+    "図書館の分館に市民が三人。\n正面の扉は封鎖されてる"
+   ],
+   [
+    "ren",
+    "横の壁を破る。見張りが一人"
+   ]
+  ],
+  "c2_plant": [
+   [
+    "genji",
+    "爆薬は 3 秒で据わる。\n撃たれたらやり直しだ"
+   ]
+  ],
+  "c2_in": [
+   [
+    "ren",
+    "開いた。中へ"
+   ],
+   [
+    "haru",
+    "……（雑音）……閲覧室……"
+   ]
+  ],
+  "c2_win": [
+   [
+    "ren",
+    "窓から来る！"
+   ]
+  ],
+  "c2_escort": [
+   [
+    "ren",
+    "敵がいなくなってから走らせる。\n物陰ごとにな"
+   ]
+  ],
+  "c2_strike": [
+   [
+    "genji",
+    "装甲車だ。支援射撃を使え。\n味方から離して撃て"
+   ]
+  ],
+  "c2_hold": [
+   [
+    "mio",
+    "九十秒で降りる。\n持ちこたえて"
+   ]
+  ],
+  "c2_r07": [
+   [
+    "veil",
+    "……R-07？\nなぜ、ここに"
+   ],
+   [
+    "ren",
+    "新入り、知り合いか"
+   ]
+  ],
+  "c2_board": [
+   [
+    "mio",
+    "着陸。市民を先に！"
+   ]
+  ],
+  "c2_relit": [
+   [
+    "mio",
+    "図書館の灯、戻った",
+    {
+     "box": true
+    }
+   ],
+   [
+    "genji",
+    "三人とも無事だ。\nカレー、多めに作るか",
+    {
+     "box": true
+    }
+   ],
+   [
+    "ren",
+    "……R-07 って何だ",
+    {
+     "box": true
+    }
+   ],
+   [
+    "rui",
+    "（まだ、言えない）",
+    {
+     "box": true,
+     "inner": true
+    }
+   ]
+  ]
+ },
+ "intel": [
+  {
+   "id": "c2_1",
+   "title": "閲覧室の名簿",
+   "body": "封鎖のあと、ここに残ったのは 3 人。\n電気が止まってから、本の灯りだけで夜を越えた。"
+  }
+ ],
+ "rewards": {
+  "relight": "library",
+  "unlock": [],
+  "next": "c3"
+ },
+ "rating": {
+  "par": 900
+ }
+}

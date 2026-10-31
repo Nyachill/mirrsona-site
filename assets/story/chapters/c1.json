@@ -1,0 +1,970 @@
+{
+ "id": "c1",
+ "v": 1,
+ "needs": 1,
+ "level": "midtown",
+ "city": "midtown",
+ "title": "第1章　黄昏便",
+ "en": "Dusk Run",
+ "caption": [
+  "封鎖 2 日目　17:40",
+  "グランドセントラル"
+ ],
+ "weather": "clear",
+ "systems": {
+  "ambient": 0,
+  "airDefense": false,
+  "jets": false,
+  "boats": false,
+  "helis": false,
+  "cityVehicles": false
+ },
+ "loadout": {
+  "slots": [
+   "rifle",
+   null,
+   "pistol"
+  ],
+  "ammo": {
+   "556": 200,
+   "9mm": 45
+  },
+  "meds": {
+   "bandage": 2,
+   "medkit": 1
+  },
+  "vest": true
+ },
+ "zones": {
+  "dark": [
+   "gct",
+   "library",
+   "times",
+   "rock",
+   "hy",
+   "carrier",
+   "un",
+   "roosevelt",
+   "lic",
+   "boathouse",
+   "skyhigh"
+  ]
+ },
+ "start": {
+  "p": [
+   -40,
+   0,
+   3
+  ],
+  "yaw": -90
+ },
+ "anchors": {
+  "ren_drop": {
+   "p": [
+    -37,
+    0,
+    6
+   ],
+   "yaw": -90
+  },
+  "no7_drop": {
+   "p": [
+    -80,
+    24,
+    6
+   ]
+  },
+  "no7_away": {
+   "p": [
+    -380,
+    100,
+    150
+   ]
+  },
+  "concourse_in": {
+   "p": [
+    -5,
+    0.2,
+    -58
+   ],
+   "ground": true
+  },
+  "ren_hall": {
+   "p": [
+    -9,
+    0.2,
+    -63
+   ],
+   "ground": true
+  },
+  "h1": {
+   "p": [
+    -30,
+    0.2,
+    -95
+   ],
+   "ground": true
+  },
+  "h2": {
+   "p": [
+    20,
+    0.2,
+    -100
+   ],
+   "ground": true
+  },
+  "h3": {
+   "p": [
+    -20,
+    0.2,
+    -110
+   ],
+   "ground": true
+  },
+  "h4": {
+   "p": [
+    12,
+    0.2,
+    -78
+   ],
+   "ground": true
+  },
+  "panel": {
+   "p": [
+    36,
+    0.2,
+    -64
+   ],
+   "ground": true
+  },
+  "sw1": {
+   "p": [
+    -44,
+    0.2,
+    -116
+   ],
+   "ground": true
+  },
+  "sw2": {
+   "p": [
+    32,
+    0.2,
+    -116
+   ],
+   "ground": true
+  },
+  "sw3": {
+   "p": [
+    0,
+    0.2,
+    -119
+   ],
+   "ground": true
+  },
+  "gct_out": {
+   "p": [
+    -5,
+    0,
+    -6
+   ],
+   "ground": true
+  },
+  "w42a": {
+   "p": [
+    -60,
+    0,
+    4
+   ],
+   "ground": true
+  },
+  "w42b": {
+   "p": [
+    -180,
+    0,
+    5
+   ],
+   "ground": true
+  },
+  "w42c": {
+   "p": [
+    -320,
+    0,
+    6
+   ],
+   "ground": true
+  },
+  "park": {
+   "p": [
+    -392,
+    0,
+    70
+   ],
+   "r": 30
+  },
+  "ren_park": {
+   "p": [
+    -385,
+    0,
+    72
+   ],
+   "ground": true
+  },
+  "s1a": {
+   "p": [
+    -160,
+    0,
+    9
+   ],
+   "ground": true
+  },
+  "s1b": {
+   "p": [
+    -168,
+    0,
+    1
+   ],
+   "ground": true
+  },
+  "s2a": {
+   "p": [
+    -300,
+    0,
+    10
+   ],
+   "ground": true
+  },
+  "s2b": {
+   "p": [
+    -306,
+    0,
+    2
+   ],
+   "ground": true
+  },
+  "lz1": {
+   "p": [
+    -436,
+    0,
+    44
+   ],
+   "ground": true
+  },
+  "lz2": {
+   "p": [
+    -436,
+    0,
+    104
+   ],
+   "ground": true
+  },
+  "lz3": {
+   "p": [
+    -352,
+    0,
+    118
+   ],
+   "ground": true
+  },
+  "park_apc": {
+   "p": [
+    -352,
+    0,
+    36
+   ],
+   "yaw": 90,
+   "ground": true
+  },
+  "strike_a": {
+   "p": [
+    -300,
+    75,
+    120
+   ]
+  },
+  "strike_b": {
+   "p": [
+    -420,
+    75,
+    -20
+   ]
+  },
+  "lz_land": {
+   "p": [
+    -392,
+    0.05,
+    83
+   ],
+   "yaw": 90
+  },
+  "lz_hover": {
+   "p": [
+    -392,
+    30,
+    83
+   ],
+   "yaw": 90
+  },
+  "cam_r0": {
+   "p": [
+    -372,
+    34,
+    66
+   ]
+  },
+  "cam_r1": {
+   "p": [
+    -350,
+    70,
+    40
+   ]
+  },
+  "gct_look": {
+   "zone": "gct",
+   "d": [
+    0,
+    30,
+    0
+   ]
+  },
+  "cam_d0": {
+   "p": [
+    -52,
+    5,
+    14
+   ]
+  },
+  "cam_d1": {
+   "p": [
+    -50,
+    8,
+    22
+   ]
+  }
+ },
+ "actors": {
+  "ren": {
+   "kind": "ally",
+   "name": "レン",
+   "look": "crew",
+   "weapon": "rifle",
+   "at": "ren_drop",
+   "fire": "tagged"
+  },
+  "no7": {
+   "kind": "vtol",
+   "name": "七号機",
+   "at": "no7_drop",
+   "air": true
+  }
+ },
+ "groups": {
+  "hall": {
+   "at": [
+    "h1",
+    "h2",
+    "h3",
+    "h4"
+   ],
+   "n": 4,
+   "roles": [
+    "guard",
+    "guard",
+    "hunt",
+    "hunt"
+   ],
+   "look": "veil",
+   "tag": "hall",
+   "acc": 0.8
+  },
+  "subwave": {
+   "at": [
+    "sw1",
+    "sw2",
+    "sw3"
+   ],
+   "n": 3,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "subwave",
+   "acc": 0.75
+  },
+  "st1": {
+   "at": [
+    "s1a",
+    "s1b"
+   ],
+   "n": 2,
+   "roles": [
+    "guard",
+    "hunt"
+   ],
+   "look": "veil",
+   "tag": "street",
+   "acc": 0.75
+  },
+  "st2": {
+   "at": [
+    "s2a",
+    "s2b"
+   ],
+   "n": 2,
+   "roles": [
+    "guard",
+    "hunt"
+   ],
+   "look": "veil",
+   "tag": "street2",
+   "acc": 0.75
+  },
+  "lz": {
+   "at": [
+    "lz1",
+    "lz2",
+    "lz3"
+   ],
+   "n": 3,
+   "role": "hunt",
+   "look": "veil",
+   "tag": "lz",
+   "waves": 2,
+   "gap": 16,
+   "acc": 0.7
+  }
+ },
+ "interact": {
+  "panel": {
+   "at": "panel",
+   "label": "配電盤",
+   "verb": "復旧する",
+   "hold": 8,
+   "cancelOnHit": true,
+   "radius": 2.4
+  },
+  "intel_c1": {
+   "at": {
+    "p": [
+     -28,
+     0.2,
+     -70
+    ],
+    "ground": true
+   },
+   "label": "命令書",
+   "verb": "調べる",
+   "intel": "c1_1",
+   "always": true
+  }
+ },
+ "steps": [
+  {
+   "id": "drop",
+   "obj": "レンについてグランドセントラルへ",
+   "mark": [
+    "@ren"
+   ],
+   "do": [
+    [
+     "vtol",
+     "hover",
+     "no7_drop",
+     -90,
+     true
+    ],
+    [
+     "vtol",
+     "ramp",
+     true
+    ],
+    [
+     "radio",
+     "c1_drop"
+    ],
+    [
+     "ally",
+     "ren",
+     "lead",
+     "concourse_in"
+    ],
+    [
+     "wait",
+     4
+    ],
+    [
+     "vtol",
+     "ramp",
+     false
+    ],
+    [
+     "vtol",
+     "hover",
+     "no7_away",
+     -60
+    ]
+   ],
+   "until": [
+    "inside",
+    "concourse_in",
+    12
+   ]
+  },
+  {
+   "id": "hall",
+   "checkpoint": true,
+   "obj": "コンコースのヴェール兵を倒す",
+   "count": [
+    "alive",
+    "hall"
+   ],
+   "do": [
+    [
+     "spawn",
+     "hall"
+    ],
+    [
+     "ally",
+     "ren",
+     "hold",
+     "ren_hall"
+    ],
+    [
+     "radio",
+     "c1_hall"
+    ]
+   ],
+   "until": [
+    "dead",
+    "hall"
+   ]
+  },
+  {
+   "id": "sub",
+   "obj": "配電盤を復旧する（8 秒）",
+   "count": [
+    "held",
+    "panel"
+   ],
+   "mark": [
+    "panel"
+   ],
+   "do": [
+    [
+     "radio",
+     "c1_sub"
+    ],
+    [
+     "spawn",
+     "subwave"
+    ]
+   ],
+   "fail": [
+    [
+     "leave",
+     "concourse_in",
+     160
+    ]
+   ],
+   "until": [
+    "held",
+    "panel"
+   ]
+  },
+  {
+   "id": "street",
+   "checkpoint": true,
+   "obj": "42 丁目を西へ　ブライアントパークへ",
+   "mark": [
+    "park"
+   ],
+   "do": [
+    [
+     "radio",
+     "c1_street"
+    ],
+    [
+     "ally",
+     "ren",
+     "lead",
+     [
+      "gct_out",
+      "w42a",
+      "w42b",
+      "w42c",
+      "ren_park"
+     ]
+    ],
+    [
+     "spawn",
+     "st1"
+    ],
+    [
+     "spawn",
+     "st2"
+    ]
+   ],
+   "until": [
+    "inside",
+    "park",
+    32
+   ]
+  },
+  {
+   "id": "hold",
+   "checkpoint": true,
+   "obj": "七号機が来るまで公園を守る",
+   "do": [
+    [
+     "area",
+     "park",
+     46
+    ],
+    [
+     "ally",
+     "ren",
+     "hold",
+     "ren_park"
+    ],
+    [
+     "spawn",
+     "lz"
+    ],
+    [
+     "timer",
+     60
+    ],
+    [
+     "vehicle",
+     "spawn",
+     "apc",
+     "park_apc",
+     "apc_c1"
+    ],
+    [
+     "radio",
+     "c1_hold"
+    ]
+   ],
+   "on": [
+    {
+     "when": [
+      "time",
+      40
+     ],
+     "do": [
+      [
+       "radio",
+       "c1_strike"
+      ],
+      [
+       "vtol",
+       "path",
+       [
+        "strike_a",
+        "strike_b"
+       ],
+       70
+      ]
+     ]
+    },
+    {
+     "when": [
+      "time",
+      46
+     ],
+     "do": [
+      [
+       "explode",
+       "park_apc",
+       "gbu16",
+       "self"
+      ],
+      [
+       "wait",
+       0.4
+      ],
+      [
+       "explode",
+       {
+        "at": "park_apc",
+        "d": [
+         6,
+         0,
+         3
+        ]
+       },
+       "vtol_gun",
+       "self"
+      ],
+      [
+       "wait",
+       0.3
+      ],
+      [
+       "explode",
+       {
+        "at": "park_apc",
+        "d": [
+         -5,
+         0,
+         -4
+        ]
+       },
+       "vtol_gun",
+       "self"
+      ],
+      [
+       "vehicle",
+       "destroy",
+       "apc_c1"
+      ]
+     ]
+    },
+    {
+     "when": [
+      "time",
+      52
+     ],
+     "do": [
+      [
+       "vtol",
+       "hover",
+       "lz_hover",
+       90
+      ]
+     ]
+    }
+   ],
+   "fail": [
+    [
+     "leave",
+     "park",
+     140
+    ]
+   ],
+   "until": [
+    "timerDone"
+   ]
+  },
+  {
+   "id": "board",
+   "obj": "七号機のランプへ",
+   "mark": [
+    "@no7.ramp"
+   ],
+   "do": [
+    [
+     "area",
+     "off"
+    ],
+    [
+     "vtol",
+     "hover",
+     "lz_land",
+     90
+    ],
+    [
+     "vtol",
+     "ramp",
+     true
+    ],
+    [
+     "vtol",
+     "board"
+    ],
+    [
+     "radio",
+     "c1_board"
+    ],
+    [
+     "ally",
+     "ren",
+     "board",
+     "@no7.ramp"
+    ]
+   ],
+   "until": [
+    "boarded"
+   ]
+  },
+  {
+   "id": "relit",
+   "do": [
+    [
+     "despawn",
+     "lz"
+    ],
+    [
+     "despawn",
+     "st1"
+    ],
+    [
+     "despawn",
+     "st2"
+    ],
+    [
+     "cine",
+     "c1_relit"
+    ]
+   ],
+   "until": [
+    "done",
+    "c1_relit"
+   ]
+  },
+  {
+   "id": "fin",
+   "do": [
+    [
+     "end",
+     "success"
+    ]
+   ],
+   "until": [
+    "never"
+   ]
+  }
+ ],
+ "fail": [
+  [
+   "playerDead"
+  ]
+ ],
+ "shots": {
+  "c1_relit": {
+   "letterbox": true,
+   "hold": 1.5,
+   "pre": [
+    [
+     "fade",
+     0,
+     0.8
+    ]
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "p": "cam_r0",
+     "look": "gct_look",
+     "fov": 52
+    },
+    {
+     "t": 8,
+     "p": "cam_r1",
+     "look": "gct_look",
+     "fov": 40,
+     "ease": "inOut"
+    }
+   ],
+   "lines": "c1_relit",
+   "relight": {
+    "zone": "gct",
+    "at": 1.2
+   }
+  }
+ },
+ "lines": {
+  "c1_drop": [
+   [
+    "mio",
+    "グランドセントラル前。\n降下、どうぞ"
+   ],
+   [
+    "ren",
+    "新入り、俺の後ろだ"
+   ]
+  ],
+  "c1_hall": [
+   [
+    "ren",
+    "コンコースに四人。\n見張りは撃つまで動かない"
+   ]
+  ],
+  "c1_sub": [
+   [
+    "haru",
+    "……（雑音）……"
+   ],
+   [
+    "genji",
+    "配電盤は奥の機械室。\n8 秒、手を離すな"
+   ]
+  ],
+  "c1_street": [
+   [
+    "mio",
+    "回収はブライアントパーク。\n42 丁目を西へ"
+   ],
+   [
+    "ren",
+    "通りに二組。焦るな"
+   ]
+  ],
+  "c1_hold": [
+   [
+    "mio",
+    "一分で降りる。\n公園を確保して"
+   ],
+   [
+    "ren",
+    "装甲車が来るぞ"
+   ]
+  ],
+  "c1_strike": [
+   [
+    "genji",
+    "翼の銃、いくぞ。\n頭を下げてろ！"
+   ]
+  ],
+  "c1_board": [
+   [
+    "mio",
+    "着陸。ランプへ！"
+   ]
+  ],
+  "c1_relit": [
+   [
+    "genji",
+    "……点いたな",
+    {
+     "box": true
+    }
+   ],
+   [
+    "mio",
+    "第七班、帰投する。\n今夜はカレーだって",
+    {
+     "box": true
+    }
+   ],
+   [
+    "ren",
+    "新入り。悪くなかった",
+    {
+     "box": true
+    }
+   ],
+   [
+    "rui",
+    "（あの窓の数だけ、人がいる）",
+    {
+     "box": true,
+     "inner": true
+    }
+   ]
+  ]
+ },
+ "intel": [
+  {
+   "id": "c1_1",
+   "title": "ヴェールの命令書",
+   "body": "第 3 区画（グランドセントラル）の送電を停止。\n配電盤の封印を解く者は拘束せよ。\n――ペルソナ計画　R-01"
+  }
+ ],
+ "rewards": {
+  "relight": "gct",
+  "unlock": [],
+  "next": "c2"
+ },
+ "rating": {
+  "par": 720
+ }
+}

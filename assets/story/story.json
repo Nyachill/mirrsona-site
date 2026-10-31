@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "title": "MIRRSONA ―黄昏便―",
+ "en": "MIRRSONA: Dusk Run",
+ "hero": "rui",
+ "cast": {
+  "rui": {
+   "name": "ルイ",
+   "color": "#e8eef4",
+   "initial": "ル",
+   "role": "新入り（あなた）"
+  },
+  "mio": {
+   "name": "ミオ",
+   "color": "#ffb36b",
+   "initial": "ミ",
+   "role": "七号機の機長"
+  },
+  "ren": {
+   "name": "レン",
+   "color": "#6fd8ea",
+   "initial": "レ",
+   "role": "地上班の班長"
+  },
+  "genji": {
+   "name": "ゲンジ",
+   "color": "#ffd25a",
+   "initial": "ゲ",
+   "role": "整備士・翼の砲手"
+  },
+  "haru": {
+   "name": "ハル",
+   "color": "#b9a3ff",
+   "initial": "ハ",
+   "role": "本社の通信「タワー」"
+  },
+  "kagami": {
+   "name": "カガミ",
+   "color": "#c8d4e0",
+   "initial": "カ",
+   "role": "ヴェールの指揮官"
+  },
+  "veil": {
+   "name": "ヴェール兵",
+   "color": "#5a6070",
+   "initial": "ヴ",
+   "role": "鏡のバイザーの兵"
+  },
+  "civ": {
+   "name": "市民",
+   "color": "#9ad07a",
+   "initial": "市",
+   "role": ""
+  }
+ },
+ "world": {
+  "home": "midtown",
+  "cities": [
+   {
+    "id": "midtown",
+    "level": "midtown",
+    "name": "ミッドタウン",
+    "country": "アメリカ",
+    "en": "Midtown",
+    "map": [
+     0.27,
+     0.4
+    ],
+    "unlock": [],
+    "needs": 1
+   },
+   {
+    "id": "manhattan",
+    "level": "manhattan",
+    "name": "ニューヨーク",
+    "country": "アメリカ",
+    "en": "New York",
+    "map": [
+     0.29,
+     0.43
+    ],
+    "unlock": [
+     "c8"
+    ],
+    "needs": 2,
+    "travel": {
+     "from": "midtown",
+     "sec": 8,
+     "caption": "七号機、南へ。"
+    }
+   }
+  ]
+ },
+ "chapters": [
+  {
+   "id": "p0",
+   "city": "midtown",
+   "level": "midtown",
+   "needs": 1,
+   "file": "story/chapters/p0.json",
+   "title": "序章　スカイハイ陥落",
+   "en": "The Fall",
+   "caption": "封鎖 1 日目　17:05"
+  },
+  {
+   "id": "c1",
+   "city": "midtown",
+   "level": "midtown",
+   "needs": 1,
+   "file": "story/chapters/c1.json",
+   "lazy": true,
+   "title": "第1章　黄昏便",
+   "en": "Dusk Run",
+   "caption": "封鎖 2 日目　17:40"
+  },
+  {
+   "id": "c2",
+   "city": "midtown",
+   "level": "midtown",
+   "needs": 1,
+   "file": "story/chapters/c2.json",
+   "lazy": true,
+   "title": "第2章　図書館の灯",
+   "en": "Library Lights",
+   "caption": "封鎖 3 日目　17:48"
+  },
+  {
+   "id": "c3",
+   "draft": true,
+   "release": 17,
+   "city": "midtown",
+   "level": "midtown",
+   "needs": 2,
+   "file": "story/chapters/c3.json",
+   "lazy": true,
+   "title": "第3章　スクリーンの声",
+   "en": "Voice on the Screens",
+   "caption": "封鎖 4 日目　17:30"
+  },
+  {
+   "id": "c4",
+   "draft": true,
+   "release": 17,
+   "city": "midtown",
+   "level": "midtown",
+   "needs": 2,
+   "file": "story/chapters/c4.json",
+   "lazy": true,
+   "title": "第4章　ふたつの声",
+   "en": "Two Voices",
+   "caption": "封鎖 5 日目　18:10"
+  },
+  {
+   "id": "c5",
+   "draft": true,
+   "release": 17,
+   "city": "midtown",
+   "level": "midtown",
+   "needs": 2,
+   "file": "story/chapters/c5.json",
+   "lazy": true,
+   "title": "第5章　甲板の夕焼け",
+   "en": "Sunset Deck",
+   "caption": "封鎖 6 日目　18:00"
+  }
+ ],
+ "hub": {
+  "lounge": [
+   [
+    "mio",
+    "七号機は夕暮れにだけ飛ぶ。\n鏡の機体が空に溶けるから"
+   ],
+   [
+    "genji",
+    "今夜もカレーだ。文句は受け付けない"
+   ],
+   [
+    "ren",
+    "新入り。銃の手入れは済ませたか"
+   ]
+  ],
+  "bunk": "新入り"
+ }
+}
